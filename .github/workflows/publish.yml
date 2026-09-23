@@ -1,0 +1,86 @@
+name: Publish LeafBlitz site
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out site
+        uses: actions/checkout@v4
+
+      - name: Add business contact details
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          path = Path('index.html')
+          html = path.read_text(encoding='utf-8')
+          marker = '<!-- FOOTER -->'
+          contact = '''<!-- CONTACT DETAILS -->
+          <section id="contact" class="bg-lime text-ink py-10 border-t-[4px] border-ink">
+            <div class="max-w-[1400px] mx-auto px-4 md:px-8">
+              <div class="border-[4px] border-ink bg-paper hard p-5 md:p-7 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-5">
+                <div>
+                  <div class="font-display text-3xl md:text-4xl">CONTACT CORINTHIAN BROWN</div>
+                  <p class="font-bold mt-2">Ready to schedule your LeafBlitz service? Call, text, or email today.</p>
+                </div>
+                <div class="flex flex-col sm:flex-row flex-wrap gap-3 font-bold">
+                  <a href="tel:3347773031" class="btn-brutal bg-ink text-lime border-[3px] border-ink px-4 py-3">☎ 334-777-3031</a>
+                  <a href="tel:3345782252" class="btn-brutal bg-ink text-lime border-[3px] border-ink px-4 py-3">☎ 334-578-2252</a>
+                  <a href="mailto:Corinthianbrown@checkchasinempire.onmicrosoft.com" class="btn-brutal bg-paper text-ink border-[3px] border-ink px-4 py-3 break-all">✉ Corinthianbrown@checkchasinempire.onmicrosoft.com</a>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          '''
+          # Keep the build idempotent if the workflow is run more than once.
+          if '<!-- CONTACT DETAILS -->' not in html:
+              if marker not in html:
+                  raise SystemExit('Footer marker not found; contact details were not added.')
+              html = html.replace(marker, contact + marker, 1)
+          # Replace the template phone number wherever it appears in the existing site.
+          html = html.replace('tel:5555465323', 'tel:3347773031')
+          html = html.replace('(555) 546-LEAF', '334-777-3031')
+          path.write_text(html, encoding='utf-8')
+          PY
+
+      - name: Commit prepared site
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git diff --cached --quiet || git commit -m "Add Corinthian Brown contact details"
+          git push
+
+  deploy:
+    needs: prepare
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Check out published site
+        uses: actions/checkout@v4
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
+      - name: Upload site artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
