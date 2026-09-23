@@ -1,0 +1,1057 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>LEAFBLITZ — No Leaf Left Behind | Residential • Commercial • Industrial</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        ink: '#0B0B0B',
+        cream: '#F4F1EA',
+        paper: '#FFFEF7',
+        lime: '#CCFF00',
+        blaze: '#FF4D00',
+        moss: '#1A2E1A',
+        gold: '#FFB800',
+      },
+      fontFamily: {
+        display: ['Anton', 'sans-serif'],
+        body: ['"Space Grotesk"', 'sans-serif'],
+      }
+    }
+  }
+}
+</script>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Grotesk:wght@400;500;600;700&family=Archivo:ital,wght@0,900;1,900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<style>
+  *{ -webkit-tap-highlight-color: transparent; }
+  html{ scroll-behavior:smooth; }
+  body{ background:#F4F1EA; color:#0B0B0B; font-family:'Space Grotesk',sans-serif; overflow-x:hidden; }
+  ::selection{ background:#CCFF00; color:#0B0B0B; }
+  .font-display{ font-family:'Anton',sans-serif; line-height:.9; letter-spacing:-.01em; }
+  .stroke-black{ -webkit-text-stroke:2.5px #0B0B0B; color:transparent; }
+  .stroke-cream{ -webkit-text-stroke:2.5px #F4F1EA; color:transparent; }
+  .stroke-lime{ -webkit-text-stroke:2px #CCFF00; color:transparent; }
+  @media(max-width:640px){ .stroke-black,.stroke-cream{ -webkit-text-stroke:1.5px currentColor; } .stroke-black{ -webkit-text-stroke-color:#0B0B0B; } }
+  .hard{ box-shadow:8px 8px 0 #0B0B0B; }
+  .hard-sm{ box-shadow:5px 5px 0 #0B0B0B; }
+  .hard-lime{ box-shadow:8px 8px 0 #CCFF00; }
+  .hard-cream{ box-shadow:8px 8px 0 #F4F1EA; }
+  .border-thick{ border:3px solid #0B0B0B; }
+  .border-thick-cream{ border:3px solid #F4F1EA; }
+  .noise::after{
+    content:""; position:absolute; inset:0; pointer-events:none; opacity:.08;
+    background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  .marquee-track{ display:flex; width:max-content; animation:marquee 22s linear infinite; }
+  .marquee-track.fast{ animation-duration:14s; }
+  @keyframes marquee{ from{ transform:translateX(0);} to{ transform:translateX(-50%);} }
+  .marquee-rev{ animation:marqueeRev 26s linear infinite; }
+  @keyframes marqueeRev{ from{ transform:translateX(-50%);} to{ transform:translateX(0);} }
+  .spin-slow{ animation:spin 12s linear infinite; }
+  @keyframes spin{ to{ transform:rotate(360deg);} }
+  .float{ animation:float 4s ease-in-out infinite; }
+  @keyframes float{ 0%,100%{ transform:translateY(0) rotate(-3deg);} 50%{ transform:translateY(-14px) rotate(3deg);} }
+  .wiggle:hover{ animation:wiggle .4s ease-in-out; }
+  @keyframes wiggle{ 0%,100%{transform:rotate(0)} 25%{transform:rotate(-3deg) scale(1.03)} 75%{transform:rotate(3deg) scale(1.03)} }
+  .btn-brutal{ transition:all .18s cubic-bezier(.34,1.56,.64,1); }
+  .btn-brutal:hover{ transform:translate(-3px,-3px); box-shadow:11px 11px 0 #0B0B0B; }
+  .btn-brutal:active{ transform:translate(4px,4px); box-shadow:0 0 0 #0B0B0B; }
+  .btn-brutal-lime:hover{ box-shadow:11px 11px 0 #CCFF00; }
+  .card-tilt{ transition:transform .3s cubic-bezier(.34,1.56,.64,1), box-shadow .3s; }
+  .card-tilt:hover{ transform:translateY(-8px) rotate(-.5deg); }
+  .sticker{ transform:rotate(-6deg); }
+  .sticker-r{ transform:rotate(4deg); }
+  input[type=range]{ -webkit-appearance:none; appearance:none; height:14px; background:#0B0B0B; border:3px solid #0B0B0B; outline:none; }
+  input[type=range]::-webkit-slider-thumb{ -webkit-appearance:none; width:34px; height:34px; background:#CCFF00; border:3px solid #0B0B0B; border-radius:50%; cursor:grab; box-shadow:3px 3px 0 #0B0B0B; }
+  input[type=range]::-moz-range-thumb{ width:30px; height:30px; background:#CCFF00; border:3px solid #0B0B0B; border-radius:50%; cursor:grab; }
+  input[type=range].range-blaze::-webkit-slider-thumb{ background:#FF4D00; }
+  .toggle-pill{ transition:all .2s; }
+  .toggle-pill.active{ background:#0B0B0B !important; color:#CCFF00 !important; transform:scale(1.02); box-shadow:5px 5px 0 #FF4D00; }
+  .addon-card{ transition:all .2s; cursor:pointer; }
+  .addon-card.selected{ background:#0B0B0B !important; color:#F4F1EA !important; box-shadow:6px 6px 0 #CCFF00; transform:translate(-2px,-2px); }
+  .addon-card.selected .addon-price{ background:#CCFF00; color:#0B0B0B; }
+  .addon-card.selected .addon-check{ opacity:1 !important; transform:scale(1) !important; }
+  .faq-a{ max-height:0; overflow:hidden; transition:max-height .45s cubic-bezier(.4,0,.2,1); }
+  .faq-item.open .faq-a{ max-height:300px; }
+  .faq-item.open .faq-icon{ transform:rotate(45deg); background:#CCFF00; color:#0B0B0B; }
+  .faq-icon{ transition:transform .3s; }
+  .slot{ transition:all .15s; }
+  .slot:not(:disabled):hover{ background:#CCFF00; transform:translateY(-2px); }
+  .slot.selected{ background:#0B0B0B !important; color:#CCFF00 !important; box-shadow:4px 4px 0 #FF4D00; }
+  .slot:disabled{ opacity:.25; text-decoration:line-through; cursor:not-allowed; }
+  .day-card.selected{ background:#CCFF00 !important; transform:translate(-2px,-2px); box-shadow:6px 6px 0 #0B0B0B; }
+  .before-handle{ cursor:ew-resize; }
+  .tick{ width:14px; height:14px; background:#CCFF00; border:2px solid #0B0B0B; display:inline-flex; align-items:center; justify-content:center; font-size:10px; }
+  #leafCanvas{ position:absolute; inset:0; pointer-events:none; z-index:5; }
+  .hero-grid{ background-image:linear-gradient(#0b0b0b14 1px, transparent 1px), linear-gradient(90deg, #0b0b0b14 1px, transparent 1px); background-size:44px 44px; }
+  .hero-grid-dark{ background-image:linear-gradient(#ffffff14 1px, transparent 1px), linear-gradient(90deg, #ffffff14 1px, transparent 1px); background-size:44px 44px; }
+  .tab-service{ transition:all .2s; }
+  .tab-service.active[data-service="residential"]{ background:#CCFF00; }
+  .tab-service.active[data-service="commercial"]{ background:#FF4D00; color:#fff; }
+  .tab-service.active[data-service="industrial"]{ background:#0B0B0B; color:#CCFF00; }
+  .toast-in{ animation:toastIn .4s cubic-bezier(.34,1.56,.64,1) forwards; }
+  @keyframes toastIn{ from{ transform:translateX(120%) rotate(3deg); opacity:0;} to{ transform:translateX(0) rotate(-1deg); opacity:1;} }
+  .confetti-leaf{ position:fixed; pointer-events:none; z-index:9999; font-size:22px; }
+  .reveal{ opacity:0; transform:translateY(40px); }
+  #preloader{ transition:opacity .6s, visibility .6s; }
+  .diag{ background:repeating-linear-gradient(-45deg, #CCFF00, #CCFF00 14px, #0B0B0B 14px, #0B0B0B 28px); }
+  .diag-blaze{ background:repeating-linear-gradient(-45deg, #FF4D00, #FF4D00 14px, #0B0B0B 14px, #0B0B0B 28px); }
+  .testi-track{ transition:transform .6s cubic-bezier(.65,0,.35,1); }
+  .link-underline{ position:relative; }
+  .link-underline::after{ content:""; position:absolute; left:0; bottom:-3px; height:3px; width:0; background:#CCFF00; transition:width .25s; }
+  .link-underline:hover::after{ width:100%; }
+  ::-webkit-scrollbar{ width:12px; }
+  ::-webkit-scrollbar-track{ background:#0B0B0B; }
+  ::-webkit-scrollbar-thumb{ background:#CCFF00; border:3px solid #0B0B0B; }
+</style>
+</head>
+<body class="antialiased">
+
+<!-- PRELOADER -->
+<div id="preloader" class="fixed inset-0 z-[10000] bg-ink text-cream flex flex-col items-center justify-center">
+  <div class="font-display text-[18vw] md:text-[10rem] leading-none">LEAF<span class="text-lime">BLITZ</span></div>
+  <div class="mt-4 flex items-center gap-3 font-bold tracking-widest text-sm">
+    <span class="w-8 h-4 diag border-2 border-lime"></span>
+    <span id="loadPct">RAKING… 0%</span>
+    <span class="w-8 h-4 diag border-2 border-lime"></span>
+  </div>
+  <div class="mt-6 w-[280px] h-[14px] border-[3px] border-cream"><div id="loadBar" class="h-full bg-lime" style="width:0%"></div></div>
+</div>
+
+<!-- TOP TICKER -->
+<div class="bg-ink text-cream text-[12px] md:text-[13px] font-bold tracking-widest overflow-hidden py-2 border-b-[3px] border-ink relative z-50">
+  <div class="marquee-track gap-0">
+    <div class="flex shrink-0 items-center">
+      <span class="px-6">⚡ SAME-DAY STORM CLEANUP <span class="text-lime">●</span> FALL 2026 ROUTES NOW OPEN <span class="text-blaze">●</span> NO JOB TOO SMALL. NO JOB TOO BIG. <span class="text-lime">●</span> FREE ESTIMATES <span class="text-blaze">●</span> LICENSED + INSURED <span class="text-lime">●</span></span>
+      <span class="px-6">⚡ SAME-DAY STORM CLEANUP <span class="text-lime">●</span> FALL 2026 ROUTES NOW OPEN <span class="text-blaze">●</span> NO JOB TOO SMALL. NO JOB TOO BIG. <span class="text-lime">●</span> FREE ESTIMATES <span class="text-blaze">●</span> LICENSED + INSURED <span class="text-lime">●</span></span>
+    </div>
+    <div class="flex shrink-0 items-center" aria-hidden="true">
+      <span class="px-6">⚡ SAME-DAY STORM CLEANUP <span class="text-lime">●</span> FALL 2026 ROUTES NOW OPEN <span class="text-blaze">●</span> NO JOB TOO SMALL. NO JOB TOO BIG. <span class="text-lime">●</span> FREE ESTIMATES <span class="text-blaze">●</span> LICENSED + INSURED <span class="text-lime">●</span></span>
+      <span class="px-6">⚡ SAME-DAY STORM CLEANUP <span class="text-lime">●</span> FALL 2026 ROUTES NOW OPEN <span class="text-blaze">●</span> NO JOB TOO SMALL. NO JOB TOO BIG. <span class="text-lime">●</span> FREE ESTIMATES <span class="text-blaze">●</span> LICENSED + INSURED <span class="text-lime">●</span></span>
+    </div>
+  </div>
+</div>
+
+<!-- NAV -->
+<header id="navbar" class="sticky top-0 z-[100] bg-cream/95 backdrop-blur border-b-[4px] border-ink">
+  <div class="max-w-[1400px] mx-auto px-4 md:px-8 flex items-center justify-between h-[72px]">
+    <a href="#top" class="flex items-center gap-2 group">
+      <div class="w-11 h-11 bg-ink text-lime border-[3px] border-ink hard-sm flex items-center justify-center text-2xl font-black rotate-[-6deg] group-hover:rotate-[6deg] transition-transform"><i class="fa-solid fa-leaf"></i></div>
+      <div class="leading-none">
+        <div class="font-display text-2xl tracking-tight">LEAF<span class="bg-ink text-lime px-1">BLITZ</span></div>
+        <div class="text-[10px] font-bold tracking-[0.25em]">RAKE • BLOW • GONE</div>
+      </div>
+    </a>
+    <nav class="hidden lg:flex items-center gap-7 font-bold text-[15px] tracking-wide">
+      <a href="#services" class="link-underline">SERVICES</a>
+      <a href="#estimator" class="link-underline">PRICE PUNCHER</a>
+      <a href="#proof" class="link-underline">BEFORE / AFTER</a>
+      <a href="#reviews" class="link-underline">REVIEWS</a>
+      <a href="#faq" class="link-underline">FAQ</a>
+    </nav>
+    <div class="flex items-center gap-3">
+      <a href="tel:5555465323" class="hidden md:flex items-center gap-2 font-bold text-sm border-thick px-3 py-2 bg-paper hard-sm btn-brutal"><i class="fa-solid fa-phone bg-blaze text-white w-7 h-7 flex items-center justify-center rounded-full text-xs"></i> (555) 546-LEAF</a>
+      <button onclick="openBooking()" class="btn-brutal bg-lime border-thick hard-sm font-display text-lg px-5 py-2 tracking-wide">GET QUOTE →</button>
+      <button id="menuBtn" class="lg:hidden w-11 h-11 border-thick bg-ink text-lime flex items-center justify-center text-xl"><i class="fa-solid fa-bars"></i></button>
+    </div>
+  </div>
+  <div id="mobileMenu" class="lg:hidden hidden border-t-[3px] border-ink bg-ink text-cream px-6 py-6 space-y-4 font-display text-3xl">
+    <a href="#services" class="block hover:text-lime">SERVICES</a>
+    <a href="#estimator" class="block hover:text-lime">PRICE PUNCHER</a>
+    <a href="#proof" class="block hover:text-lime">BEFORE / AFTER</a>
+    <a href="#reviews" class="block hover:text-lime">REVIEWS</a>
+    <a href="#faq" class="block hover:text-lime">FAQ</a>
+    <a href="tel:5555465323" class="block text-lg font-body font-bold text-lime">📞 (555) 546-5323</a>
+  </div>
+</header>
+
+<!-- HERO -->
+<section id="top" class="relative bg-cream hero-grid overflow-hidden noise">
+  <canvas id="leafCanvas"></canvas>
+  <div class="max-w-[1400px] mx-auto px-4 md:px-8 pt-10 md:pt-16 pb-10 relative z-10">
+    <div class="flex flex-wrap items-center gap-3 mb-6">
+      <span class="bg-ink text-lime font-bold text-xs md:text-sm px-4 py-2 border-thick hard-sm tracking-widest sticker inline-flex items-center gap-2"><span class="w-2 h-2 bg-lime rounded-full animate-ping"></span> FALL 2026 — 14 CREWS LIVE TODAY</span>
+      <span class="bg-paper font-bold text-xs md:text-sm px-4 py-2 border-thick hard-sm tracking-widest sticker-r">★ 4.9 — 2,300+ YARDS CLEARED</span>
+      <span class="hidden md:inline-flex bg-blaze text-white font-bold text-xs px-4 py-2 border-thick hard-sm tracking-widest rotate-2">NO JOB TOO SMALL. NO JOB TOO BIG.</span>
+    </div>
+
+    <h1 class="font-display uppercase text-ink">
+      <span class="block text-[15.5vw] lg:text-[10.5rem] leading-[0.85] reveal-hero">NO LEAF</span>
+      <span class="block text-[15.5vw] lg:text-[10.5rem] leading-[0.85] reveal-hero">LEFT <span class="bg-ink text-lime px-3 md:px-5 inline-block -rotate-1 hard">BEHIND.</span></span>
+      <span class="block text-[7vw] lg:text-[3.8rem] leading-[0.95] mt-3 reveal-hero"><span class="stroke-black">YARD PICKUP</span> <span class="text-blaze">THAT HITS HARD.</span></span>
+    </h1>
+
+    <div class="grid lg:grid-cols-12 gap-8 mt-8 items-start">
+      <div class="lg:col-span-5">
+        <p class="text-lg md:text-xl font-medium leading-tight border-l-[6px] border-blaze pl-4">From a single curb pile to a 50-acre industrial park — we rake, blow, vacuum & haul. <strong>You point. We disappear the leaves.</strong></p>
+        <div class="flex flex-wrap gap-4 mt-6">
+          <button onclick="document.getElementById('estimator').scrollIntoView({behavior:'smooth'})" class="btn-brutal bg-ink text-cream font-display text-2xl px-8 py-4 border-thick hard tracking-wide">PUNCH MY PRICE →</button>
+          <button onclick="openBooking()" class="btn-brutal bg-paper font-display text-2xl px-8 py-4 border-thick hard tracking-wide">BOOK NOW</button>
+        </div>
+        <div class="grid grid-cols-3 gap-3 mt-8">
+          <div class="border-thick bg-paper p-3 hard-sm text-center card-tilt"><div class="font-display text-3xl md:text-4xl"><span class="counter" data-target="12840">0</span></div><div class="text-[11px] font-bold tracking-widest">YARDS BLITZED</div></div>
+          <div class="border-thick bg-lime p-3 hard-sm text-center card-tilt"><div class="font-display text-3xl md:text-4xl"><span class="counter" data-target="98">0</span>%</div><div class="text-[11px] font-bold tracking-widest">SAME-WEEK DONE</div></div>
+          <div class="border-thick bg-ink text-cream p-3 hard-sm text-center card-tilt"><div class="font-display text-3xl md:text-4xl text-blaze"><span class="counter" data-target="45">0</span>MIN</div><div class="text-[11px] font-bold tracking-widest">AVG. QUOTE → CREW</div></div>
+        </div>
+      </div>
+
+      <div class="lg:col-span-7 relative">
+        <div class="grid md:grid-cols-2 gap-4">
+          <div class="relative border-[4px] border-ink hard overflow-hidden bg-ink rotate-[-1.5deg]">
+            <img src="https://images.unsplash.com/photo-1507371341162-763b5e419408?q=80&w=800&auto=format&fit=crop" alt="Leaves" class="w-full h-[280px] md:h-[360px] object-cover hover:scale-110 transition-transform duration-700"/>
+            <div class="absolute bottom-0 left-0 right-0 bg-ink text-cream px-4 py-3 flex justify-between items-center"><span class="font-display text-xl">RESIDENTIAL BEAST MODE</span><span class="bg-lime text-ink font-bold text-xs px-2 py-1">FROM $89</span></div>
+            <div class="absolute top-3 left-3 bg-blaze text-white font-display px-3 py-1 border-2 border-white rotate-[-6deg]">BEFORE: BURIED</div>
+          </div>
+          <div class="relative border-[4px] border-ink hard overflow-hidden bg-ink rotate-[1.5deg] md:mt-10">
+            <img src="https://images.unsplash.com/photo-1502082553048-f009c37129b9?q=80&w=800&auto=format&fit=crop" alt="Clean yard" class="w-full h-[280px] md:h-[360px] object-cover hover:scale-110 transition-transform duration-700"/>
+            <div class="absolute bottom-0 left-0 right-0 bg-lime text-ink px-4 py-3 flex justify-between items-center border-t-[4px] border-ink"><span class="font-display text-xl">AFTER: GONE IN 90 MIN</span><i class="fa-solid fa-circle-check text-xl"></i></div>
+            <div class="absolute top-3 right-3 bg-ink text-lime font-display px-3 py-1 border-2 border-lime rotate-[5deg]">AFTER: BLITZED</div>
+          </div>
+        </div>
+        <!-- spinning badge -->
+        <div class="absolute -top-8 -right-2 md:right-8 w-28 h-28 md:w-36 md:h-36 z-20">
+          <div class="relative w-full h-full spin-slow">
+            <svg viewBox="0 0 100 100" class="w-full h-full"><defs><path id="circ" d="M50,50 m-37,0 a37,37 0 1,1 74,0 a37,37 0 1,1 -74,0"/></defs><circle cx="50" cy="50" r="50" fill="#FF4D00" stroke="#0B0B0B" stroke-width="3"/><text font-size="11.5" font-weight="900" fill="white" letter-spacing="1.5"><textPath href="#circ">• FREE ESTIMATE • LEAFBLITZ • FREE ESTIMATE </textPath></text><text x="50" y="58" text-anchor="middle" font-size="24">🍂</text></svg>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- scale bar -->
+    <div class="mt-10 border-thick bg-ink text-cream hard p-2 md:p-3 flex flex-col md:flex-row items-stretch md:items-center gap-2">
+      <div class="font-display text-lg md:text-xl px-4 whitespace-nowrap">SCALE? <span class="text-lime">WE EAT SCALE:</span></div>
+      <div class="flex-1 grid grid-cols-4 text-center font-bold text-[11px] md:text-sm">
+        <div class="bg-cream text-ink py-3 px-1 border-2 border-ink m-1">🍂 SINGLE PILE<br><span class="text-blaze">$29+</span></div>
+        <div class="bg-cream text-ink py-3 px-1 border-2 border-ink m-1">🏠 ¼ ACRE YARD<br><span class="text-blaze">$89+</span></div>
+        <div class="bg-cream text-ink py-3 px-1 border-2 border-ink m-1">🏢 OFFICE PARK<br><span class="text-blaze">$299+</span></div>
+        <div class="bg-blaze text-white py-3 px-1 border-2 border-white m-1">🏭 50-ACRE SITE<br><span class="text-lime">CUSTOM</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- marquee divider -->
+  <div class="bg-lime border-y-[4px] border-ink py-3 overflow-hidden -rotate-1 scale-[1.02] relative z-10">
+    <div class="marquee-track fast font-display text-2xl md:text-3xl">
+      <div class="flex shrink-0"><span class="px-4">RESIDENTIAL ✕ COMMERCIAL ✕ INDUSTRIAL ✕ CURB PICKUP ✕ GUTTERS ✕ MULCHING ✕&nbsp;</span><span class="px-4">RESIDENTIAL ✕ COMMERCIAL ✕ INDUSTRIAL ✕ CURB PICKUP ✕ GUTTERS ✕ MULCHING ✕&nbsp;</span></div>
+      <div class="flex shrink-0" aria-hidden="true"><span class="px-4">RESIDENTIAL ✕ COMMERCIAL ✕ INDUSTRIAL ✕ CURB PICKUP ✕ GUTTERS ✕ MULCHING ✕&nbsp;</span><span class="px-4">RESIDENTIAL ✕ COMMERCIAL ✕ INDUSTRIAL ✕ CURB PICKUP ✕ GUTTERS ✕ MULCHING ✕&nbsp;</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services" class="bg-paper py-16 md:py-24 relative">
+  <div class="max-w-[1400px] mx-auto px-4 md:px-8">
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10">
+      <div>
+        <div class="inline-block bg-blaze text-white font-bold text-xs tracking-[0.25em] px-3 py-1 border-thick mb-4">01 — PICK YOUR BATTLE</div>
+        <h2 class="font-display text-[13vw] md:text-7xl lg:text-8xl leading-[0.9]">THREE WAYS<br>WE <span class="bg-lime px-2 border-thick inline-block -rotate-1">WRECK</span> LEAVES</h2>
+      </div>
+      <p class="max-w-sm font-medium text-lg border-thick bg-cream p-4 hard-sm rotate-1"><strong>No job too small or too big.</strong> If it has leaves, we have a truck, a vacuum, and an attitude.</p>
+    </div>
+
+    <div class="grid lg:grid-cols-3 gap-6">
+      <!-- RESIDENTIAL -->
+      <div class="border-[4px] border-ink bg-cream hard card-tilt flex flex-col overflow-hidden reveal">
+        <div class="h-56 overflow-hidden border-b-[4px] border-ink relative">
+          <img src="https://images.unsplash.com/photo-1560749003-f4b1e17e2dfd?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover" alt="Residential"/>
+          <span class="absolute top-3 left-3 bg-lime font-display text-lg px-3 py-1 border-[3px] border-ink -rotate-3">MOST BOOKED</span>
+        </div>
+        <div class="p-6 flex-1 flex flex-col">
+          <div class="flex items-center justify-between"><h3 class="font-display text-5xl">RESI<span class="text-blaze">.</span></h3><span class="font-display text-xl bg-ink text-lime px-2">FROM $89</span></div>
+          <p class="font-bold text-sm tracking-widest mt-1 text-neutral-600">HOUSES • DUPLEXES • HOAs • RENTALS</p>
+          <ul class="mt-4 space-y-2 font-medium text-[15px]">
+            <li class="flex gap-2 items-center"><span class="tick">✔</span> Full rake + blow + vacuum</li>
+            <li class="flex gap-2 items-center"><span class="tick">✔</span> Flower-bed & fence-line detail</li>
+            <li class="flex gap-2 items-center"><span class="tick">✔</span> Bag or haul-away included</li>
+            <li class="flex gap-2 items-center"><span class="tick">✔</span> Curb-pile pickup from $29</li>
+            <li class="flex gap-2 items-center"><span class="tick">✔</span> Same-week slots, text alerts</li>
+          </ul>
+          <div class="mt-4 bg-white border-[3px] border-ink p-3 text-sm font-bold flex justify-between"><span>⏱ 60–120 MIN AVG</span><span>👷 2-PERSON CREW</span></div>
+          <div class="grid grid-cols-2 gap-3 mt-5">
+            <button onclick="selectService('residential', true)" class="btn-brutal bg-lime border-thick hard-sm font-display text-xl py-3">SELECT →</button>
+            <button onclick="selectService('residential', false)" class="btn-brutal bg-white border-thick hard-sm font-bold text-sm py-3">SEE PRICE</button>
+          </div>
+        </div>
+      </div>
+      <!-- COMMERCIAL -->
+      <div class="border-[4px] border-ink bg-ink text-cream hard card-tilt flex flex-col overflow-hidden reveal lg:-mt-6 lg:mb-6 relative">
+        <div class="absolute top-0 left-0 right-0 diag-blaze h-3 border-b-[3px] border-ink"></div>
+        <div class="h-56 overflow-hidden border-b-[4px] border-cream/20 relative">
+          <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover" alt="Commercial"/>
+          <span class="absolute top-3 left-3 bg-blaze text-white font-display text-lg px-3 py-1 border-[3px] border-white rotate-2">FOR BUSINESS</span>
+        </div>
+        <div class="p-6 flex-1 flex flex-col">
+          <div class="flex items-center justify-between"><h3 class="font-display text-5xl">COMMER<span class="text-blaze">.</span></h3><span class="font-display text-xl bg-blaze text-white px-2 border-2 border-white">FROM $299</span></div>
+          <p class="font-bold text-sm tracking-widest mt-1 text-cream/60">OFFICES • RETAIL • SCHOOLS • CHURCHES</p>
+          <ul class="mt-4 space-y-2 font-medium text-[15px]">
+            <li class="flex gap-2 items-center"><span class="tick !bg-blaze !text-white !border-white">✔</span> Parking lots, entries, sidewalks</li>
+            <li class="flex gap-2 items-center"><span class="tick !bg-blaze !text-white !border-white">✔</span> Weekly / bi-weekly routes</li>
+            <li class="flex gap-2 items-center"><span class="tick !bg-blaze !text-white !border-white">✔</span> Before-hours silent crews</li>
+            <li class="flex gap-2 items-center"><span class="tick !bg-blaze !text-white !border-white">✔</span> Liability docs + invoicing</li>
+            <li class="flex gap-2 items-center"><span class="tick !bg-blaze !text-white !border-white">✔</span> Slip-and-fall prevention logs</li>
+          </ul>
+          <div class="mt-4 bg-white/10 border-[3px] border-cream/30 p-3 text-sm font-bold flex justify-between"><span>⏱ HALF / FULL DAY</span><span class="text-lime">👷 3-5 CREW + TRUCK</span></div>
+          <div class="grid grid-cols-2 gap-3 mt-5">
+            <button onclick="selectService('commercial', true)" class="btn-brutal bg-blaze text-white border-[3px] border-white font-display text-xl py-3" style="box-shadow:6px 6px 0 #CCFF00">SELECT →</button>
+            <button onclick="selectService('commercial', false)" class="btn-brutal bg-transparent border-[3px] border-cream font-bold text-sm py-3">SEE PRICE</button>
+          </div>
+        </div>
+      </div>
+      <!-- INDUSTRIAL -->
+      <div class="border-[4px] border-ink bg-gold hard card-tilt flex flex-col overflow-hidden reveal">
+        <div class="h-56 overflow-hidden border-b-[4px] border-ink relative">
+          <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover" alt="Industrial"/>
+          <span class="absolute top-3 left-3 bg-ink text-lime font-display text-lg px-3 py-1 border-[3px] border-ink rotate-3">HEAVY DUTY</span>
+        </div>
+        <div class="p-6 flex-1 flex flex-col">
+          <div class="flex items-center justify-between"><h3 class="font-display text-5xl">INDUS<span class="text-blaze">.</span></h3><span class="font-display text-xl bg-paper px-2 border-thick">CUSTOM</span></div>
+          <p class="font-bold text-sm tracking-widest mt-1 text-ink/70">WAREHOUSES • FACTORIES • MUNICIPAL • ACRES</p>
+          <ul class="mt-4 space-y-2 font-medium text-[15px]">
+            <li class="flex gap-2 items-center"><span class="tick !bg-ink !text-lime">✔</span> 5–50+ acres, tow-behind vacuums</li>
+            <li class="flex gap-2 items-center"><span class="tick !bg-ink !text-lime">✔</span> Storm-drain & ditch clearing</li>
+            <li class="flex gap-2 items-center"><span class="tick !bg-ink !text-lime">✔</span> OSHA-conscious crews, flagged zones</li>
+            <li class="flex gap-2 items-center"><span class="tick !bg-ink !text-lime">✔</span> Composting certificates</li>
+            <li class="flex gap-2 items-center"><span class="tick !bg-ink !text-lime">✔</span> Dedicated account manager</li>
+          </ul>
+          <div class="mt-4 bg-ink text-cream border-[3px] border-ink p-3 text-sm font-bold flex justify-between"><span>⏱ MULTI-DAY OPS</span><span class="text-lime">👷 FLEET + LOADERS</span></div>
+          <div class="grid grid-cols-2 gap-3 mt-5">
+            <button onclick="selectService('industrial', true)" class="btn-brutal bg-ink text-lime border-thick hard-sm font-display text-xl py-3">SELECT →</button>
+            <button onclick="selectService('industrial', false)" class="btn-brutal bg-paper border-thick hard-sm font-bold text-sm py-3">SEE PRICE</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-8 border-thick bg-cream hard p-4 md:p-5 flex flex-col md:flex-row items-center gap-4 justify-between">
+      <div class="font-bold text-lg">🤔 Not sure which one? <span class="bg-ink text-lime px-2">Take the 20-second Price Puncher below</span> — it picks for you.</div>
+      <button onclick="document.getElementById('estimator').scrollIntoView({behavior:'smooth'})" class="btn-brutal bg-ink text-lime font-display text-xl px-6 py-3 border-thick shrink-0">JUMP TO ESTIMATOR ↓</button>
+    </div>
+  </div>
+</section>
+
+<!-- ESTIMATOR -->
+<section id="estimator" class="bg-ink text-cream py-16 md:py-24 border-y-[6px] border-ink relative overflow-hidden noise">
+  <div class="absolute inset-0 hero-grid-dark opacity-60"></div>
+  <div class="max-w-[1400px] mx-auto px-4 md:px-8 relative z-10">
+    <div class="text-center mb-10">
+      <div class="inline-block bg-lime text-ink font-bold text-xs tracking-[0.25em] px-4 py-1 border-[3px] border-lime mb-4 rotate-[-2deg]">02 — INSTANT QUOTE ENGINE</div>
+      <h2 class="font-display text-[13vw] md:text-8xl leading-[0.9]">THE PRICE <span class="text-lime">PUNCHER</span></h2>
+      <p class="mt-3 font-bold text-cream/70 tracking-wide">MOVE SLIDERS. SMASH BUTTONS. WATCH THE PRICE. NO EMAIL REQUIRED.</p>
+    </div>
+
+    <!-- service tabs -->
+    <div class="grid grid-cols-3 gap-3 max-w-3xl mx-auto mb-8">
+      <button data-service="residential" onclick="setService('residential')" class="tab-service active border-[3px] border-cream bg-cream text-ink font-display text-lg md:text-2xl py-3">🏠 RESI</button>
+      <button data-service="commercial" onclick="setService('commercial')" class="tab-service border-[3px] border-cream bg-cream text-ink font-display text-lg md:text-2xl py-3">🏢 COMM</button>
+      <button data-service="industrial" onclick="setService('industrial')" class="tab-service border-[3px] border-cream bg-cream text-ink font-display text-lg md:text-2xl py-3">🏭 INDUS</button>
+    </div>
+
+    <div class="grid lg:grid-cols-12 gap-6 items-start">
+      <!-- controls -->
+      <div class="lg:col-span-7 space-y-5">
+        <!-- yard size -->
+        <div class="bg-cream text-ink border-[4px] border-cream hard-cream p-5 md:p-7 rotate-[-.5deg]">
+          <div class="flex justify-between items-end mb-2">
+            <label class="font-display text-2xl md:text-3xl">YARD SIZE <span id="sizeOut" class="bg-ink text-lime px-2 ml-2">5,000 SQ FT</span></label>
+            <span id="sizeAcres" class="font-bold text-sm bg-lime border-2 border-ink px-2">≈ 0.11 ACRES</span>
+          </div>
+          <input id="yardSize" type="range" min="500" max="50000" step="500" value="5000" class="w-full mt-4"/>
+          <div class="flex justify-between text-[11px] font-bold tracking-widest mt-2"><span>🍂 SINGLE PILE (500)</span><span>🏠 HOUSE (5K)</span><span>🏢 LOT (20K)</span><span>🏭 ACRES (50K)</span></div>
+          <div class="mt-4 grid grid-cols-4 gap-2">
+            <button onclick="setSize(1000)" class="border-2 border-ink font-bold text-xs py-2 hover:bg-lime">COURTYARD</button>
+            <button onclick="setSize(5000)" class="border-2 border-ink font-bold text-xs py-2 hover:bg-lime">SUBURBAN</button>
+            <button onclick="setSize(15000)" class="border-2 border-ink font-bold text-xs py-2 hover:bg-lime">CORNER LOT</button>
+            <button onclick="setSize(40000)" class="border-2 border-ink font-bold text-xs py-2 hover:bg-lime">BEAST MODE</button>
+          </div>
+        </div>
+
+        <!-- density -->
+        <div class="bg-cream text-ink border-[4px] border-cream hard-cream p-5 md:p-7 rotate-[.5deg]">
+          <div class="font-display text-2xl md:text-3xl mb-1">LEAF DENSITY <span class="text-sm font-body font-bold bg-blaze text-white px-2 py-1 align-middle ml-2">BE HONEST 😅</span></div>
+          <p class="text-sm font-medium text-neutral-600 mb-4">How buried are we talking? Tap one.</p>
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-3" id="densityGroup">
+            <button data-density="light" onclick="setDensity('light')" class="toggle-pill border-[3px] border-ink bg-white p-3 text-left"><div class="text-3xl">🌱</div><div class="font-display text-xl mt-1">LIGHT</div><div class="text-xs font-bold">Sprinkling ×1.0</div></button>
+            <button data-density="medium" onclick="setDensity('medium')" class="toggle-pill active border-[3px] border-ink bg-white p-3 text-left"><div class="text-3xl">🍂</div><div class="font-display text-xl mt-1">MEDIUM</div><div class="text-xs font-bold">Crunchy ×1.35</div></button>
+            <button data-density="heavy" onclick="setDensity('heavy')" class="toggle-pill border-[3px] border-ink bg-white p-3 text-left"><div class="text-3xl">🍁</div><div class="font-display text-xl mt-1">HEAVY</div><div class="text-xs font-bold">Ankle-deep ×1.75</div></button>
+            <button data-density="buried" onclick="setDensity('buried')" class="toggle-pill border-[3px] border-ink bg-white p-3 text-left"><div class="text-3xl">🌋</div><div class="font-display text-xl mt-1">BURIED</div><div class="text-xs font-bold">Send help ×2.3</div></button>
+          </div>
+        </div>
+
+        <!-- addons -->
+        <div class="bg-cream text-ink border-[4px] border-cream hard-cream p-5 md:p-7 rotate-[-.5deg]">
+          <div class="font-display text-2xl md:text-3xl mb-4">POWER-UPS <span class="text-sm font-body font-bold">TAP TO ADD</span></div>
+          <div class="grid md:grid-cols-2 gap-3" id="addonGrid">
+            <div onclick="toggleAddon('gutter')" data-addon="gutter" class="addon-card border-[3px] border-ink bg-white p-4 flex items-center gap-3 relative"><div class="addon-check opacity-0 scale-50 transition-all absolute -top-3 -right-3 w-8 h-8 bg-lime border-[3px] border-ink rounded-full flex items-center justify-center font-black">✔</div><div class="text-3xl">🪜</div><div class="flex-1"><div class="font-bold">Gutter Cleanout</div><div class="text-xs font-medium opacity-70">Downspouts flushed</div></div><div class="addon-price font-display text-lg bg-ink text-lime px-2">+$<span id="price-gutter">79</span></div></div>
+            <div onclick="toggleAddon('mulch')" data-addon="mulch" class="addon-card border-[3px] border-ink bg-white p-4 flex items-center gap-3 relative"><div class="addon-check opacity-0 scale-50 transition-all absolute -top-3 -right-3 w-8 h-8 bg-lime border-[3px] border-ink rounded-full flex items-center justify-center font-black">✔</div><div class="text-3xl">♻️</div><div class="flex-1"><div class="font-bold">Mulch & Compost</div><div class="text-xs font-medium opacity-70">Shredded on-site</div></div><div class="addon-price font-display text-lg bg-ink text-lime px-2">+$<span id="price-mulch">49</span></div></div>
+            <div onclick="toggleAddon('haul')" data-addon="haul" class="addon-card selected border-[3px] border-ink bg-white p-4 flex items-center gap-3 relative"><div class="addon-check opacity-0 scale-50 transition-all absolute -top-3 -right-3 w-8 h-8 bg-lime border-[3px] border-ink rounded-full flex items-center justify-center font-black">✔</div><div class="text-3xl">🚚</div><div class="flex-1"><div class="font-bold">Haul Everything Away</div><div class="text-xs font-medium opacity-70">Leave zero trace</div></div><div class="addon-price font-display text-lg bg-ink text-lime px-2">+$<span id="price-haul">39</span></div></div>
+            <div onclick="toggleAddon('sticks')" data-addon="sticks" class="addon-card border-[3px] border-ink bg-white p-4 flex items-center gap-3 relative"><div class="addon-check opacity-0 scale-50 transition-all absolute -top-3 -right-3 w-8 h-8 bg-lime border-[3px] border-ink rounded-full flex items-center justify-center font-black">✔</div><div class="text-3xl">🪵</div><div class="flex-1"><div class="font-bold">Sticks & Branches</div><div class="text-xs font-medium opacity-70">Storm debris too</div></div><div class="addon-price font-display text-lg bg-ink text-lime px-2">+$<span id="price-sticks">59</span></div></div>
+            <div onclick="toggleAddon('curb')" data-addon="curb" class="addon-card border-[3px] border-ink bg-white p-4 flex items-center gap-3 relative"><div class="addon-check opacity-0 scale-50 transition-all absolute -top-3 -right-3 w-8 h-8 bg-lime border-[3px] border-ink rounded-full flex items-center justify-center font-black">✔</div><div class="text-3xl">📦</div><div class="flex-1"><div class="font-bold">Curb Pile Pickup</div><div class="text-xs font-medium opacity-70">You rake, we grab</div></div><div class="addon-price font-display text-lg bg-ink text-lime px-2">+$<span id="price-curb">29</span></div></div>
+            <div onclick="toggleAddon('beds')" data-addon="beds" class="addon-card border-[3px] border-ink bg-white p-4 flex items-center gap-3 relative"><div class="addon-check opacity-0 scale-50 transition-all absolute -top-3 -right-3 w-8 h-8 bg-lime border-[3px] border-ink rounded-full flex items-center justify-center font-black">✔</div><div class="text-3xl">🌷</div><div class="flex-1"><div class="font-bold">Bed Detailing</div><div class="text-xs font-medium opacity-70">Hand-pick beds</div></div><div class="addon-price font-display text-lg bg-ink text-lime px-2">+$<span id="price-beds">45</span></div></div>
+          </div>
+        </div>
+
+        <!-- frequency + urgency -->
+        <div class="grid md:grid-cols-2 gap-5">
+          <div class="bg-lime text-ink border-[4px] border-lime p-5 hard-lime">
+            <div class="font-display text-2xl mb-3">FREQUENCY</div>
+            <div class="space-y-2" id="freqGroup">
+              <button data-freq="once" onclick="setFreq('once')" class="toggle-pill active w-full text-left border-[3px] border-ink bg-cream px-3 py-2 font-bold text-sm">⚡ ONE-TIME <span class="float-right">×1.0</span></button>
+              <button data-freq="monthly" onclick="setFreq('monthly')" class="toggle-pill w-full text-left border-[3px] border-ink bg-cream px-3 py-2 font-bold text-sm">🗓 MONTHLY <span class="float-right text-blaze">−10%</span></button>
+              <button data-freq="biweekly" onclick="setFreq('biweekly')" class="toggle-pill w-full text-left border-[3px] border-ink bg-cream px-3 py-2 font-bold text-sm">🔁 BI-WEEKLY <span class="float-right text-blaze">−15%</span></button>
+              <button data-freq="weekly" onclick="setFreq('weekly')" class="toggle-pill w-full text-left border-[3px] border-ink bg-cream px-3 py-2 font-bold text-sm">♾ WEEKLY <span class="float-right text-blaze">−20%</span></button>
+            </div>
+          </div>
+          <div class="bg-blaze text-white border-[4px] border-cream p-5" style="box-shadow:8px 8px 0 #CCFF00">
+            <div class="font-display text-2xl mb-3">HOW FAST? 🏃</div>
+            <div class="space-y-2" id="urgGroup">
+              <button data-urg="standard" onclick="setUrg('standard')" class="toggle-pill active w-full text-left border-[3px] border-ink bg-cream text-ink px-3 py-2 font-bold text-sm">🐢 STANDARD 3–5 DAYS <span class="float-right">FREE</span></button>
+              <button data-urg="priority" onclick="setUrg('priority')" class="toggle-pill w-full text-left border-[3px] border-ink bg-cream text-ink px-3 py-2 font-bold text-sm">🚀 PRIORITY 48H <span class="float-right">+$49</span></button>
+              <button data-urg="sameday" onclick="setUrg('sameday')" class="toggle-pill w-full text-left border-[3px] border-ink bg-cream text-ink px-3 py-2 font-bold text-sm">🔥 SAME-DAY STORM <span class="float-right">+$129</span></button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- sticky quote -->
+      <div class="lg:col-span-5 lg:sticky lg:top-[90px]">
+        <div class="bg-lime text-ink border-[4px] border-cream p-6 md:p-8 rotate-1" style="box-shadow:10px 10px 0 #FF4D00">
+          <div class="flex items-center justify-between">
+            <span id="quoteServiceBadge" class="bg-ink text-lime font-display text-lg px-3 py-1">🏠 RESIDENTIAL</span>
+            <span class="font-bold text-xs tracking-widest flex items-center gap-1"><span class="w-2 h-2 bg-green-700 rounded-full animate-pulse"></span> LIVE PRICE</span>
+          </div>
+          <div class="mt-4 flex items-end gap-2">
+            <div id="quoteTotal" class="font-display text-7xl md:text-8xl leading-none">$189</div>
+            <div class="pb-2 font-bold text-sm leading-tight">EST.<br><span id="quoteRange" class="bg-ink text-cream px-1">$170 – $208</span></div>
+          </div>
+          <div class="mt-2 flex gap-2 text-[12px] font-bold">
+            <span class="bg-ink text-cream px-2 py-1">⏱ <span id="quoteTime">~1.5 HRS</span></span>
+            <span class="bg-paper border-2 border-ink px-2 py-1">👷 <span id="quoteCrew">2-PERSON CREW</span></span>
+            <span class="bg-blaze text-white px-2 py-1">🔥 <span id="quoteBags">14 BAGS</span></span>
+          </div>
+          <div class="mt-5 bg-ink text-cream p-4 text-sm font-medium space-y-1.5 border-[3px] border-ink">
+            <div class="flex justify-between"><span id="breakBaseLabel">Base (Residential)</span><span id="breakBase" class="font-bold">$89</span></div>
+            <div class="flex justify-between"><span>Yard volume <span id="breakSizeLabel" class="text-lime">(5,000 sqft)</span></span><span id="breakSize" class="font-bold">+$62</span></div>
+            <div class="flex justify-between"><span>Density <span id="breakDensityLabel" class="text-lime">(Medium ×1.35)</span></span><span id="breakDensity" class="font-bold">+$38</span></div>
+            <div class="flex justify-between"><span>Add-ons <span id="breakAddonCount" class="text-lime">(1)</span></span><span id="breakAddon" class="font-bold">+$39</span></div>
+            <div class="flex justify-between text-lime"><span>Frequency <span id="breakFreqLabel">(One-time)</span></span><span id="breakFreq">−$0</span></div>
+            <div class="flex justify-between"><span>Speed fee</span><span id="breakUrg" class="font-bold">$0</span></div>
+            <div class="border-t border-cream/20 pt-2 flex justify-between font-display text-xl"><span>TOTAL PUNCH</span><span id="breakTotal" class="text-lime">$189</span></div>
+          </div>
+          <div class="mt-4 flex items-center gap-2 bg-paper border-[3px] border-ink p-3">
+            <i class="fa-solid fa-leaf text-green-700 text-xl"></i>
+            <div class="text-[13px] font-bold leading-tight">100% COMPOSTED. <span id="ecoLine">Your job = ~14 bags diverted from landfill.</span></div>
+          </div>
+          <button onclick="openBooking()" class="btn-brutal w-full mt-4 bg-ink text-lime font-display text-3xl py-4 border-[3px] border-ink" style="box-shadow:6px 6px 0 #0B0B0B, 6px 6px 0 3px #F4F1EA">LOCK THIS PRICE →</button>
+          <button onclick="resetEstimator()" class="w-full mt-2 font-bold text-xs tracking-widest underline underline-offset-4 hover:text-blaze">RESET PUNCHER</button>
+          <div class="mt-2 text-center text-[11px] font-bold tracking-widest opacity-70">FINAL QUOTE CONFIRMED ON-SITE • NO HIDDEN FEES • EVER</div>
+        </div>
+        <div class="mt-4 bg-cream text-ink border-[3px] border-cream p-4 flex gap-3 items-center -rotate-1">
+          <img src="https://i.pravatar.cc/100?img=12" class="w-12 h-12 rounded-full border-[3px] border-ink" alt="rep"/>
+          <div class="text-sm"><strong>Mike R. — Dispatch:</strong> “That price? I can have a crew there <span id="dispatchLine" class="bg-lime px-1 font-bold">TOMORROW at 9AM.</span>” <button onclick="openBooking()" class="underline font-bold">Claim it →</button></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="bg-cream py-16 md:py-20 border-b-[4px] border-ink">
+  <div class="max-w-[1400px] mx-auto px-4 md:px-8">
+    <h2 class="font-display text-[11vw] md:text-7xl leading-none mb-8">HOW IT <span class="stroke-black">WORKS</span> <span class="bg-ink text-lime px-3 text-[6vw] md:text-4xl align-middle -rotate-2 inline-block">EASY AS 1-2-3-4</span></h2>
+    <div class="grid md:grid-cols-4 gap-4">
+      <div class="border-thick bg-paper hard p-5 card-tilt reveal"><div class="font-display text-6xl text-blaze">01</div><div class="font-display text-2xl mt-2">PUNCH PRICE</div><p class="font-medium text-sm mt-2">Use the estimator or send us 2 photos. Get a locked price in 60 seconds.</p><div class="mt-3 text-xs font-bold bg-lime border-2 border-ink inline-block px-2 py-1">NO EMAIL NEEDED</div></div>
+      <div class="border-thick bg-ink text-cream p-5 card-tilt reveal md:mt-6"><div class="font-display text-6xl text-lime">02</div><div class="font-display text-2xl mt-2">PICK A SLOT</div><p class="font-medium text-sm mt-2 text-cream/70">Live calendar. Same-day storm slots. Text confirmation instantly.</p><div class="mt-3 text-xs font-bold bg-blaze text-white border-2 border-white inline-block px-2 py-1">TEXT ALERTS ON</div></div>
+      <div class="border-thick bg-lime hard p-5 card-tilt reveal"><div class="font-display text-6xl">03</div><div class="font-display text-2xl mt-2">WE BLITZ</div><p class="font-medium text-sm mt-2">Crew shows up, blows, rakes, vacuums, details beds. You do nothing.</p><div class="mt-3 text-xs font-bold bg-ink text-lime inline-block px-2 py-1">AVG 90 MIN</div></div>
+      <div class="border-thick bg-blaze text-white hard p-5 card-tilt reveal md:mt-6"><div class="font-display text-6xl">04</div><div class="font-display text-2xl mt-2">GONE. POOF.</div><p class="font-medium text-sm mt-2">Haul-away + photo proof + compost receipt. Pay after you love it.</p><div class="mt-3 text-xs font-bold bg-white text-ink border-2 border-ink inline-block px-2 py-1">PAY AFTER ★</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- BEFORE AFTER -->
+<section id="proof" class="bg-paper py-16 md:py-24">
+  <div class="max-w-[1400px] mx-auto px-4 md:px-8">
+    <div class="flex flex-col lg:flex-row gap-8 items-start">
+      <div class="lg:w-[38%]">
+        <div class="inline-block bg-ink text-lime font-bold text-xs tracking-[0.25em] px-3 py-1 mb-4">03 — RECEIPTS</div>
+        <h2 class="font-display text-[12vw] md:text-7xl leading-[0.9]">DRAG IT.<br><span class="bg-blaze text-white px-2 inline-block rotate-1">SEE THE</span><br>BLITZ.</h2>
+        <p class="mt-4 font-medium text-lg">Real yards. Real piles. Slide the handle to witness the carnage — <strong>left = buried, right = blitzed.</strong></p>
+        <div class="mt-6 space-y-3">
+          <div class="border-thick bg-cream p-4 hard-sm flex justify-between items-center"><div><div class="font-display text-xl">MAPLE STREET — RESI</div><div class="text-xs font-bold">4,200 SQFT • HEAVY • 1HR 20MIN</div></div><button onclick="swapBA(0)" class="bg-ink text-lime font-bold text-xs px-3 py-2 border-2 border-ink">VIEW</button></div>
+          <div class="border-thick bg-cream p-4 hard-sm flex justify-between items-center"><div><div class="font-display text-xl">PLAZA LOT — COMM</div><div class="text-xs font-bold">18,000 SQFT • 3 CREW • HALF DAY</div></div><button onclick="swapBA(1)" class="bg-ink text-lime font-bold text-xs px-3 py-2 border-2 border-ink">VIEW</button></div>
+          <div class="border-thick bg-cream p-4 hard-sm flex justify-between items-center"><div><div class="font-display text-xl">DEPOT YARDS — INDUS</div><div class="text-xs font-bold">6.2 ACRES • FLEET • 2 DAYS</div></div><button onclick="swapBA(2)" class="bg-ink text-lime font-bold text-xs px-3 py-2 border-2 border-ink">VIEW</button></div>
+        </div>
+        <div class="mt-6 bg-ink text-cream p-4 border-thick hard flex items-center gap-4">
+          <div class="font-display text-5xl text-lime">100%</div>
+          <div class="font-bold text-sm">PAY-AFTER-YOU-LOVE-IT GUARANTEE. If a leaf survives, we come back FREE.</div>
+        </div>
+      </div>
+      <div class="lg:w-[62%] w-full">
+        <div id="baWrap" class="relative border-[5px] border-ink hard overflow-hidden select-none bg-ink" style="height:520px; touch-action:none;">
+          <img id="baAfter" src="https://images.unsplash.com/photo-1558904541-efa843a96f01?q=80&w=1200&auto=format&fit=crop" class="absolute inset-0 w-full h-full object-cover" alt="after" draggable="false"/>
+          <div id="baBeforeClip" class="absolute inset-0 overflow-hidden" style="width:50%">
+            <img id="baBefore" src="https://images.unsplash.com/photo-1507371341162-763b5e419408?q=80&w=1200&auto=format&fit=crop" class="absolute inset-0 h-full object-cover max-w-none" style="width:100vw;" alt="before" draggable="false"/>
+            <div class="absolute top-4 left-4 bg-blaze text-white font-display text-xl px-3 py-1 border-[3px] border-white -rotate-2">BEFORE 😱</div>
+          </div>
+          <div class="absolute top-4 right-4 bg-lime font-display text-xl px-3 py-1 border-[3px] border-ink rotate-2">AFTER 🤯</div>
+          <div id="baHandle" class="before-handle absolute top-0 bottom-0 w-[6px] bg-lime border-x-[3px] border-ink" style="left:50%">
+            <div class="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 left-1/2 w-14 h-14 bg-lime border-[4px] border-ink rounded-full flex items-center justify-center font-black text-xl hard-sm">↔</div>
+          </div>
+          <div class="absolute bottom-4 left-1/2 -translate-x-1/2 bg-ink text-cream text-xs font-bold px-4 py-2 border-2 border-lime tracking-widest whitespace-nowrap">◀ DRAG TO COMPARE ▶</div>
+        </div>
+        <div class="grid grid-cols-3 gap-3 mt-4">
+          <div class="border-thick bg-lime p-3 text-center hard-sm"><div class="font-display text-2xl">2,300+</div><div class="text-[11px] font-bold">BEFORE/AFTERS</div></div>
+          <div class="border-thick bg-ink text-cream p-3 text-center"><div class="font-display text-2xl text-blaze">4.9 ★</div><div class="text-[11px] font-bold">AVG RATING</div></div>
+          <div class="border-thick bg-paper p-3 text-center hard-sm"><div class="font-display text-2xl">0 LEAVES</div><div class="text-[11px] font-bold">LEFT BEHIND</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPARISON / WHY -->
+<section class="bg-ink text-cream py-16 md:py-24 border-y-[6px] border-ink relative overflow-hidden">
+  <div class="max-w-[1200px] mx-auto px-4 md:px-8">
+    <h2 class="font-display text-center text-[11vw] md:text-7xl leading-none">YOU vs. <span class="text-blaze">THEM</span> vs. <span class="bg-lime text-ink px-2">US</span></h2>
+    <p class="text-center font-bold text-cream/60 mt-3 tracking-widest text-sm">SPOILER: YOUR BACK WILL THANK US.</p>
+    <div class="mt-10 border-[4px] border-cream overflow-hidden">
+      <div class="grid grid-cols-4 bg-cream text-ink font-display text-sm md:text-xl">
+        <div class="p-3 md:p-4">FEATURE</div><div class="p-3 md:p-4 text-center bg-neutral-200">DIY 😩</div><div class="p-3 md:p-4 text-center bg-neutral-300">OTHER GUYS 😐</div><div class="p-3 md:p-4 text-center bg-lime">BLITZ 😎</div>
+      </div>
+      <div id="compareRows" class="text-sm md:text-base font-medium"></div>
+    </div>
+    <div class="grid md:grid-cols-3 gap-4 mt-8">
+      <div class="bg-cream text-ink border-[3px] border-cream p-5 -rotate-1"><div class="text-4xl">🦺</div><div class="font-display text-2xl mt-2">LICENSED + INSURED</div><p class="text-sm font-medium">$2M liability. Your property, our responsibility. Certificates on request.</p></div>
+      <div class="bg-blaze border-[3px] border-cream p-5 rotate-1"><div class="text-4xl">🌍</div><div class="font-display text-2xl mt-2">ZERO DUMP. ALL COMPOST.</div><p class="text-sm font-medium">412 tons composted last fall. You get a compost receipt with every job.</p></div>
+      <div class="bg-paper text-ink border-[3px] border-cream p-5 -rotate-1"><div class="text-4xl">⚡</div><div class="font-display text-2xl mt-2">STORM SQUAD</div><p class="text-sm font-medium">Wind event last night? Priority crews roll within 48h — same-day if urgent.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- FLEET -->
+<section class="bg-gold py-16 md:py-20 border-b-[4px] border-ink overflow-hidden">
+  <div class="max-w-[1400px] mx-auto px-4 md:px-8">
+    <div class="flex flex-col md:flex-row justify-between items-end gap-4 mb-8">
+      <h2 class="font-display text-[12vw] md:text-7xl leading-[0.9]">THE ARSENAL <span class="text-4xl align-middle">🚀</span></h2>
+      <div class="font-bold bg-ink text-lime px-4 py-2 border-thick text-sm tracking-widest rotate-1">COMMERCIAL-GRADE ONLY. NO DOLLAR-STORE RAKES.</div>
+    </div>
+    <div class="grid md:grid-cols-4 gap-4">
+      <div class="border-thick bg-ink text-cream hard p-5 card-tilt group"><div class="text-5xl group-hover:scale-125 transition-transform origin-left">🌀</div><div class="font-display text-2xl mt-3 text-lime">HURRICANE BLOWERS</div><p class="text-sm text-cream/70 font-medium">200+ MPH backpack + walk-behind. Moves wet mats like nothing.</p><div class="mt-3 h-2 bg-cream/20"><div class="h-full bg-lime" style="width:95%"></div></div><div class="text-[11px] font-bold mt-1">POWER 95%</div></div>
+      <div class="border-thick bg-paper hard p-5 card-tilt group"><div class="text-5xl group-hover:scale-125 transition-transform origin-left">🦈</div><div class="font-display text-2xl mt-3">LEAF SHARK VAC</div><p class="text-sm font-medium">16HP truck-loader vacuums. Eats piles, spits mulch. 2,500 lbs/hr.</p><div class="mt-3 h-2 bg-ink/10"><div class="h-full bg-blaze" style="width:88%"></div></div><div class="text-[11px] font-bold mt-1">SUCK 88%</div></div>
+      <div class="border-thick bg-paper hard p-5 card-tilt group"><div class="text-5xl group-hover:scale-125 transition-transform origin-left">🚚</div><div class="font-display text-2xl mt-3">DUMP FLEET ×14</div><p class="text-sm font-medium">14 trucks + trailers staged across zones. Never waiting on haul.</p><div class="mt-3 h-2 bg-ink/10"><div class="h-full bg-ink" style="width:100%"></div></div><div class="text-[11px] font-bold mt-1">COVERAGE 100%</div></div>
+      <div class="border-thick bg-blaze text-white hard p-5 card-tilt group"><div class="text-5xl group-hover:scale-125 transition-transform origin-left">🤖</div><div class="font-display text-2xl mt-3">BED DETAIL KIT</div><p class="text-sm font-medium">Hand tools, tarps, gutter scoops. Flower beds treated like surgery.</p><div class="mt-3 h-2 bg-white/20"><div class="h-full bg-white" style="width:92%"></div></div><div class="text-[11px] font-bold mt-1">DETAIL 92%</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section id="reviews" class="bg-cream py-16 md:py-24 hero-grid">
+  <div class="max-w-[1200px] mx-auto px-4 md:px-8">
+    <div class="text-center mb-8">
+      <div class="inline-block bg-ink text-lime font-bold text-xs tracking-[0.25em] px-3 py-1 mb-4">04 — STREET TALK</div>
+      <h2 class="font-display text-[13vw] md:text-8xl leading-[0.9]">YARDS TALK.<br><span class="stroke-black">NEIGHBORS STARE.</span></h2>
+      <div class="mt-3 inline-flex items-center gap-2 bg-paper border-thick hard-sm px-4 py-2 font-bold">★★★★★ 4.9 from 2,314 verified blitzes <span class="bg-lime border-2 border-ink px-2 text-xs">GOOGLE • YELP • NEXTDOOR</span></div>
+    </div>
+    <div class="relative border-[4px] border-ink bg-ink text-cream hard overflow-hidden">
+      <div class="overflow-hidden"><div id="testiTrack" class="testi-track flex"></div></div>
+      <div class="flex items-center justify-between bg-lime text-ink border-t-[4px] border-ink px-4 py-3">
+        <div class="flex gap-2">
+          <button onclick="moveTesti(-1)" class="w-11 h-11 border-[3px] border-ink bg-paper font-black text-xl btn-brutal">←</button>
+          <button onclick="moveTesti(1)" class="w-11 h-11 border-[3px] border-ink bg-ink text-lime font-black text-xl btn-brutal">→</button>
+        </div>
+        <div id="testiDots" class="flex gap-2"></div>
+        <div class="hidden md:block font-display text-xl"><span id="testiIdx">01</span> / 05</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICE AREA + ZIP -->
+<section class="bg-paper py-16 md:py-20 border-t-[4px] border-ink">
+  <div class="max-w-[1400px] mx-auto px-4 md:px-8 grid lg:grid-cols-2 gap-8 items-start">
+    <div>
+      <div class="inline-block bg-blaze text-white font-bold text-xs tracking-[0.25em] px-3 py-1 mb-4 border-thick">05 — ARE WE IN YOUR HOOD?</div>
+      <h2 class="font-display text-[11vw] md:text-6xl leading-[0.9]">ENTER ZIP.<br>GET VERDICT <span class="bg-lime border-thick px-2 inline-block -rotate-1">IN 2 SEC.</span></h2>
+      <div class="mt-6 border-thick bg-cream hard p-5">
+        <label class="font-bold text-sm tracking-widest">YOUR ZIP CODE</label>
+        <div class="flex gap-3 mt-2">
+          <input id="zipInput" maxlength="5" inputmode="numeric" placeholder="e.g. 90210" class="flex-1 border-[3px] border-ink bg-white font-display text-3xl px-4 py-3 outline-none focus:bg-lime placeholder:text-neutral-300"/>
+          <button onclick="checkZip()" class="btn-brutal bg-ink text-lime font-display text-2xl px-6 border-thick">CHECK →</button>
+        </div>
+        <div id="zipResult" class="mt-4 hidden border-[3px] border-ink p-4 font-bold text-sm"></div>
+        <div class="mt-3 text-xs font-bold opacity-60">TRY: 90210 • 60614 • 10001 • 75001 • 99999 (to see out-of-zone)</div>
+      </div>
+      <div class="grid grid-cols-3 gap-3 mt-4 text-center">
+        <div class="border-thick bg-lime p-3 hard-sm"><div class="font-display text-xl">ZONE A</div><div class="text-xs font-bold">SAME-DAY<br>12 neighborhoods</div></div>
+        <div class="border-thick bg-gold p-3 hard-sm"><div class="font-display text-xl">ZONE B</div><div class="text-xs font-bold">48-HOUR<br>28 neighborhoods</div></div>
+        <div class="border-thick bg-ink text-cream p-3"><div class="font-display text-xl text-blaze">ZONE C</div><div class="text-xs font-bold">CUSTOM QUOTE<br>Industrial + rural</div></div>
+      </div>
+    </div>
+    <div class="border-[4px] border-ink hard bg-ink text-cream p-6 md:p-8 relative overflow-hidden">
+      <div class="absolute inset-0 hero-grid-dark"></div>
+      <div class="relative z-10">
+        <div class="font-display text-3xl mb-4">THIS WEEK'S <span class="text-lime">ROUTE HEATMAP</span></div>
+        <div class="grid grid-cols-4 gap-2 text-center font-bold text-xs" id="zoneGrid"></div>
+        <div class="mt-6 bg-cream text-ink border-[3px] border-cream p-4 flex items-center gap-4">
+          <div class="w-14 h-14 bg-blaze border-[3px] border-ink rounded-full flex items-center justify-center text-2xl shrink-0">📍</div>
+          <div><div class="font-display text-xl">14 TRUCKS ROLLING TODAY</div><div class="text-sm font-medium">Live dispatch: <span class="font-bold">Oakdale • Riverside • Northgate</span> — your street could be next.</div></div>
+        </div>
+        <button onclick="openBooking()" class="btn-brutal w-full mt-4 bg-lime text-ink font-display text-2xl py-3 border-[3px] border-lime">CLAIM A SLOT ON TODAY'S ROUTE →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq" class="bg-cream py-16 md:py-24 border-t-[4px] border-ink">
+  <div class="max-w-[900px] mx-auto px-4 md:px-8">
+    <h2 class="font-display text-[13vw] md:text-7xl text-center leading-none">DUMB QUESTIONS?<br><span class="bg-ink text-lime px-3 inline-block rotate-1">SMART ANSWERS.</span></h2>
+    <div id="faqList" class="mt-10 space-y-3"></div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="bg-blaze text-white py-16 md:py-24 border-t-[6px] border-ink relative overflow-hidden noise">
+  <div class="absolute font-display text-[26vw] leading-none opacity-10 whitespace-nowrap top-1/2 -translate-y-1/2 pointer-events-none select-none">LEAVES LEAVES LEAVES</div>
+  <div class="max-w-[1200px] mx-auto px-4 md:px-8 text-center relative z-10">
+    <div class="inline-block bg-ink text-lime font-display text-lg px-4 py-1 rotate-[-2deg] border-[3px] border-ink">NO JOB TOO SMALL. NO JOB TOO BIG.</div>
+    <h2 class="font-display text-[14vw] md:text-[7.5rem] leading-[0.85] mt-4">READY TO<br>RECLAIM<br>YOUR YARD?</h2>
+    <p class="font-bold text-lg mt-4">One pile or fifty acres — same energy. Same blitz.</p>
+    <div class="flex flex-col md:flex-row gap-4 justify-center mt-8">
+      <button onclick="openBooking()" class="btn-brutal bg-ink text-lime font-display text-3xl md:text-4xl px-10 py-5 border-[4px] border-ink hard">BOOK MY BLITZ →</button>
+      <a href="tel:5555465323" class="btn-brutal bg-paper text-ink font-display text-3xl md:text-4xl px-10 py-5 border-[4px] border-ink hard">CALL (555) 546-LEAF</a>
+    </div>
+    <div class="mt-6 font-bold text-sm tracking-widest">★ PAY AFTER YOU LOVE IT ★ FREE RE-VISIT IF WE MISS A LEAF ★ COMPOST RECEIPT INCLUDED</div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="bg-ink text-cream pt-14 pb-6 border-t-[4px] border-ink">
+  <div class="max-w-[1400px] mx-auto px-4 md:px-8 grid md:grid-cols-4 gap-8">
+    <div>
+      <div class="font-display text-4xl">LEAF<span class="bg-lime text-ink px-1">BLITZ</span></div>
+      <p class="text-sm text-cream/60 font-medium mt-3">The loudest leaf pickup crew in town. Residential, commercial, industrial — raked, blown, vacuumed, gone.</p>
+      <div class="flex gap-2 mt-4">
+        <a href="#" class="w-10 h-10 border-2 border-cream flex items-center justify-center hover:bg-lime hover:text-ink hover:border-lime transition"><i class="fa-brands fa-instagram"></i></a>
+        <a href="#" class="w-10 h-10 border-2 border-cream flex items-center justify-center hover:bg-lime hover:text-ink hover:border-lime transition"><i class="fa-brands fa-facebook-f"></i></a>
+        <a href="#" class="w-10 h-10 border-2 border-cream flex items-center justify-center hover:bg-lime hover:text-ink hover:border-lime transition"><i class="fa-brands fa-tiktok"></i></a>
+        <a href="#" class="w-10 h-10 border-2 border-cream flex items-center justify-center hover:bg-lime hover:text-ink hover:border-lime transition"><i class="fa-brands fa-youtube"></i></a>
+      </div>
+    </div>
+    <div><div class="font-display text-xl text-lime mb-3">SERVICES</div><ul class="space-y-2 font-medium text-sm text-cream/70"><li><a href="#services" class="hover:text-lime">Residential Pickup</a></li><li><a href="#services" class="hover:text-lime">Commercial Routes</a></li><li><a href="#services" class="hover:text-lime">Industrial Acres</a></li><li><a href="#estimator" class="hover:text-lime">Curb Pile Pickup $29+</a></li><li><a href="#estimator" class="hover:text-lime">Gutter Cleanout</a></li></ul></div>
+    <div><div class="font-display text-xl text-lime mb-3">COMPANY</div><ul class="space-y-2 font-medium text-sm text-cream/70"><li><a href="#proof" class="hover:text-lime">Before / After</a></li><li><a href="#reviews" class="hover:text-lime">Reviews</a></li><li><a href="#faq" class="hover:text-lime">FAQ</a></li><li><a href="#" class="hover:text-lime">Careers — Join the Blitz</a></li><li><a href="#" class="hover:text-lime">Compost Impact Report</a></li></ul></div>
+    <div class="bg-cream text-ink border-[3px] border-cream p-5 rotate-1"><div class="font-display text-2xl">GET $20 OFF</div><p class="text-sm font-medium">Drop your number. We text you a $20 coupon. No spam, just leaves.</p><div class="flex gap-2 mt-3"><input id="couponPhone" placeholder="(555) ___" class="flex-1 border-[3px] border-ink px-3 py-2 font-bold text-sm outline-none w-full"/><button onclick="claimCoupon()" class="bg-blaze text-white border-[3px] border-ink font-display px-4">→</button></div></div>
+  </div>
+  <div class="max-w-[1400px] mx-auto px-4 md:px-8 mt-10 pt-6 border-t border-cream/15 flex flex-col md:flex-row justify-between gap-2 text-xs font-bold tracking-widest text-cream/50"><span>© 2026 LEAFBLITZ CO. ALL LEAVES RESERVED.</span><span>LICENSED • INSURED • COMPOST-CERTIFIED • MADE WITH RAKE & RAGE</span></div>
+</footer>
+
+<!-- FLOATING -->
+<button onclick="openBooking()" class="fixed bottom-5 right-5 z-[90] btn-brutal bg-lime border-thick hard font-display text-lg px-5 py-3 flex items-center gap-2 wiggle"><span class="w-3 h-3 bg-blaze rounded-full animate-ping"></span> QUOTE: <span id="floatPrice">$189</span></button>
+
+<!-- BOOKING MODAL -->
+<div id="bookingModal" class="fixed inset-0 z-[200] hidden items-center justify-center p-3 md:p-6">
+  <div class="absolute inset-0 bg-ink/80 backdrop-blur-sm" onclick="closeBooking()"></div>
+  <div class="relative w-full max-w-3xl bg-cream border-[5px] border-ink hard max-h-[92vh] overflow-y-auto">
+    <div class="sticky top-0 bg-ink text-cream px-5 py-4 flex justify-between items-center border-b-[4px] border-ink z-10">
+      <div class="font-display text-2xl">BOOK YOUR BLITZ <span id="modalPriceTag" class="bg-lime text-ink text-lg px-2 ml-2">$189</span></div>
+      <button onclick="closeBooking()" class="w-10 h-10 bg-blaze border-2 border-cream font-black">✕</button>
+    </div>
+    <div class="px-5 pt-5">
+      <div class="grid grid-cols-3 gap-2 mb-6">
+        <div id="stepDot1" class="text-center font-display text-sm md:text-base bg-ink text-lime py-2 border-[3px] border-ink">1. DETAILS</div>
+        <div id="stepDot2" class="text-center font-display text-sm md:text-base bg-white py-2 border-[3px] border-ink">2. SCHEDULE</div>
+        <div id="stepDot3" class="text-center font-display text-sm md:text-base bg-white py-2 border-[3px] border-ink">3. CONFIRM</div>
+      </div>
+    </div>
+    <!-- STEP 1 -->
+    <div id="bStep1" class="px-5 pb-6">
+      <div id="modalSummary" class="bg-lime border-[3px] border-ink p-4 font-bold text-sm mb-4"></div>
+      <div class="grid md:grid-cols-2 gap-3">
+        <div><label class="font-bold text-xs tracking-widest">FULL NAME *</label><input id="fName" placeholder="Jane Doe" class="w-full border-[3px] border-ink px-3 py-2.5 font-bold outline-none focus:bg-lime/30 mt-1"/></div>
+        <div><label class="font-bold text-xs tracking-widest">PHONE *</label><input id="fPhone" placeholder="(555) 123-4567" class="w-full border-[3px] border-ink px-3 py-2.5 font-bold outline-none focus:bg-lime/30 mt-1"/></div>
+        <div class="md:col-span-2"><label class="font-bold text-xs tracking-widest">SERVICE ADDRESS *</label><input id="fAddr" placeholder="123 Maple St, Springfield" class="w-full border-[3px] border-ink px-3 py-2.5 font-bold outline-none focus:bg-lime/30 mt-1"/></div>
+        <div class="md:col-span-2"><label class="font-bold text-xs tracking-widest">ANYTHING WE SHOULD KNOW? (gates, dogs, slopes)</label><textarea id="fNotes" rows="2" placeholder="Back gate code 4410, two big oaks, pile by curb..." class="w-full border-[3px] border-ink px-3 py-2.5 font-medium outline-none focus:bg-lime/30 mt-1"></textarea></div>
+      </div>
+      <button onclick="goStep(2)" class="btn-brutal w-full mt-4 bg-ink text-lime font-display text-2xl py-3 border-thick">NEXT: PICK A TIME →</button>
+    </div>
+    <!-- STEP 2 -->
+    <div id="bStep2" class="px-5 pb-6 hidden">
+      <label class="font-bold text-xs tracking-widest">PICK A DAY — NEXT 14 DAYS (SUNDAYS WE REST 😴)</label>
+      <div id="dayGrid" class="grid grid-cols-4 md:grid-cols-7 gap-2 mt-2"></div>
+      <label class="font-bold text-xs tracking-widest mt-5 block">PICK A TIME WINDOW</label>
+      <div id="slotGrid" class="grid grid-cols-2 md:grid-cols-4 gap-2 mt-2"></div>
+      <div class="grid grid-cols-2 gap-3 mt-5">
+        <button onclick="goStep(1)" class="border-thick bg-white font-display text-xl py-3">← BACK</button>
+        <button onclick="goStep(3)" class="btn-brutal bg-ink text-lime font-display text-xl py-3 border-thick">REVIEW →</button>
+      </div>
+    </div>
+    <!-- STEP 3 -->
+    <div id="bStep3" class="px-5 pb-6 hidden">
+      <div id="confirmSummary" class="border-[3px] border-ink bg-white p-4 text-sm font-medium"></div>
+      <label class="flex items-start gap-3 mt-4 font-bold text-sm cursor-pointer"><input id="agreeBox" type="checkbox" class="w-6 h-6 accent-[#FF4D00] mt-0.5 shrink-0"/> I agree to pay after I love it. Free re-visit if a leaf survives. Crew can access yard at scheduled time.</label>
+      <div class="grid grid-cols-2 gap-3 mt-4">
+        <button onclick="goStep(2)" class="border-thick bg-white font-display text-xl py-3">← BACK</button>
+        <button onclick="confirmBooking()" class="btn-brutal bg-blaze text-white font-display text-xl py-3 border-thick">BLITZ ME! 🔥</button>
+      </div>
+    </div>
+    <!-- SUCCESS -->
+    <div id="bSuccess" class="px-5 pb-8 hidden text-center">
+      <div class="text-7xl mt-4">🎉</div>
+      <div class="font-display text-5xl mt-2">YOU'RE ON<br>THE ROUTE!</div>
+      <div class="inline-block bg-ink text-lime font-display text-2xl px-4 py-2 mt-4 border-thick">BOOKING <span id="bookingId">LEAF-0000</span></div>
+      <p id="successLine" class="font-bold mt-4"></p>
+      <div class="bg-lime border-[3px] border-ink p-4 mt-4 text-sm font-bold">📲 Confirmation text sent! Crew texts you 30 min before arrival with live ETA + crew photo.</div>
+      <button onclick="closeBooking()" class="btn-brutal mt-4 bg-ink text-lime font-display text-2xl px-8 py-3 border-thick">DONE ✓</button>
+    </div>
+  </div>
+</div>
+
+<!-- TOASTS -->
+<div id="toastBox" class="fixed top-24 right-4 z-[300] space-y-3 w-[320px] max-w-[calc(100vw-2rem)]"></div>
+
+<script>
+/* ============ STATE ============ */
+const state = {
+  service: 'residential',
+  size: 5000,
+  density: 'medium',
+  freq: 'once',
+  urg: 'standard',
+  addons: new Set(['haul']),
+  total: 189,
+  booking: { day:null, slot:null }
+};
+const CFG = {
+  residential:{base:89, label:'Residential', rate:0.0125, crew:'2-PERSON CREW', badge:'🏠 RESIDENTIAL', gutter:79, mulch:49, haul:39, sticks:59, curb:29, beds:45},
+  commercial:{base:299, label:'Commercial', rate:0.02, crew:'3-5 CREW + TRUCK', badge:'🏢 COMMERCIAL', gutter:149, mulch:99, haul:89, sticks:119, curb:59, beds:95},
+  industrial:{base:899, label:'Industrial', rate:0.028, crew:'FLEET + LOADERS', badge:'🏭 INDUSTRIAL', gutter:249, mulch:199, haul:179, sticks:229, curb:99, beds:189}
+};
+const DENS = {light:{m:1,label:'Light ×1.0'}, medium:{m:1.35,label:'Medium ×1.35'}, heavy:{m:1.75,label:'Heavy ×1.75'}, buried:{m:2.3,label:'Buried ×2.3'}};
+const FREQ = {once:{d:0,label:'One-time'}, monthly:{d:.10,label:'Monthly −10%'}, biweekly:{d:.15,label:'Bi-weekly −15%'}, weekly:{d:.20,label:'Weekly −20%'}};
+const URG = {standard:{f:0,label:'Standard 3–5 days'}, priority:{f:49,label:'Priority 48H'}, sameday:{f:129,label:'Same-day Storm'}};
+
+/* ============ PRELOADER ============ */
+let lp=0; const loadInt=setInterval(()=>{ lp+=Math.random()*22; if(lp>=100){lp=100;clearInterval(loadInt); setTimeout(()=>{document.getElementById('preloader').style.opacity='0';document.getElementById('preloader').style.visibility='hidden'; revealHero();},350);} document.getElementById('loadPct').textContent='RAKING… '+Math.floor(lp)+'%'; document.getElementById('loadBar').style.width=lp+'%'; },140);
+function revealHero(){ gsap.fromTo('.reveal-hero',{y:80,opacity:0},{y:0,opacity:1,duration:.9,stagger:.12,ease:'power4.out'}); }
+
+/* ============ LEAF CANVAS ============ */
+const cv=document.getElementById('leafCanvas'), ctx=cv.getContext('2d');
+let leaves=[], mouseX=.5, wind=0;
+function sizeCanvas(){ const r=cv.parentElement.getBoundingClientRect(); cv.width=r.width; cv.height=r.height; }
+sizeCanvas(); window.addEventListener('resize', sizeCanvas);
+const LEAF_COLORS=['#FF4D00','#FFB800','#7A9E00','#CCFF00','#8B5A00','#D64500'];
+function makeLeaf(top){ return {x:Math.random()*cv.width, y:top? -30: Math.random()*cv.height, s:8+Math.random()*16, r:Math.random()*Math.PI*2, vr:(Math.random()-.5)*.06, vy:.6+Math.random()*1.8, vx:(Math.random()-.5)*1, sway:Math.random()*Math.PI*2, swaySp:.01+Math.random()*.03, c:LEAF_COLORS[Math.floor(Math.random()*LEAF_COLORS.length)], o:.7+Math.random()*.3}; }
+for(let i=0;i<55;i++) leaves.push(makeLeaf(false));
+document.addEventListener('mousemove',e=>{ const nx=e.clientX/window.innerWidth; wind += (nx-.5)*.08; wind*=.95; mouseX=nx; });
+function drawLeaf(l){
+  ctx.save(); ctx.translate(l.x,l.y); ctx.rotate(l.r); ctx.globalAlpha=l.o; ctx.fillStyle=l.c;
+  ctx.beginPath(); ctx.ellipse(0,0,l.s,l.s*.55,0,0,Math.PI*2); ctx.fill();
+  ctx.strokeStyle='#0B0B0B'; ctx.lineWidth=1.5; ctx.beginPath(); ctx.moveTo(-l.s,0); ctx.lineTo(l.s,0); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(l.s,0); ctx.lineTo(l.s+5,3); ctx.stroke();
+  ctx.restore();
+}
+(function loop(){ ctx.clearRect(0,0,cv.width,cv.height);
+  leaves.forEach((l,i)=>{ l.sway+=l.swaySp; l.r+=l.vr; l.y+=l.vy; l.x+=l.vx + Math.sin(l.sway)*1.2 + wind*3;
+    if(l.y>cv.height+40||l.x<-50||l.x>cv.width+50) leaves[i]=makeLeaf(true);
+    drawLeaf(l); });
+  requestAnimationFrame(loop);
+})();
+
+/* ============ ESTIMATOR ============ */
+const yardSizeEl=document.getElementById('yardSize');
+yardSizeEl.addEventListener('input',()=>{ state.size=parseInt(yardSizeEl.value); calc(); });
+function setSize(v){ state.size=v; yardSizeEl.value=v; calc(); pulseQuote(); }
+function setService(s){ state.service=s;
+  document.querySelectorAll('.tab-service').forEach(b=>b.classList.toggle('active', b.dataset.service===s));
+  const c=CFG[s];
+  document.getElementById('price-gutter').textContent=c.gutter;
+  document.getElementById('price-mulch').textContent=c.mulch;
+  document.getElementById('price-haul').textContent=c.haul;
+  document.getElementById('price-sticks').textContent=c.sticks;
+  document.getElementById('price-curb').textContent=c.curb;
+  document.getElementById('price-beds').textContent=c.beds;
+  calc(); pulseQuote();
+}
+function selectService(s, book){ setService(s); document.getElementById('estimator').scrollIntoView({behavior:'smooth'}); toast((s==='residential'?'🏠 Residential':s==='commercial'?'🏢 Commercial':'🏭 Industrial')+' selected — puncher updated!','lime'); if(book) setTimeout(openBooking,900); }
+function setDensity(d){ state.density=d; document.querySelectorAll('#densityGroup .toggle-pill').forEach(b=>b.classList.toggle('active',b.dataset.density===d)); calc(); }
+function setFreq(f){ state.freq=f; document.querySelectorAll('#freqGroup .toggle-pill').forEach(b=>b.classList.toggle('active',b.dataset.freq===f)); calc(); }
+function setUrg(u){ state.urg=u; document.querySelectorAll('#urgGroup .toggle-pill').forEach(b=>b.classList.toggle('active',b.dataset.urg===u)); calc(); }
+function toggleAddon(a){ const el=document.querySelector(`[data-addon="${a}"]`); if(state.addons.has(a)){state.addons.delete(a); el.classList.remove('selected');} else {state.addons.add(a); el.classList.add('selected');} calc(); }
+function resetEstimator(){ state.size=5000; yardSizeEl.value=5000; state.density='medium'; state.freq='once'; state.urg='standard'; state.addons=new Set(['haul']);
+  document.querySelectorAll('#densityGroup .toggle-pill').forEach(b=>b.classList.toggle('active',b.dataset.density==='medium'));
+  document.querySelectorAll('#freqGroup .toggle-pill').forEach(b=>b.classList.toggle('active',b.dataset.freq==='once'));
+  document.querySelectorAll('#urgGroup .toggle-pill').forEach(b=>b.classList.toggle('active',b.dataset.urg==='standard'));
+  document.querySelectorAll('.addon-card').forEach(c=>c.classList.toggle('selected',c.dataset.addon==='haul'));
+  calc(); toast('Puncher reset. Fresh start. 🍂','cream');
+}
+const ADDON_NAMES={gutter:'Gutter Cleanout',mulch:'Mulch & Compost',haul:'Haul Away',sticks:'Sticks & Branches',curb:'Curb Pickup',beds:'Bed Detailing'};
+function calc(){
+  const c=CFG[state.service], d=DENS[state.density], f=FREQ[state.freq], u=URG[state.urg];
+  const base=c.base;
+  const sizeCost=Math.round(state.size*c.rate);
+  const sub=base+sizeCost;
+  const densExtra=Math.round(sub*(d.m-1));
+  let addonCost=0; state.addons.forEach(a=>addonCost+=c[a]);
+  const preDisc=sub+densExtra+addonCost;
+  const disc=Math.round(preDisc*f.d);
+  const total=Math.max(29, preDisc-disc+u.f);
+  state.total=total;
+  // UI
+  document.getElementById('sizeOut').textContent=state.size.toLocaleString()+' SQ FT';
+  document.getElementById('sizeAcres').textContent='≈ '+(state.size/43560).toFixed(2)+' ACRES';
+  document.getElementById('quoteServiceBadge').textContent=c.badge;
+  animateNumber('quoteTotal', total, '$');
+  document.getElementById('quoteRange').textContent='$'+Math.round(total*.9)+' – $'+Math.round(total*1.1);
+  document.getElementById('floatPrice').textContent='$'+total;
+  document.getElementById('modalPriceTag').textContent='$'+total;
+  document.getElementById('breakBaseLabel').textContent='Base ('+c.label+')';
+  document.getElementById('breakBase').textContent='$'+base;
+  document.getElementById('breakSizeLabel').textContent='('+state.size.toLocaleString()+' sqft)';
+  document.getElementById('breakSize').textContent='+$'+sizeCost;
+  document.getElementById('breakDensityLabel').textContent='('+d.label+')';
+  document.getElementById('breakDensity').textContent='+$'+densExtra;
+  document.getElementById('breakAddonCount').textContent='('+state.addons.size+')';
+  document.getElementById('breakAddon').textContent='+$'+addonCost;
+  document.getElementById('breakFreqLabel').textContent='('+f.label+')';
+  document.getElementById('breakFreq').textContent='−$'+disc;
+  document.getElementById('breakUrg').textContent=u.f? '+$'+u.f : '$0';
+  document.getElementById('breakTotal').textContent='$'+total;
+  // time / bags / crew
+  const hrs = state.service==='residential' ? (0.75 + state.size/6000*(d.m)) : state.service==='commercial' ? (2 + state.size/8000*(d.m)) : (6 + state.size/9000*(d.m));
+  const hrsTxt = hrs<3 ? '~'+hrs.toFixed(1)+' HRS' : hrs<8 ? '~'+Math.round(hrs)+' HRS' : '~'+Math.ceil(hrs/8)+' DAYS';
+  document.getElementById('quoteTime').textContent=hrsTxt;
+  document.getElementById('quoteCrew').textContent=c.crew;
+  const bags=Math.round(state.size/350*d.m);
+  document.getElementById('quoteBags').textContent=bags+' BAGS';
+  document.getElementById('ecoLine').textContent='Your job = ~'+bags+' bags diverted from landfill.';
+  const days=['Sun','Mon','Tue','Wed','Thu','Fri','Sat']; const t=new Date(); t.setDate(t.getDate()+ (state.urg==='sameday'?0:state.urg==='priority'?2:3));
+  document.getElementById('dispatchLine').textContent=(state.urg==='sameday'?'TODAY ':days[t.getDay()].toUpperCase()+' '+(t.getMonth()+1)+'/'+t.getDate()+' at 9AM.');
+}
+let curShown=189;
+function animateNumber(id, target, prefix){
+  const el=document.getElementById(id); const start=curShown; const t0=performance.now();
+  function step(t){ const p=Math.min(1,(t-t0)/400); const e=1-Math.pow(1-p,3); const v=Math.round(start+(target-start)*e); el.textContent=prefix+v; if(p<1) requestAnimationFrame(step); else curShown=target; }
+  requestAnimationFrame(step);
+}
+function pulseQuote(){ gsap.fromTo('#quoteTotal',{scale:1.15,rotate:-2},{scale:1,rotate:0,duration:.4,ease:'back.out(3)'}); }
+
+/* ============ BEFORE / AFTER ============ */
+const baSets=[
+  {before:'https://images.unsplash.com/photo-1507371341162-763b5e419408?q=80&w=1200&auto=format&fit=crop', after:'https://images.unsplash.com/photo-1558904541-efa843a96f01?q=80&w=1200&auto=format&fit=crop'},
+  {before:'https://images.unsplash.com/photo-1477414348463-c0eb7f1359b6?q=80&w=1200&auto=format&fit=crop', after:'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1200&auto=format&fit=crop'},
+  {before:'https://images.unsplash.com/photo-1503149779833-1de50ebe5f8a?q=80&w=1200&auto=format&fit=crop', after:'https://images.unsplash.com/photo-1581094794329-c8112a89af12?q=80&w=1200&auto=format&fit=crop'}
+];
+function swapBA(i){ document.getElementById('baBefore').src=baSets[i].before; document.getElementById('baAfter').src=baSets[i].after; setBA(50); toast('Showing job #0'+(i+1)+' — drag to compare 👀','cream'); }
+const baWrap=document.getElementById('baWrap'), baClip=document.getElementById('baBeforeClip'), baHandle=document.getElementById('baHandle'), baBeforeImg=document.getElementById('baBefore');
+let dragging=false;
+function setBA(pct){ pct=Math.max(2,Math.min(98,pct)); baClip.style.width=pct+'%'; baHandle.style.left=pct+'%'; baBeforeImg.style.width=baWrap.offsetWidth+'px'; }
+baWrap.addEventListener('pointerdown',e=>{dragging=true; baWrap.setPointerCapture(e.pointerId); moveBA(e);});
+baWrap.addEventListener('pointermove',e=>{ if(dragging) moveBA(e); });
+baWrap.addEventListener('pointerup',()=>dragging=false);
+function moveBA(e){ const r=baWrap.getBoundingClientRect(); setBA(((e.clientX-r.left)/r.width)*100); }
+window.addEventListener('resize',()=>setBA(50)); setTimeout(()=>setBA(50),300);
+
+/* ============ COMPARE TABLE ============ */
+const rows=[
+  ['Time spent','8+ hrs + sore back','3–7 day wait','90 min, you chill'],
+  ['Equipment','Plastic rake 💀','Basic blower','Vacs + 200MPH rigs'],
+  ['Haul-away','You + dump fees','Often extra $$$','Included option'],
+  ['Gutters & beds','Nope','Upsell city','Add-on, done right'],
+  ['Guarantee','—','“We’ll see”','Pay-after-you-love-it'],
+  ['Eco disposal','Burn pile? 🔥','Landfill?','100% composted ♻️']
+];
+document.getElementById('compareRows').innerHTML=rows.map((r,i)=>`
+  <div class="grid grid-cols-4 border-t border-cream/15 ${i%2?'bg-white/[0.03]':''}">
+    <div class="p-3 md:p-4 font-bold text-cream/90">${r[0]}</div>
+    <div class="p-3 md:p-4 text-center text-cream/50">${r[1]}</div>
+    <div class="p-3 md:p-4 text-center text-cream/60">${r[2]}</div>
+    <div class="p-3 md:p-4 text-center bg-lime/10 font-bold text-lime">✔ ${r[3]}</div>
+  </div>`).join('');
+
+/* ============ TESTIMONIALS ============ */
+const testis=[
+  {n:'Sarah M.', z:'Oakdale — RESI $189', t:'“My yard was a horror movie. Two dudes, one vacuum shark, 80 minutes — GONE. My neighbor literally knocked to ask who did it.”', img:'https://i.pravatar.cc/100?img=47', stars:5},
+  {n:'Dave K.', z:'Property Mgr — COMM $640', t:'“They do our 4 storefronts bi-weekly before 7AM. Zero complaints, photo proof every visit. Our slip incidents dropped to zero.”', img:'https://i.pravatar.cc/100?img=13', stars:5},
+  {n:'Priya S.', z:'Riverside — RESI $240', t:'“Buried category. Like, couldn’t-see-grass buried. Price Puncher said $240, final was $235. Paid after. Insane.”', img:'https://i.pravatar.cc/100?img=32', stars:5},
+  {n:'Tom W.', z:'Logistics Park — INDUS', t:'“6 acres of oak hell + clogged drains. Fleet showed up two days, left it spotless with compost certs for our audit. Pros.”', img:'https://i.pravatar.cc/100?img=59', stars:5},
+  {n:'Greg & Lou', z:'Northgate — CURB $29', t:'“We raked to the curb, they vacuumed it in 6 minutes for $29. SIX MINUTES. Best $29 ever spent, I rake with pride now.”', img:'https://i.pravatar.cc/100?img=15', stars:5}
+];
+let tIdx=0;
+function renderTesti(){
+  document.getElementById('testiTrack').innerHTML=testis.map(x=>`
+    <div class="w-full shrink-0 p-6 md:p-12 flex flex-col md:flex-row gap-6 items-start">
+      <img src="${x.img}" class="w-20 h-20 rounded-full border-[4px] border-lime object-cover shrink-0"/>
+      <div><div class="text-lime font-black tracking-widest">★★★★★ VERIFIED BLITZ</div>
+      <p class="font-display text-2xl md:text-4xl leading-[1.05] mt-2">${x.t}</p>
+      <div class="mt-4 flex items-center gap-3"><span class="bg-lime text-ink font-bold px-3 py-1 border-2 border-lime text-sm">${x.n}</span><span class="text-cream/60 font-bold text-sm">${x.z}</span></div></div>
+    </div>`).join('');
+  document.getElementById('testiDots').innerHTML=testis.map((_,i)=>`<button onclick="goTesti(${i})" class="h-3 border-2 border-ink transition-all ${i===tIdx?'w-8 bg-ink':'w-3 bg-white'}"></button>`).join('');
+  document.getElementById('testiIdx').textContent=String(tIdx+1).padStart(2,'0');
+  document.getElementById('testiTrack').style.transform=`translateX(-${tIdx*100}%)`;
+}
+function moveTesti(d){ tIdx=(tIdx+d+testis.length)%testis.length; renderTesti(); }
+function goTesti(i){ tIdx=i; renderTesti(); }
+renderTesti(); setInterval(()=>{moveTesti(1)},6000);
+
+/* ============ FAQ ============ */
+const faqs=[
+  ['How fast can you actually come?','Standard is 3–5 days. Priority hits within 48 hours (+$49). Same-day storm slots exist (+$129) and go QUICK after wind events — book before noon for best odds.'],
+  ['What if my yard is REALLY bad? Like, embarrassing bad?','Good. That’s our favorite. “Buried” density just applies a multiplier in the Puncher. No judgment, no extra shame fee. We’ve seen worse. Probably.'],
+  ['Do I need to be home?','Nope. As long as gates are unlocked and pets secured, we blitz while you’re out. You get before/after photos + text when done. Pay by link after you approve.'],
+  ['Where do the leaves go?','100% composted at partner facilities — never the landfill, never burned. You get a compost receipt. Last fall: 412 tons diverted. You’re basically a climate hero.'],
+  ['Residential vs Commercial vs Industrial — which am I?','House/duplex/HOA = Residential. Storefront/office/school/church with foot traffic + invoicing needs = Commercial. Warehouses, factories, multi-acre municipal = Industrial with fleet + account manager.'],
+  ['What if you miss a spot?','Then we come back FREE. Pay-after-you-love-it means exactly that: approve the photo proof, or we re-roll within 48h at zero charge.'],
+  ['Do you do gutters and sticks too?','Yes — add them in the Puncher. Gutters flushed, sticks/branches chipped or hauled, beds hand-detailed. One crew, one visit, zero “oh we don’t do that.”']
+];
+document.getElementById('faqList').innerHTML=faqs.map((f,i)=>`
+  <div class="faq-item border-thick bg-paper hard-sm overflow-hidden ${i===0?'open':''}">
+    <button onclick="toggleFaq(this)" class="w-full flex items-center justify-between gap-4 p-4 md:p-5 text-left">
+      <span class="font-display text-lg md:text-2xl">${f[0]}</span>
+      <span class="faq-icon w-10 h-10 shrink-0 bg-ink text-lime border-[3px] border-ink flex items-center justify-center text-2xl font-black">+</span>
+    </button>
+    <div class="faq-a"><p class="px-4 md:px-5 pb-5 font-medium text-[15px] border-t-[3px] border-ink pt-4 bg-cream">${f[1]}</p></div>
+  </div>`).join('');
+function toggleFaq(btn){ const item=btn.parentElement; const was=item.classList.contains('open'); document.querySelectorAll('.faq-item').forEach(x=>x.classList.remove('open')); if(!was) item.classList.add('open'); }
+
+/* ============ ZIP + ZONES ============ */
+function checkZip(){
+  const v=document.getElementById('zipInput').value.trim(); const box=document.getElementById('zipResult'); box.classList.remove('hidden');
+  if(!/^\d{5}$/.test(v)){ box.className='mt-4 border-[3px] border-ink p-4 font-bold text-sm bg-blaze text-white'; box.innerHTML='⚠️ That’s not a 5-digit ZIP. Try again, champ.'; return; }
+  if(v==='99999'){ box.className='mt-4 border-[3px] border-ink p-4 font-bold text-sm bg-ink text-cream'; box.innerHTML='🗺️ ZIP '+v+' is OUT OF ZONE… <span class="text-lime">but call us.</span> Industrial fleet travels. (555) 546-5323'; return; }
+  const first=parseInt(v[0]); let zone, msg, cls;
+  if([9,6].includes(first)){ zone='ZONE A — SAME-DAY ELIGIBLE ⚡'; cls='bg-lime text-ink'; msg='Trucks are in your area TODAY. Same-day + 48h slots open.'; }
+  else if([1,7,3].includes(first)){ zone='ZONE B — 48-HOUR ROUTE 🗓'; cls='bg-gold text-ink'; msg='You’re on our 48-hour loop. Priority fee waived this week!'; }
+  else { zone='ZONE C — CUSTOM / FLEET 🚚'; cls='bg-ink text-lime'; msg='Rural / industrial corridor — we’ll build a custom fleet quote. Free site walk.'; }
+  box.className='mt-4 border-[3px] border-ink p-4 font-bold text-sm '+cls;
+  box.innerHTML=`✅ ${v} → <span class="font-display text-lg">${zone}</span><br>${msg} <button onclick="openBooking()" class="underline">Book now →</button>`;
+  toast('ZIP '+v+' checked — '+zone.split('—')[0].trim()+'!','lime');
+}
+document.getElementById('zipInput').addEventListener('keydown',e=>{if(e.key==='Enter')checkZip();});
+const hoods=['OAKDALE⚡','RIVERSIDE⚡','NORTHGATE⚡','MAPLE HTS','ELM PARK','HILLCREST','BROOKSIDE','FAIRVIEW','CEDAR BLVD','LAKESHORE','OLD MILL','DEPOT⚙','AIRPORT⚙','SOUTHPARK','WESTEND','EASTVALE'];
+document.getElementById('zoneGrid').innerHTML=hoods.map((h,i)=>`<div class="border-2 ${h.includes('⚡')?'border-lime bg-lime/10 text-lime':h.includes('⚙')?'border-blaze bg-blaze/20 text-white':'border-cream/25 bg-white/5 text-cream/70'} py-3 px-1">${h}</div>`).join('');
+
+/* ============ BOOKING ============ */
+const slots=['8–10 AM','10–12 PM','12–2 PM','2–4 PM','4–6 PM'];
+function openBooking(){
+  const m=document.getElementById('bookingModal'); m.classList.remove('hidden'); m.classList.add('flex'); document.body.style.overflow='hidden';
+  goStep(1); buildDays(); updateModalSummary();
+}
+function closeBooking(){ const m=document.getElementById('bookingModal'); m.classList.add('hidden'); m.classList.remove('flex'); document.body.style.overflow=''; }
+function updateModalSummary(){
+  const c=CFG[state.service]; const addons=[...state.addons].map(a=>ADDON_NAMES[a]).join(', ')||'None';
+  document.getElementById('modalSummary').innerHTML=`LOCKED ESTIMATE: <span class="font-display text-2xl">$${state.total}</span> — ${c.badge} • ${state.size.toLocaleString()} sqft • ${DENS[state.density].label} • ${FREQ[state.freq].label} • ${URG[state.urg].label}<br><span class="text-xs">ADD-ONS: ${addons}</span>`;
+}
+function goStep(n){
+  if(n===2){
+    if(!document.getElementById('fName').value.trim()||!document.getElementById('fPhone').value.trim()||!document.getElementById('fAddr').value.trim()){ toast('Fill name, phone + address first ✍️','blaze'); return; }
+    updateModalSummary();
+  }
+  if(n===3){
+    if(!state.booking.day||!state.booking.slot){ toast('Pick a day + time window 📅','blaze'); return; }
+    const c=CFG[state.service];
+    document.getElementById('confirmSummary').innerHTML=`
+      <div class="font-display text-2xl mb-2">ORDER REVIEW</div>
+      <div class="grid md:grid-cols-2 gap-x-6 gap-y-1">
+        <div><strong>Name:</strong> ${esc(document.getElementById('fName').value)}</div>
+        <div><strong>Phone:</strong> ${esc(document.getElementById('fPhone').value)}</div>
+        <div class="md:col-span-2"><strong>Address:</strong> ${esc(document.getElementById('fAddr').value)}</div>
+        <div><strong>Service:</strong> ${c.badge}</div>
+        <div><strong>Size:</strong> ${state.size.toLocaleString()} sqft (${DENS[state.density].label})</div>
+        <div><strong>When:</strong> ${state.booking.day.label} • ${state.booking.slot}</div>
+        <div><strong>Total:</strong> <span class="bg-ink text-lime px-2 font-display text-xl">$${state.total}</span> <span class="text-xs">pay after ✓</span></div>
+      </div>`;
+  }
+  [1,2,3].forEach(i=>{
+    document.getElementById('bStep'+i).classList.toggle('hidden', i!==n);
+    const d=document.getElementById('stepDot'+i);
+    d.className='text-center font-display text-sm md:text-base py-2 border-[3px] border-ink '+(i===n?'bg-ink text-lime':i<n?'bg-lime text-ink':'bg-white');
+  });
+  document.getElementById('bSuccess').classList.add('hidden');
+}
+function esc(s){ return s.replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+function buildDays(){
+  const g=document.getElementById('dayGrid'); g.innerHTML=''; const names=['SUN','MON','TUE','WED','THU','FRI','SAT']; const months=['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
+  let added=0, off=0;
+  while(added<14){
+    const d=new Date(); d.setDate(d.getDate()+off); off++;
+    if(d.getDay()===0) continue;
+    const label=names[d.getDay()]+' '+months[d.getMonth()]+' '+d.getDate();
+    const full=names[d.getDay()]+', '+months[d.getMonth()]+' '+d.getDate();
+    const hot=(added<3);
+    const b=document.createElement('button');
+    b.className='day-card border-[3px] border-ink bg-white p-2 text-center hover:bg-lime'+(state.booking.day&&state.booking.day.label===full?' selected':'');
+    b.innerHTML=`<div class="text-[10px] font-black tracking-widest">${names[d.getDay()]}</div><div class="font-display text-2xl leading-none">${d.getDate()}</div><div class="text-[10px] font-bold">${hot?'🔥 '+ (2+added) +' LEFT':'OPEN'}</div>`;
+    b.onclick=()=>{ state.booking.day={label:full}; document.querySelectorAll('.day-card').forEach(x=>x.classList.remove('selected')); b.classList.add('selected'); buildSlots(); };
+    g.appendChild(b); added++;
+  }
+  buildSlots();
+}
+function buildSlots(){
+  const g=document.getElementById('slotGrid'); g.innerHTML='';
+  slots.forEach((s,i)=>{
+    const taken=(state.booking.day && (state.booking.day.label.length+i)%4===0);
+    const b=document.createElement('button');
+    b.className='slot border-[3px] border-ink bg-white font-bold text-sm py-3 px-2'+(state.booking.slot===s?' selected':'');
+    b.textContent=(taken?'❌ ':'✅ ')+s; b.disabled=taken;
+    b.onclick=()=>{ state.booking.slot=s; document.querySelectorAll('.slot').forEach(x=>x.classList.remove('selected')); b.classList.add('selected'); };
+    g.appendChild(b);
+  });
+}
+function confirmBooking(){
+  if(!document.getElementById('agreeBox').checked){ toast('Tick the agreement box first ☑️','blaze'); return; }
+  const id='LEAF-'+Math.floor(1000+Math.random()*9000);
+  document.getElementById('bookingId').textContent=id;
+  document.getElementById('successLine').innerHTML=`${esc(document.getElementById('fName').value.split(' ')[0]||'Friend')}, crew rolls <strong>${state.booking.day.label} • ${state.booking.slot}</strong> for <strong>$${state.total}</strong>.`;
+  [1,2,3].forEach(i=>document.getElementById('bStep'+i).classList.add('hidden'));
+  document.getElementById('bSuccess').classList.remove('hidden');
+  leafBurst(); toast('Booked! '+id+' — see you soon 🚚','lime');
+}
+function leafBurst(){
+  const em=['🍂','🍁','🌿','✨','💥'];
+  for(let i=0;i<40;i++){ const s=document.createElement('div'); s.className='confetti-leaf'; s.textContent=em[Math.floor(Math.random()*em.length)];
+    s.style.left='50%'; s.style.top='40%'; document.body.appendChild(s);
+    gsap.to(s,{x:(Math.random()-.5)*window.innerWidth*.8, y:(Math.random()-.3)*window.innerHeight*.7, rotation:Math.random()*720, opacity:0, duration:1.4+Math.random(), ease:'power2.out', onComplete:()=>s.remove()});
+  }
+}
+
+/* ============ MISC ============ */
+function toast(msg, color){
+  const bg=color==='lime'?'bg-lime text-ink':color==='blaze'?'bg-blaze text-white':'bg-paper text-ink';
+  const t=document.createElement('div');
+  t.className=`toast-in ${bg} border-[3px] border-ink p-3 font-bold text-sm flex gap-2 items-start`;
+  t.style.boxShadow='5px 5px 0 #0B0B0B';
+  t.innerHTML=`<span>${msg}</span>`;
+  document.getElementById('toastBox').appendChild(t);
+  setTimeout(()=>{ t.style.transition='all .4s'; t.style.transform='translateX(120%)'; t.style.opacity='0'; setTimeout(()=>t.remove(),400); },3400);
+}
+function claimCoupon(){
+  const v=document.getElementById('couponPhone').value.trim();
+  if(v.length<7){ toast('Drop a real number for the $20 off 📲','blaze'); return; }
+  const code='BLITZ20-'+Math.floor(100+Math.random()*900);
+  toast('Coupon locked: '+code+' — $20 off! 🎉','lime'); document.getElementById('couponPhone').value='';
+}
+document.getElementById('menuBtn').onclick=()=>document.getElementById('mobileMenu').classList.toggle('hidden');
+document.querySelectorAll('#mobileMenu a').forEach(a=>a.onclick=()=>document.getElementById('mobileMenu').classList.add('hidden'));
+
+/* counters */
+const cObs=new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting){ const el=e.target, target=+el.dataset.target; let cur=0; const step=Math.max(1,Math.round(target/60)); const iv=setInterval(()=>{cur+=step; if(cur>=target){cur=target;clearInterval(iv);} el.textContent=cur.toLocaleString();},25); cObs.unobserve(el);} }),{threshold:.5});
+document.querySelectorAll('.counter').forEach(el=>cObs.observe(el));
+
+/* scroll reveals */
+gsap.registerPlugin(ScrollTrigger);
+gsap.utils.toArray('.reveal').forEach(el=>{ gsap.fromTo(el,{y:50,opacity:0},{y:0,opacity:1,duration:.8,ease:'power3.out', scrollTrigger:{trigger:el,start:'top 88%'}}); });
+
+/* esc closes modal */
+document.addEventListener('keydown',e=>{ if(e.key==='Escape') closeBooking(); });
+
+calc();
+</script>
+</body>
+</html>
