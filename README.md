@@ -30,7 +30,10 @@ apple-touch-icon.png    iOS home-screen icon (regenerate with tools/make_icons.p
 robots.txt, sitemap.xml crawl hints for the published site
 tools/check_site.py     static QA: tag balance, dead links, ids referenced by JS,
                         placeholder phone numbers, alt text, JSON-LD validity
+tools/smoke_test.js     jsdom end-to-end run (estimator, booking, ZIP, FAQ, coupon)
+                        with every CDN blocked -- also proves the no-CDN fallbacks
 tools/make_icons.py     regenerates favicon.svg + apple-touch-icon.png (no deps)
+tools/package.json      pins jsdom for the smoke test (node_modules/ is ignored)
 .github/workflows/publish.yml   validate → deploy pipeline
 ```
 
@@ -63,7 +66,14 @@ Run the QA checks locally before pushing:
 ```bash
 python3 tools/check_site.py index.html
 python3 tools/check_site.py 404.html
+
+# optional end-to-end runtime test (needs node + one npm install)
+cd tools && npm install && node smoke_test.js ../index.html
 ```
+
+CI runs both static checks as *blocking* gates and the jsdom smoke test as an
+advisory step (a flaky npm registry should never block a deploy, but a failing
+smoke test is still shown in the run summary).
 
 ## What to edit for common changes
 

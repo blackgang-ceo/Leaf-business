@@ -1,0 +1,13 @@
+{
+  "name": "leafblitz-site-tools",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Local QA tooling for the LeafBlitz single-page site (jsdom smoke test only).",
+  "scripts": {
+    "smoke": "node smoke_test.js",
+    "check": "python3 check_site.py ../index.html && python3 check_site.py ../404.html"
+  },
+  "devDependencies": {
+    "jsdom": "^25.0.1"
+  }
+}
