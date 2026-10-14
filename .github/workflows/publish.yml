@@ -3,71 +3,70 @@ name: Publish LeafBlitz site
 on:
   push:
     branches: [main]
+  pull_request:
   workflow_dispatch:
 
+# No more write access to the repo: the site files are the source of truth and
+# CI only validates + publishes them.
 permissions:
-  contents: write
+  contents: read
   pages: write
   id-token: write
 
 concurrency:
   group: pages
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
-  prepare:
+  validate:
+    name: Validate site
     runs-on: ubuntu-latest
     steps:
       - name: Check out site
         uses: actions/checkout@v4
 
-      - name: Add business contact details
+      - name: Static site checks (structure, links, contacts, a11y)
         run: |
-          python - <<'PY'
-          from pathlib import Path
+          python3 tools/check_site.py index.html
+          python3 tools/check_site.py 404.html
 
-          path = Path('index.html')
-          html = path.read_text(encoding='utf-8')
-          marker = '<!-- FOOTER -->'
-          contact = '''<!-- CONTACT DETAILS -->
-          <section id="contact" class="bg-lime text-ink py-10 border-t-[4px] border-ink">
-            <div class="max-w-[1400px] mx-auto px-4 md:px-8">
-              <div class="border-[4px] border-ink bg-paper hard p-5 md:p-7 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-5">
-                <div>
-                  <div class="font-display text-3xl md:text-4xl">CONTACT CORINTHIAN BROWN</div>
-                  <p class="font-bold mt-2">Ready to schedule your LeafBlitz service? Call, text, or email today.</p>
-                </div>
-                <div class="flex flex-col sm:flex-row flex-wrap gap-3 font-bold">
-                  <a href="tel:3347773031" class="btn-brutal bg-ink text-lime border-[3px] border-ink px-4 py-3">☎ 334-777-3031</a>
-                  <a href="tel:3345782252" class="btn-brutal bg-ink text-lime border-[3px] border-ink px-4 py-3">☎ 334-578-2252</a>
-                  <a href="mailto:Corinthianbrown@checkchasinempire.onmicrosoft.com" class="btn-brutal bg-paper text-ink border-[3px] border-ink px-4 py-3 break-all">✉ Corinthianbrown@checkchasinempire.onmicrosoft.com</a>
-                </div>
-              </div>
-            </div>
-          </section>
+      - name: Syntax-check inline JavaScript
+        run: |
+          python3 - <<'PY'
+          import subprocess, sys, tempfile
+          sys.path.insert(0, 'tools')
+          from check_site import extract_scripts
 
-          '''
-          # Keep the build idempotent if the workflow is run more than once.
-          if '<!-- CONTACT DETAILS -->' not in html:
-              if marker not in html:
-                  raise SystemExit('Footer marker not found; contact details were not added.')
-              html = html.replace(marker, contact + marker, 1)
-          # Replace the template phone number wherever it appears in the existing site.
-          html = html.replace('tel:5555465323', 'tel:3347773031')
-          html = html.replace('(555) 546-LEAF', '334-777-3031')
-          path.write_text(html, encoding='utf-8')
+          failed = 0
+          for i, body in enumerate(extract_scripts('index.html')):
+              with tempfile.NamedTemporaryFile('w', suffix='.js', delete=False, encoding='utf-8') as fh:
+                  fh.write(body)
+                  path = fh.name
+              result = subprocess.run(['node', '--check', path], capture_output=True, text=True)
+              if result.returncode != 0:
+                  failed += 1
+                  print(f'--- inline script #{i} failed node --check ---')
+                  print(result.stderr)
+          sys.exit(1 if failed else 0)
           PY
 
-      - name: Commit prepared site
+      - name: Verify JSON-LD and site icons parse
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add index.html
-          git diff --cached --quiet || git commit -m "Add Corinthian Brown contact details"
-          git push
+          python3 tools/make_icons.py >/dev/null && echo "icon generator OK"
+          python3 - <<'PY'
+          import json, re, sys
+          html = open('index.html', encoding='utf-8').read()
+          blocks = re.findall(r'<script type="application/ld\+json">(.*?)</script>', html, re.S)
+          assert blocks, 'no JSON-LD block found'
+          for b in blocks:
+              json.loads(b)
+          print(f'{len(blocks)} JSON-LD block(s) valid')
+          PY
 
   deploy:
-    needs: prepare
+    name: Deploy to GitHub Pages
+    needs: validate
+    if: github.event_name != 'pull_request'
     runs-on: ubuntu-latest
     environment:
       name: github-pages
@@ -75,12 +74,21 @@ jobs:
     steps:
       - name: Check out published site
         uses: actions/checkout@v4
+
+      - name: Stage only the public site files
+        run: |
+          mkdir -p _site
+          cp index.html 404.html favicon.svg apple-touch-icon.png robots.txt sitemap.xml _site/
+          ls -la _site
+
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
+
       - name: Upload site artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: .
+          path: _site
+
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4

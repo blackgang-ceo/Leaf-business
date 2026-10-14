@@ -4,9 +4,42 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>LEAFBLITZ — No Leaf Left Behind | Residential • Commercial • Industrial</title>
+<meta name="description" content="LeafBlitz leaf removal by Corinthian Brown — residential, commercial and industrial. We rake, blow, vacuum, haul and compost. Instant price puncher, pay after you love it. Call or text 334-777-3031."/>
+<meta name="author" content="Corinthian Brown — LeafBlitz"/>
+<meta name="robots" content="index, follow"/>
+<meta name="theme-color" content="#CCFF00"/>
+<link rel="canonical" href="https://blackgang-ceo.github.io/Leaf-business/"/>
+
+<!-- Open Graph / Twitter sharing -->
+<meta property="og:type" content="website"/>
+<meta property="og:site_name" content="LeafBlitz"/>
+<meta property="og:title" content="LEAFBLITZ — No Leaf Left Behind"/>
+<meta property="og:description" content="Yard pickup that hits hard: residential, commercial and industrial leaf removal. Instant estimate, same-week crews, compost receipt included. Call or text 334-777-3031."/>
+<meta property="og:url" content="https://blackgang-ceo.github.io/Leaf-business/"/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:image" content="https://images.unsplash.com/photo-1502082553048-f009c37129b9?q=80&amp;w=1200&amp;auto=format&amp;fit=crop"/>
+<meta property="og:image:alt" content="A clean, leaf-free yard after a LeafBlitz pickup"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="LEAFBLITZ — No Leaf Left Behind"/>
+<meta name="twitter:description" content="Residential, commercial and industrial leaf removal. Instant estimate, pay after you love it. Call or text 334-777-3031."/>
+<meta name="twitter:image" content="https://images.unsplash.com/photo-1502082553048-f009c37129b9?q=80&amp;w=1200&amp;auto=format&amp;fit=crop"/>
+
+<!-- Icons -->
+<link rel="icon" href="favicon.svg" type="image/svg+xml"/>
+<link rel="apple-touch-icon" href="apple-touch-icon.png"/>
+
+<!-- Faster first paint for the third-party origins this page uses -->
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin/>
+<link rel="preconnect" href="https://images.unsplash.com"/>
+<link rel="dns-prefetch" href="https://cdn.tailwindcss.com"/>
+
 <script src="https://cdn.tailwindcss.com"></script>
 <script>
-tailwind.config = {
+/* Only configure Tailwind if the CDN actually loaded — otherwise stay quiet
+   and let the page degrade to unstyled-but-functional. */
+if (window.tailwind) tailwind.config = {
   theme: {
     extend: {
       colors: {
@@ -101,7 +134,9 @@ tailwind.config = {
   @keyframes toastIn{ from{ transform:translateX(120%) rotate(3deg); opacity:0;} to{ transform:translateX(0) rotate(-1deg); opacity:1;} }
   .confetti-leaf{ position:fixed; pointer-events:none; z-index:9999; font-size:22px; }
   .reveal{ opacity:0; transform:translateY(40px); }
-  #preloader{ transition:opacity .6s, visibility .6s; }
+  #preloader{ transition:opacity .6s, visibility .6s; animation:preloaderFailsafe .01s linear 4s forwards; }
+  /* If JS is blocked or errors out, never leave the visitor stuck behind the loader. */
+  @keyframes preloaderFailsafe{ to{ opacity:0; visibility:hidden; } }
   .diag{ background:repeating-linear-gradient(-45deg, #CCFF00, #CCFF00 14px, #0B0B0B 14px, #0B0B0B 28px); }
   .diag-blaze{ background:repeating-linear-gradient(-45deg, #FF4D00, #FF4D00 14px, #0B0B0B 14px, #0B0B0B 28px); }
   .testi-track{ transition:transform .6s cubic-bezier(.65,0,.35,1); }
@@ -111,9 +146,78 @@ tailwind.config = {
   ::-webkit-scrollbar{ width:12px; }
   ::-webkit-scrollbar-track{ background:#0B0B0B; }
   ::-webkit-scrollbar-thumb{ background:#CCFF00; border:3px solid #0B0B0B; }
+
+  /* ---- accessibility, focus & resilience ---- */
+  .skip-link{ position:absolute; left:-9999px; top:0; z-index:10001; background:#CCFF00; color:#0B0B0B; border:3px solid #0B0B0B; padding:.75rem 1.25rem; font-family:'Anton',sans-serif; font-size:1.1rem; }
+  .skip-link:focus{ left:12px; top:12px; }
+  a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible, [tabindex]:focus-visible{ outline:4px solid #FF4D00; outline-offset:3px; }
+  .avatar{ display:flex; align-items:center; justify-content:center; font-family:'Anton',sans-serif; letter-spacing:.02em; background:#0B0B0B; color:#CCFF00; }
+  .sr-only{ position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
+  /* Motion is decorative here — respect the OS setting. */
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior:auto; }
+    *,*::before,*::after{ animation-duration:.001ms !important; animation-iteration-count:1 !important; transition-duration:.001ms !important; }
+    .reveal{ opacity:1 !important; transform:none !important; }
+    #leafCanvas{ display:none; }
+  }
 </style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "LeafBlitz",
+  "description": "Residential, commercial and industrial leaf removal: raking, blowing, vacuuming, hauling, gutter cleanout and composting. Pay after you love it.",
+  "url": "https://blackgang-ceo.github.io/Leaf-business/",
+  "telephone": "+1-334-777-3031",
+  "email": "Corinthianbrown@checkchasinempire.onmicrosoft.com",
+  "priceRange": "$29 - $899",
+  "image": "https://images.unsplash.com/photo-1502082553048-f009c37129b9?q=80&w=1200&auto=format&fit=crop",
+  "founder": { "@type": "Person", "name": "Corinthian Brown" },
+  "contactPoint": [
+    {
+      "@type": "ContactPoint",
+      "telephone": "+1-334-777-3031",
+      "contactType": "customer service",
+      "email": "Corinthianbrown@checkchasinempire.onmicrosoft.com",
+      "availableLanguage": ["English"]
+    },
+    { "@type": "ContactPoint", "telephone": "+1-334-578-2252", "contactType": "sales" }
+  ],
+  "openingHoursSpecification": [
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+      "opens": "08:00",
+      "closes": "18:00"
+    }
+  ],
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Leaf removal services",
+    "itemListElement": [
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Residential leaf pickup" }, "price": "89", "priceCurrency": "USD" },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Commercial leaf routes" }, "price": "299", "priceCurrency": "USD" },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Industrial / multi-acre leaf removal" }, "price": "899", "priceCurrency": "USD" },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Curb pile pickup" }, "price": "29", "priceCurrency": "USD" },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Gutter cleanout" }, "price": "79", "priceCurrency": "USD" },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Mulch & compost" }, "price": "49", "priceCurrency": "USD" }
+    ]
+  }
+}
+</script>
 </head>
 <body class="antialiased">
+
+<a href="#top" class="skip-link">SKIP TO CONTENT</a>
+
+<noscript>
+  <style>#preloader{ display:none !important; }</style>
+  <div class="bg-ink text-lime border-b-[4px] border-lime px-4 py-4 font-bold text-center relative z-[101]">
+    JavaScript is off, so the instant price puncher and booking calendar can't run.
+    Call or text <a href="tel:+13347773031" class="underline">334-777-3031</a> or email
+    <a href="mailto:Corinthianbrown@checkchasinempire.onmicrosoft.com" class="underline break-all">Corinthianbrown@checkchasinempire.onmicrosoft.com</a> for a free estimate.
+  </div>
+</noscript>
 
 <!-- PRELOADER -->
 <div id="preloader" class="fixed inset-0 z-[10000] bg-ink text-cream flex flex-col items-center justify-center">
@@ -150,27 +254,34 @@ tailwind.config = {
         <div class="text-[10px] font-bold tracking-[0.25em]">RAKE • BLOW • GONE</div>
       </div>
     </a>
-    <nav class="hidden lg:flex items-center gap-7 font-bold text-[15px] tracking-wide">
+    <nav aria-label="Primary" class="hidden lg:flex items-center gap-7 font-bold text-[15px] tracking-wide">
       <a href="#services" class="link-underline">SERVICES</a>
       <a href="#estimator" class="link-underline">PRICE PUNCHER</a>
       <a href="#proof" class="link-underline">BEFORE / AFTER</a>
       <a href="#reviews" class="link-underline">REVIEWS</a>
       <a href="#faq" class="link-underline">FAQ</a>
+      <a href="#contact" class="link-underline">CONTACT</a>
     </nav>
     <div class="flex items-center gap-3">
-      <a href="tel:3347773031" class="hidden md:flex items-center gap-2 font-bold text-sm border-thick px-3 py-2 bg-paper hard-sm btn-brutal"><i class="fa-solid fa-phone bg-blaze text-white w-7 h-7 flex items-center justify-center rounded-full text-xs"></i> 334-777-3031</a>
-      <button onclick="openBooking()" class="btn-brutal bg-lime border-thick hard-sm font-display text-lg px-5 py-2 tracking-wide">GET QUOTE →</button>
-      <button id="menuBtn" class="lg:hidden w-11 h-11 border-thick bg-ink text-lime flex items-center justify-center text-xl"><i class="fa-solid fa-bars"></i></button>
+      <a href="tel:+13347773031" aria-label="Call LeafBlitz on 334-777-3031" class="hidden md:flex items-center gap-2 font-bold text-sm border-thick px-3 py-2 bg-paper hard-sm btn-brutal"><i class="fa-solid fa-phone bg-blaze text-white w-7 h-7 flex items-center justify-center rounded-full text-xs" aria-hidden="true"></i> 334-777-3031</a>
+      <button type="button" onclick="openBooking()" class="btn-brutal bg-lime border-thick hard-sm font-display text-lg px-5 py-2 tracking-wide">GET QUOTE →</button>
+      <button type="button" id="menuBtn" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu" class="lg:hidden w-11 h-11 border-thick bg-ink text-lime flex items-center justify-center text-xl"><i class="fa-solid fa-bars" aria-hidden="true"></i></button>
     </div>
   </div>
-  <div id="mobileMenu" class="lg:hidden hidden border-t-[3px] border-ink bg-ink text-cream px-6 py-6 space-y-4 font-display text-3xl">
+  <nav id="mobileMenu" aria-label="Mobile" class="lg:hidden hidden border-t-[3px] border-ink bg-ink text-cream px-6 py-6 space-y-4 font-display text-3xl">
     <a href="#services" class="block hover:text-lime">SERVICES</a>
     <a href="#estimator" class="block hover:text-lime">PRICE PUNCHER</a>
     <a href="#proof" class="block hover:text-lime">BEFORE / AFTER</a>
     <a href="#reviews" class="block hover:text-lime">REVIEWS</a>
     <a href="#faq" class="block hover:text-lime">FAQ</a>
-    <a href="tel:3347773031" class="block text-lg font-body font-bold text-lime">📞 (555) 546-5323</a>
-  </div>
+    <a href="#contact" class="block hover:text-lime">CONTACT</a>
+    <div class="pt-2 border-t border-cream/20 space-y-3 font-body">
+      <a href="tel:+13347773031" class="block text-lg font-bold text-lime">📞 CALL 334-777-3031</a>
+      <a href="sms:+13347773031" class="block text-lg font-bold text-lime">💬 TEXT 334-777-3031</a>
+      <a href="tel:+13345782252" class="block text-lg font-bold text-cream">📞 ALT 334-578-2252</a>
+      <a href="mailto:Corinthianbrown@checkchasinempire.onmicrosoft.com" class="block text-base font-bold text-cream break-all">✉ EMAIL US</a>
+    </div>
+  </nav>
 </header>
 
 <!-- HERO -->
@@ -193,8 +304,8 @@ tailwind.config = {
       <div class="lg:col-span-5">
         <p class="text-lg md:text-xl font-medium leading-tight border-l-[6px] border-blaze pl-4">From a single curb pile to a 50-acre industrial park — we rake, blow, vacuum & haul. <strong>You point. We disappear the leaves.</strong></p>
         <div class="flex flex-wrap gap-4 mt-6">
-          <button onclick="document.getElementById('estimator').scrollIntoView({behavior:'smooth'})" class="btn-brutal bg-ink text-cream font-display text-2xl px-8 py-4 border-thick hard tracking-wide">PUNCH MY PRICE →</button>
-          <button onclick="openBooking()" class="btn-brutal bg-paper font-display text-2xl px-8 py-4 border-thick hard tracking-wide">BOOK NOW</button>
+          <button type="button" onclick="document.getElementById('estimator').scrollIntoView({behavior:'smooth'})" class="btn-brutal bg-ink text-cream font-display text-2xl px-8 py-4 border-thick hard tracking-wide">PUNCH MY PRICE →</button>
+          <button type="button" onclick="openBooking()" class="btn-brutal bg-paper font-display text-2xl px-8 py-4 border-thick hard tracking-wide">BOOK NOW</button>
         </div>
         <div class="grid grid-cols-3 gap-3 mt-8">
           <div class="border-thick bg-paper p-3 hard-sm text-center card-tilt"><div class="font-display text-3xl md:text-4xl"><span class="counter" data-target="12840">0</span></div><div class="text-[11px] font-bold tracking-widest">YARDS BLITZED</div></div>
@@ -206,12 +317,12 @@ tailwind.config = {
       <div class="lg:col-span-7 relative">
         <div class="grid md:grid-cols-2 gap-4">
           <div class="relative border-[4px] border-ink hard overflow-hidden bg-ink rotate-[-1.5deg]">
-            <img src="https://images.unsplash.com/photo-1507371341162-763b5e419408?q=80&w=800&auto=format&fit=crop" alt="Leaves" class="w-full h-[280px] md:h-[360px] object-cover hover:scale-110 transition-transform duration-700"/>
+            <img decoding="async" src="https://images.unsplash.com/photo-1507371341162-763b5e419408?q=80&w=800&auto=format&fit=crop" alt="A yard buried in fallen leaves before a LeafBlitz pickup" class="w-full h-[280px] md:h-[360px] object-cover hover:scale-110 transition-transform duration-700"/>
             <div class="absolute bottom-0 left-0 right-0 bg-ink text-cream px-4 py-3 flex justify-between items-center"><span class="font-display text-xl">RESIDENTIAL BEAST MODE</span><span class="bg-lime text-ink font-bold text-xs px-2 py-1">FROM $89</span></div>
             <div class="absolute top-3 left-3 bg-blaze text-white font-display px-3 py-1 border-2 border-white rotate-[-6deg]">BEFORE: BURIED</div>
           </div>
           <div class="relative border-[4px] border-ink hard overflow-hidden bg-ink rotate-[1.5deg] md:mt-10">
-            <img src="https://images.unsplash.com/photo-1502082553048-f009c37129b9?q=80&w=800&auto=format&fit=crop" alt="Clean yard" class="w-full h-[280px] md:h-[360px] object-cover hover:scale-110 transition-transform duration-700"/>
+            <img decoding="async" src="https://images.unsplash.com/photo-1502082553048-f009c37129b9?q=80&w=800&auto=format&fit=crop" alt="The same yard after LeafBlitz removed every leaf" class="w-full h-[280px] md:h-[360px] object-cover hover:scale-110 transition-transform duration-700"/>
             <div class="absolute bottom-0 left-0 right-0 bg-lime text-ink px-4 py-3 flex justify-between items-center border-t-[4px] border-ink"><span class="font-display text-xl">AFTER: GONE IN 90 MIN</span><i class="fa-solid fa-circle-check text-xl"></i></div>
             <div class="absolute top-3 right-3 bg-ink text-lime font-display px-3 py-1 border-2 border-lime rotate-[5deg]">AFTER: BLITZED</div>
           </div>
@@ -261,7 +372,7 @@ tailwind.config = {
       <!-- RESIDENTIAL -->
       <div class="border-[4px] border-ink bg-cream hard card-tilt flex flex-col overflow-hidden reveal">
         <div class="h-56 overflow-hidden border-b-[4px] border-ink relative">
-          <img src="https://images.unsplash.com/photo-1560749003-f4b1e17e2dfd?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover" alt="Residential"/>
+          <img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1560749003-f4b1e17e2dfd?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover" alt="Residential home with a clean, leaf-free lawn"/>
           <span class="absolute top-3 left-3 bg-lime font-display text-lg px-3 py-1 border-[3px] border-ink -rotate-3">MOST BOOKED</span>
         </div>
         <div class="p-6 flex-1 flex flex-col">
@@ -276,8 +387,8 @@ tailwind.config = {
           </ul>
           <div class="mt-4 bg-white border-[3px] border-ink p-3 text-sm font-bold flex justify-between"><span>⏱ 60–120 MIN AVG</span><span>👷 2-PERSON CREW</span></div>
           <div class="grid grid-cols-2 gap-3 mt-5">
-            <button onclick="selectService('residential', true)" class="btn-brutal bg-lime border-thick hard-sm font-display text-xl py-3">SELECT →</button>
-            <button onclick="selectService('residential', false)" class="btn-brutal bg-white border-thick hard-sm font-bold text-sm py-3">SEE PRICE</button>
+            <button type="button" onclick="selectService('residential', true)" class="btn-brutal bg-lime border-thick hard-sm font-display text-xl py-3">SELECT →</button>
+            <button type="button" onclick="selectService('residential', false)" class="btn-brutal bg-white border-thick hard-sm font-bold text-sm py-3">SEE PRICE</button>
           </div>
         </div>
       </div>
@@ -285,7 +396,7 @@ tailwind.config = {
       <div class="border-[4px] border-ink bg-ink text-cream hard card-tilt flex flex-col overflow-hidden reveal lg:-mt-6 lg:mb-6 relative">
         <div class="absolute top-0 left-0 right-0 diag-blaze h-3 border-b-[3px] border-ink"></div>
         <div class="h-56 overflow-hidden border-b-[4px] border-cream/20 relative">
-          <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover" alt="Commercial"/>
+          <img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover" alt="Commercial property with cleared parking lot and walkways"/>
           <span class="absolute top-3 left-3 bg-blaze text-white font-display text-lg px-3 py-1 border-[3px] border-white rotate-2">FOR BUSINESS</span>
         </div>
         <div class="p-6 flex-1 flex flex-col">
@@ -300,15 +411,15 @@ tailwind.config = {
           </ul>
           <div class="mt-4 bg-white/10 border-[3px] border-cream/30 p-3 text-sm font-bold flex justify-between"><span>⏱ HALF / FULL DAY</span><span class="text-lime">👷 3-5 CREW + TRUCK</span></div>
           <div class="grid grid-cols-2 gap-3 mt-5">
-            <button onclick="selectService('commercial', true)" class="btn-brutal bg-blaze text-white border-[3px] border-white font-display text-xl py-3" style="box-shadow:6px 6px 0 #CCFF00">SELECT →</button>
-            <button onclick="selectService('commercial', false)" class="btn-brutal bg-transparent border-[3px] border-cream font-bold text-sm py-3">SEE PRICE</button>
+            <button type="button" onclick="selectService('commercial', true)" class="btn-brutal bg-blaze text-white border-[3px] border-white font-display text-xl py-3" style="box-shadow:6px 6px 0 #CCFF00">SELECT →</button>
+            <button type="button" onclick="selectService('commercial', false)" class="btn-brutal bg-transparent border-[3px] border-cream font-bold text-sm py-3">SEE PRICE</button>
           </div>
         </div>
       </div>
       <!-- INDUSTRIAL -->
       <div class="border-[4px] border-ink bg-gold hard card-tilt flex flex-col overflow-hidden reveal">
         <div class="h-56 overflow-hidden border-b-[4px] border-ink relative">
-          <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover" alt="Industrial"/>
+          <img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover" alt="Industrial site with large cleared acreage"/>
           <span class="absolute top-3 left-3 bg-ink text-lime font-display text-lg px-3 py-1 border-[3px] border-ink rotate-3">HEAVY DUTY</span>
         </div>
         <div class="p-6 flex-1 flex flex-col">
@@ -323,8 +434,8 @@ tailwind.config = {
           </ul>
           <div class="mt-4 bg-ink text-cream border-[3px] border-ink p-3 text-sm font-bold flex justify-between"><span>⏱ MULTI-DAY OPS</span><span class="text-lime">👷 FLEET + LOADERS</span></div>
           <div class="grid grid-cols-2 gap-3 mt-5">
-            <button onclick="selectService('industrial', true)" class="btn-brutal bg-ink text-lime border-thick hard-sm font-display text-xl py-3">SELECT →</button>
-            <button onclick="selectService('industrial', false)" class="btn-brutal bg-paper border-thick hard-sm font-bold text-sm py-3">SEE PRICE</button>
+            <button type="button" onclick="selectService('industrial', true)" class="btn-brutal bg-ink text-lime border-thick hard-sm font-display text-xl py-3">SELECT →</button>
+            <button type="button" onclick="selectService('industrial', false)" class="btn-brutal bg-paper border-thick hard-sm font-bold text-sm py-3">SEE PRICE</button>
           </div>
         </div>
       </div>
@@ -332,7 +443,7 @@ tailwind.config = {
 
     <div class="mt-8 border-thick bg-cream hard p-4 md:p-5 flex flex-col md:flex-row items-center gap-4 justify-between">
       <div class="font-bold text-lg">🤔 Not sure which one? <span class="bg-ink text-lime px-2">Take the 20-second Price Puncher below</span> — it picks for you.</div>
-      <button onclick="document.getElementById('estimator').scrollIntoView({behavior:'smooth'})" class="btn-brutal bg-ink text-lime font-display text-xl px-6 py-3 border-thick shrink-0">JUMP TO ESTIMATOR ↓</button>
+      <button type="button" onclick="document.getElementById('estimator').scrollIntoView({behavior:'smooth'})" class="btn-brutal bg-ink text-lime font-display text-xl px-6 py-3 border-thick shrink-0">JUMP TO ESTIMATOR ↓</button>
     </div>
   </div>
 </section>
@@ -349,9 +460,9 @@ tailwind.config = {
 
     <!-- service tabs -->
     <div class="grid grid-cols-3 gap-3 max-w-3xl mx-auto mb-8">
-      <button data-service="residential" onclick="setService('residential')" class="tab-service active border-[3px] border-cream bg-cream text-ink font-display text-lg md:text-2xl py-3">🏠 RESI</button>
-      <button data-service="commercial" onclick="setService('commercial')" class="tab-service border-[3px] border-cream bg-cream text-ink font-display text-lg md:text-2xl py-3">🏢 COMM</button>
-      <button data-service="industrial" onclick="setService('industrial')" class="tab-service border-[3px] border-cream bg-cream text-ink font-display text-lg md:text-2xl py-3">🏭 INDUS</button>
+      <button type="button" data-service="residential" onclick="setService('residential')" class="tab-service active border-[3px] border-cream bg-cream text-ink font-display text-lg md:text-2xl py-3">🏠 RESI</button>
+      <button type="button" data-service="commercial" onclick="setService('commercial')" class="tab-service border-[3px] border-cream bg-cream text-ink font-display text-lg md:text-2xl py-3">🏢 COMM</button>
+      <button type="button" data-service="industrial" onclick="setService('industrial')" class="tab-service border-[3px] border-cream bg-cream text-ink font-display text-lg md:text-2xl py-3">🏭 INDUS</button>
     </div>
 
     <div class="grid lg:grid-cols-12 gap-6 items-start">
@@ -366,10 +477,10 @@ tailwind.config = {
           <input id="yardSize" type="range" min="500" max="50000" step="500" value="5000" class="w-full mt-4"/>
           <div class="flex justify-between text-[11px] font-bold tracking-widest mt-2"><span>🍂 SINGLE PILE (500)</span><span>🏠 HOUSE (5K)</span><span>🏢 LOT (20K)</span><span>🏭 ACRES (50K)</span></div>
           <div class="mt-4 grid grid-cols-4 gap-2">
-            <button onclick="setSize(1000)" class="border-2 border-ink font-bold text-xs py-2 hover:bg-lime">COURTYARD</button>
-            <button onclick="setSize(5000)" class="border-2 border-ink font-bold text-xs py-2 hover:bg-lime">SUBURBAN</button>
-            <button onclick="setSize(15000)" class="border-2 border-ink font-bold text-xs py-2 hover:bg-lime">CORNER LOT</button>
-            <button onclick="setSize(40000)" class="border-2 border-ink font-bold text-xs py-2 hover:bg-lime">BEAST MODE</button>
+            <button type="button" onclick="setSize(1000)" class="border-2 border-ink font-bold text-xs py-2 hover:bg-lime">COURTYARD</button>
+            <button type="button" onclick="setSize(5000)" class="border-2 border-ink font-bold text-xs py-2 hover:bg-lime">SUBURBAN</button>
+            <button type="button" onclick="setSize(15000)" class="border-2 border-ink font-bold text-xs py-2 hover:bg-lime">CORNER LOT</button>
+            <button type="button" onclick="setSize(40000)" class="border-2 border-ink font-bold text-xs py-2 hover:bg-lime">BEAST MODE</button>
           </div>
         </div>
 
@@ -378,10 +489,10 @@ tailwind.config = {
           <div class="font-display text-2xl md:text-3xl mb-1">LEAF DENSITY <span class="text-sm font-body font-bold bg-blaze text-white px-2 py-1 align-middle ml-2">BE HONEST 😅</span></div>
           <p class="text-sm font-medium text-neutral-600 mb-4">How buried are we talking? Tap one.</p>
           <div class="grid grid-cols-2 md:grid-cols-4 gap-3" id="densityGroup">
-            <button data-density="light" onclick="setDensity('light')" class="toggle-pill border-[3px] border-ink bg-white p-3 text-left"><div class="text-3xl">🌱</div><div class="font-display text-xl mt-1">LIGHT</div><div class="text-xs font-bold">Sprinkling ×1.0</div></button>
-            <button data-density="medium" onclick="setDensity('medium')" class="toggle-pill active border-[3px] border-ink bg-white p-3 text-left"><div class="text-3xl">🍂</div><div class="font-display text-xl mt-1">MEDIUM</div><div class="text-xs font-bold">Crunchy ×1.35</div></button>
-            <button data-density="heavy" onclick="setDensity('heavy')" class="toggle-pill border-[3px] border-ink bg-white p-3 text-left"><div class="text-3xl">🍁</div><div class="font-display text-xl mt-1">HEAVY</div><div class="text-xs font-bold">Ankle-deep ×1.75</div></button>
-            <button data-density="buried" onclick="setDensity('buried')" class="toggle-pill border-[3px] border-ink bg-white p-3 text-left"><div class="text-3xl">🌋</div><div class="font-display text-xl mt-1">BURIED</div><div class="text-xs font-bold">Send help ×2.3</div></button>
+            <button type="button" data-density="light" onclick="setDensity('light')" class="toggle-pill border-[3px] border-ink bg-white p-3 text-left"><div class="text-3xl">🌱</div><div class="font-display text-xl mt-1">LIGHT</div><div class="text-xs font-bold">Sprinkling ×1.0</div></button>
+            <button type="button" data-density="medium" onclick="setDensity('medium')" class="toggle-pill active border-[3px] border-ink bg-white p-3 text-left"><div class="text-3xl">🍂</div><div class="font-display text-xl mt-1">MEDIUM</div><div class="text-xs font-bold">Crunchy ×1.35</div></button>
+            <button type="button" data-density="heavy" onclick="setDensity('heavy')" class="toggle-pill border-[3px] border-ink bg-white p-3 text-left"><div class="text-3xl">🍁</div><div class="font-display text-xl mt-1">HEAVY</div><div class="text-xs font-bold">Ankle-deep ×1.75</div></button>
+            <button type="button" data-density="buried" onclick="setDensity('buried')" class="toggle-pill border-[3px] border-ink bg-white p-3 text-left"><div class="text-3xl">🌋</div><div class="font-display text-xl mt-1">BURIED</div><div class="text-xs font-bold">Send help ×2.3</div></button>
           </div>
         </div>
 
@@ -403,18 +514,18 @@ tailwind.config = {
           <div class="bg-lime text-ink border-[4px] border-lime p-5 hard-lime">
             <div class="font-display text-2xl mb-3">FREQUENCY</div>
             <div class="space-y-2" id="freqGroup">
-              <button data-freq="once" onclick="setFreq('once')" class="toggle-pill active w-full text-left border-[3px] border-ink bg-cream px-3 py-2 font-bold text-sm">⚡ ONE-TIME <span class="float-right">×1.0</span></button>
-              <button data-freq="monthly" onclick="setFreq('monthly')" class="toggle-pill w-full text-left border-[3px] border-ink bg-cream px-3 py-2 font-bold text-sm">🗓 MONTHLY <span class="float-right text-blaze">−10%</span></button>
-              <button data-freq="biweekly" onclick="setFreq('biweekly')" class="toggle-pill w-full text-left border-[3px] border-ink bg-cream px-3 py-2 font-bold text-sm">🔁 BI-WEEKLY <span class="float-right text-blaze">−15%</span></button>
-              <button data-freq="weekly" onclick="setFreq('weekly')" class="toggle-pill w-full text-left border-[3px] border-ink bg-cream px-3 py-2 font-bold text-sm">♾ WEEKLY <span class="float-right text-blaze">−20%</span></button>
+              <button type="button" data-freq="once" onclick="setFreq('once')" class="toggle-pill active w-full text-left border-[3px] border-ink bg-cream px-3 py-2 font-bold text-sm">⚡ ONE-TIME <span class="float-right">×1.0</span></button>
+              <button type="button" data-freq="monthly" onclick="setFreq('monthly')" class="toggle-pill w-full text-left border-[3px] border-ink bg-cream px-3 py-2 font-bold text-sm">🗓 MONTHLY <span class="float-right text-blaze">−10%</span></button>
+              <button type="button" data-freq="biweekly" onclick="setFreq('biweekly')" class="toggle-pill w-full text-left border-[3px] border-ink bg-cream px-3 py-2 font-bold text-sm">🔁 BI-WEEKLY <span class="float-right text-blaze">−15%</span></button>
+              <button type="button" data-freq="weekly" onclick="setFreq('weekly')" class="toggle-pill w-full text-left border-[3px] border-ink bg-cream px-3 py-2 font-bold text-sm">♾ WEEKLY <span class="float-right text-blaze">−20%</span></button>
             </div>
           </div>
           <div class="bg-blaze text-white border-[4px] border-cream p-5" style="box-shadow:8px 8px 0 #CCFF00">
             <div class="font-display text-2xl mb-3">HOW FAST? 🏃</div>
             <div class="space-y-2" id="urgGroup">
-              <button data-urg="standard" onclick="setUrg('standard')" class="toggle-pill active w-full text-left border-[3px] border-ink bg-cream text-ink px-3 py-2 font-bold text-sm">🐢 STANDARD 3–5 DAYS <span class="float-right">FREE</span></button>
-              <button data-urg="priority" onclick="setUrg('priority')" class="toggle-pill w-full text-left border-[3px] border-ink bg-cream text-ink px-3 py-2 font-bold text-sm">🚀 PRIORITY 48H <span class="float-right">+$49</span></button>
-              <button data-urg="sameday" onclick="setUrg('sameday')" class="toggle-pill w-full text-left border-[3px] border-ink bg-cream text-ink px-3 py-2 font-bold text-sm">🔥 SAME-DAY STORM <span class="float-right">+$129</span></button>
+              <button type="button" data-urg="standard" onclick="setUrg('standard')" class="toggle-pill active w-full text-left border-[3px] border-ink bg-cream text-ink px-3 py-2 font-bold text-sm">🐢 STANDARD 3–5 DAYS <span class="float-right">FREE</span></button>
+              <button type="button" data-urg="priority" onclick="setUrg('priority')" class="toggle-pill w-full text-left border-[3px] border-ink bg-cream text-ink px-3 py-2 font-bold text-sm">🚀 PRIORITY 48H <span class="float-right">+$49</span></button>
+              <button type="button" data-urg="sameday" onclick="setUrg('sameday')" class="toggle-pill w-full text-left border-[3px] border-ink bg-cream text-ink px-3 py-2 font-bold text-sm">🔥 SAME-DAY STORM <span class="float-right">+$129</span></button>
             </div>
           </div>
         </div>
@@ -449,13 +560,13 @@ tailwind.config = {
             <i class="fa-solid fa-leaf text-green-700 text-xl"></i>
             <div class="text-[13px] font-bold leading-tight">100% COMPOSTED. <span id="ecoLine">Your job = ~14 bags diverted from landfill.</span></div>
           </div>
-          <button onclick="openBooking()" class="btn-brutal w-full mt-4 bg-ink text-lime font-display text-3xl py-4 border-[3px] border-ink" style="box-shadow:6px 6px 0 #0B0B0B, 6px 6px 0 3px #F4F1EA">LOCK THIS PRICE →</button>
-          <button onclick="resetEstimator()" class="w-full mt-2 font-bold text-xs tracking-widest underline underline-offset-4 hover:text-blaze">RESET PUNCHER</button>
+          <button type="button" onclick="openBooking()" class="btn-brutal w-full mt-4 bg-ink text-lime font-display text-3xl py-4 border-[3px] border-ink" style="box-shadow:6px 6px 0 #0B0B0B, 6px 6px 0 3px #F4F1EA">LOCK THIS PRICE →</button>
+          <button type="button" onclick="resetEstimator()" class="w-full mt-2 font-bold text-xs tracking-widest underline underline-offset-4 hover:text-blaze">RESET PUNCHER</button>
           <div class="mt-2 text-center text-[11px] font-bold tracking-widest opacity-70">FINAL QUOTE CONFIRMED ON-SITE • NO HIDDEN FEES • EVER</div>
         </div>
         <div class="mt-4 bg-cream text-ink border-[3px] border-cream p-4 flex gap-3 items-center -rotate-1">
-          <img src="https://i.pravatar.cc/100?img=12" class="w-12 h-12 rounded-full border-[3px] border-ink" alt="rep"/>
-          <div class="text-sm"><strong>Mike R. — Dispatch:</strong> “That price? I can have a crew there <span id="dispatchLine" class="bg-lime px-1 font-bold">TOMORROW at 9AM.</span>” <button onclick="openBooking()" class="underline font-bold">Claim it →</button></div>
+          <div class="avatar w-12 h-12 rounded-full border-[3px] border-ink text-lg shrink-0" role="img" aria-label="LeafBlitz dispatch">📞</div>
+          <div class="text-sm"><strong>Dispatch:</strong> “That price? We can usually roll <span id="dispatchLine" class="bg-lime px-1 font-bold">TOMORROW at 9AM.</span>” <button type="button" onclick="openBooking()" class="underline font-bold">Claim it →</button> or text <a href="sms:+13347773031" class="underline font-bold">334-777-3031</a>.</div>
         </div>
       </div>
     </div>
@@ -484,9 +595,9 @@ tailwind.config = {
         <h2 class="font-display text-[12vw] md:text-7xl leading-[0.9]">DRAG IT.<br><span class="bg-blaze text-white px-2 inline-block rotate-1">SEE THE</span><br>BLITZ.</h2>
         <p class="mt-4 font-medium text-lg">Real yards. Real piles. Slide the handle to witness the carnage — <strong>left = buried, right = blitzed.</strong></p>
         <div class="mt-6 space-y-3">
-          <div class="border-thick bg-cream p-4 hard-sm flex justify-between items-center"><div><div class="font-display text-xl">MAPLE STREET — RESI</div><div class="text-xs font-bold">4,200 SQFT • HEAVY • 1HR 20MIN</div></div><button onclick="swapBA(0)" class="bg-ink text-lime font-bold text-xs px-3 py-2 border-2 border-ink">VIEW</button></div>
-          <div class="border-thick bg-cream p-4 hard-sm flex justify-between items-center"><div><div class="font-display text-xl">PLAZA LOT — COMM</div><div class="text-xs font-bold">18,000 SQFT • 3 CREW • HALF DAY</div></div><button onclick="swapBA(1)" class="bg-ink text-lime font-bold text-xs px-3 py-2 border-2 border-ink">VIEW</button></div>
-          <div class="border-thick bg-cream p-4 hard-sm flex justify-between items-center"><div><div class="font-display text-xl">DEPOT YARDS — INDUS</div><div class="text-xs font-bold">6.2 ACRES • FLEET • 2 DAYS</div></div><button onclick="swapBA(2)" class="bg-ink text-lime font-bold text-xs px-3 py-2 border-2 border-ink">VIEW</button></div>
+          <div class="border-thick bg-cream p-4 hard-sm flex justify-between items-center"><div><div class="font-display text-xl">MAPLE STREET — RESI</div><div class="text-xs font-bold">4,200 SQFT • HEAVY • 1HR 20MIN</div></div><button type="button" onclick="swapBA(0)" class="bg-ink text-lime font-bold text-xs px-3 py-2 border-2 border-ink">VIEW</button></div>
+          <div class="border-thick bg-cream p-4 hard-sm flex justify-between items-center"><div><div class="font-display text-xl">PLAZA LOT — COMM</div><div class="text-xs font-bold">18,000 SQFT • 3 CREW • HALF DAY</div></div><button type="button" onclick="swapBA(1)" class="bg-ink text-lime font-bold text-xs px-3 py-2 border-2 border-ink">VIEW</button></div>
+          <div class="border-thick bg-cream p-4 hard-sm flex justify-between items-center"><div><div class="font-display text-xl">DEPOT YARDS — INDUS</div><div class="text-xs font-bold">6.2 ACRES • FLEET • 2 DAYS</div></div><button type="button" onclick="swapBA(2)" class="bg-ink text-lime font-bold text-xs px-3 py-2 border-2 border-ink">VIEW</button></div>
         </div>
         <div class="mt-6 bg-ink text-cream p-4 border-thick hard flex items-center gap-4">
           <div class="font-display text-5xl text-lime">100%</div>
@@ -495,9 +606,9 @@ tailwind.config = {
       </div>
       <div class="lg:w-[62%] w-full">
         <div id="baWrap" class="relative border-[5px] border-ink hard overflow-hidden select-none bg-ink" style="height:520px; touch-action:none;">
-          <img id="baAfter" src="https://images.unsplash.com/photo-1558904541-efa843a96f01?q=80&w=1200&auto=format&fit=crop" class="absolute inset-0 w-full h-full object-cover" alt="after" draggable="false"/>
+          <img loading="lazy" decoding="async" id="baAfter" src="https://images.unsplash.com/photo-1558904541-efa843a96f01?q=80&w=1200&auto=format&fit=crop" class="absolute inset-0 w-full h-full object-cover" alt="After: yard fully cleared of leaves" draggable="false"/>
           <div id="baBeforeClip" class="absolute inset-0 overflow-hidden" style="width:50%">
-            <img id="baBefore" src="https://images.unsplash.com/photo-1507371341162-763b5e419408?q=80&w=1200&auto=format&fit=crop" class="absolute inset-0 h-full object-cover max-w-none" style="width:100vw;" alt="before" draggable="false"/>
+            <img loading="lazy" decoding="async" id="baBefore" src="https://images.unsplash.com/photo-1507371341162-763b5e419408?q=80&w=1200&auto=format&fit=crop" class="absolute inset-0 h-full object-cover max-w-none" style="width:100vw;" alt="Before: yard covered in leaves" draggable="false"/>
             <div class="absolute top-4 left-4 bg-blaze text-white font-display text-xl px-3 py-1 border-[3px] border-white -rotate-2">BEFORE 😱</div>
           </div>
           <div class="absolute top-4 right-4 bg-lime font-display text-xl px-3 py-1 border-[3px] border-ink rotate-2">AFTER 🤯</div>
@@ -563,8 +674,8 @@ tailwind.config = {
       <div class="overflow-hidden"><div id="testiTrack" class="testi-track flex"></div></div>
       <div class="flex items-center justify-between bg-lime text-ink border-t-[4px] border-ink px-4 py-3">
         <div class="flex gap-2">
-          <button onclick="moveTesti(-1)" class="w-11 h-11 border-[3px] border-ink bg-paper font-black text-xl btn-brutal">←</button>
-          <button onclick="moveTesti(1)" class="w-11 h-11 border-[3px] border-ink bg-ink text-lime font-black text-xl btn-brutal">→</button>
+          <button type="button" onclick="moveTesti(-1)" class="w-11 h-11 border-[3px] border-ink bg-paper font-black text-xl btn-brutal">←</button>
+          <button type="button" onclick="moveTesti(1)" class="w-11 h-11 border-[3px] border-ink bg-ink text-lime font-black text-xl btn-brutal">→</button>
         </div>
         <div id="testiDots" class="flex gap-2"></div>
         <div class="hidden md:block font-display text-xl"><span id="testiIdx">01</span> / 05</div>
@@ -580,13 +691,13 @@ tailwind.config = {
       <div class="inline-block bg-blaze text-white font-bold text-xs tracking-[0.25em] px-3 py-1 mb-4 border-thick">05 — ARE WE IN YOUR HOOD?</div>
       <h2 class="font-display text-[11vw] md:text-6xl leading-[0.9]">ENTER ZIP.<br>GET VERDICT <span class="bg-lime border-thick px-2 inline-block -rotate-1">IN 2 SEC.</span></h2>
       <div class="mt-6 border-thick bg-cream hard p-5">
-        <label class="font-bold text-sm tracking-widest">YOUR ZIP CODE</label>
+        <label for="zipInput" class="font-bold text-sm tracking-widest">YOUR ZIP CODE</label>
         <div class="flex gap-3 mt-2">
-          <input id="zipInput" maxlength="5" inputmode="numeric" placeholder="e.g. 90210" class="flex-1 border-[3px] border-ink bg-white font-display text-3xl px-4 py-3 outline-none focus:bg-lime placeholder:text-neutral-300"/>
-          <button onclick="checkZip()" class="btn-brutal bg-ink text-lime font-display text-2xl px-6 border-thick">CHECK →</button>
+          <input id="zipInput" maxlength="5" inputmode="numeric" autocomplete="postal-code" placeholder="e.g. 36101" aria-describedby="zipHint" class="flex-1 border-[3px] border-ink bg-white font-display text-3xl px-4 py-3 outline-none focus:bg-lime placeholder:text-neutral-300"/>
+          <button type="button" onclick="checkZip()" class="btn-brutal bg-ink text-lime font-display text-2xl px-6 border-thick">CHECK →</button>
         </div>
-        <div id="zipResult" class="mt-4 hidden border-[3px] border-ink p-4 font-bold text-sm"></div>
-        <div class="mt-3 text-xs font-bold opacity-60">TRY: 90210 • 60614 • 10001 • 75001 • 99999 (to see out-of-zone)</div>
+        <div id="zipResult" class="mt-4 hidden border-[3px] border-ink p-4 font-bold text-sm" role="status" aria-live="polite"></div>
+        <div id="zipHint" class="mt-3 text-xs font-bold opacity-60">Enter the ZIP where you need the crew. No match? Call <a href="tel:+13347773031" class="underline">334-777-3031</a> — we travel for big jobs.</div>
       </div>
       <div class="grid grid-cols-3 gap-3 mt-4 text-center">
         <div class="border-thick bg-lime p-3 hard-sm"><div class="font-display text-xl">ZONE A</div><div class="text-xs font-bold">SAME-DAY<br>12 neighborhoods</div></div>
@@ -597,13 +708,14 @@ tailwind.config = {
     <div class="border-[4px] border-ink hard bg-ink text-cream p-6 md:p-8 relative overflow-hidden">
       <div class="absolute inset-0 hero-grid-dark"></div>
       <div class="relative z-10">
-        <div class="font-display text-3xl mb-4">THIS WEEK'S <span class="text-lime">ROUTE HEATMAP</span></div>
-        <div class="grid grid-cols-4 gap-2 text-center font-bold text-xs" id="zoneGrid"></div>
-        <div class="mt-6 bg-cream text-ink border-[3px] border-cream p-4 flex items-center gap-4">
-          <div class="w-14 h-14 bg-blaze border-[3px] border-ink rounded-full flex items-center justify-center text-2xl shrink-0">📍</div>
-          <div><div class="font-display text-xl">14 TRUCKS ROLLING TODAY</div><div class="text-sm font-medium">Live dispatch: <span class="font-bold">Oakdale • Riverside • Northgate</span> — your street could be next.</div></div>
+        <div class="font-display text-3xl mb-4">TOWNS WE <span class="text-lime">RUN WEEKLY</span></div>
+        <div class="grid grid-cols-4 gap-2 text-center font-bold text-xs" id="zoneGrid" aria-label="Towns served"></div>
+        <p class="text-xs font-bold text-cream/60 mt-2">⚡ SAME-DAY ELIGIBLE &nbsp; ⚙ INDUSTRIAL / FLEET</p>
+        <div class="mt-4 bg-cream text-ink border-[3px] border-cream p-4 flex items-center gap-4">
+          <div class="w-14 h-14 bg-blaze border-[3px] border-ink rounded-full flex items-center justify-center text-2xl shrink-0" aria-hidden="true">📍</div>
+          <div><div class="font-display text-xl">WANT THE NEXT OPENING?</div><div class="text-sm font-medium">Text your address to <a href="sms:+13347773031" class="font-bold underline">334-777-3031</a> and we'll reply with the closest slot.</div></div>
         </div>
-        <button onclick="openBooking()" class="btn-brutal w-full mt-4 bg-lime text-ink font-display text-2xl py-3 border-[3px] border-lime">CLAIM A SLOT ON TODAY'S ROUTE →</button>
+        <button type="button" onclick="openBooking()" class="btn-brutal w-full mt-4 bg-lime text-ink font-display text-2xl py-3 border-[3px] border-lime">CLAIM A SLOT ON THE ROUTE →</button>
       </div>
     </div>
   </div>
@@ -625,8 +737,8 @@ tailwind.config = {
     <h2 class="font-display text-[14vw] md:text-[7.5rem] leading-[0.85] mt-4">READY TO<br>RECLAIM<br>YOUR YARD?</h2>
     <p class="font-bold text-lg mt-4">One pile or fifty acres — same energy. Same blitz.</p>
     <div class="flex flex-col md:flex-row gap-4 justify-center mt-8">
-      <button onclick="openBooking()" class="btn-brutal bg-ink text-lime font-display text-3xl md:text-4xl px-10 py-5 border-[4px] border-ink hard">BOOK MY BLITZ →</button>
-      <a href="tel:3347773031" class="btn-brutal bg-paper text-ink font-display text-3xl md:text-4xl px-10 py-5 border-[4px] border-ink hard">CALL 334-777-3031</a>
+      <button type="button" onclick="openBooking()" class="btn-brutal bg-ink text-lime font-display text-3xl md:text-4xl px-10 py-5 border-[4px] border-ink hard">BOOK MY BLITZ →</button>
+      <a href="tel:+13347773031" class="btn-brutal bg-paper text-ink font-display text-3xl md:text-4xl px-10 py-5 border-[4px] border-ink hard">CALL 334-777-3031</a>
     </div>
     <div class="mt-6 font-bold text-sm tracking-widest">★ PAY AFTER YOU LOVE IT ★ FREE RE-VISIT IF WE MISS A LEAF ★ COMPOST RECEIPT INCLUDED</div>
   </div>
@@ -641,8 +753,8 @@ tailwind.config = {
         <p class="font-bold mt-2">Ready to schedule your LeafBlitz service? Call, text, or email today.</p>
       </div>
       <div class="flex flex-col sm:flex-row flex-wrap gap-3 font-bold">
-        <a href="tel:3347773031" class="btn-brutal bg-ink text-lime border-[3px] border-ink px-4 py-3">☎ 334-777-3031</a>
-        <a href="tel:3345782252" class="btn-brutal bg-ink text-lime border-[3px] border-ink px-4 py-3">☎ 334-578-2252</a>
+        <a href="tel:+13347773031" class="btn-brutal bg-ink text-lime border-[3px] border-ink px-4 py-3">☎ 334-777-3031</a>
+        <a href="tel:+13345782252" class="btn-brutal bg-ink text-lime border-[3px] border-ink px-4 py-3">☎ 334-578-2252</a>
         <a href="mailto:Corinthianbrown@checkchasinempire.onmicrosoft.com" class="btn-brutal bg-paper text-ink border-[3px] border-ink px-4 py-3 break-all">✉ Corinthianbrown@checkchasinempire.onmicrosoft.com</a>
       </div>
     </div>
@@ -656,29 +768,30 @@ tailwind.config = {
       <div class="font-display text-4xl">LEAF<span class="bg-lime text-ink px-1">BLITZ</span></div>
       <p class="text-sm text-cream/60 font-medium mt-3">The loudest leaf pickup crew in town. Residential, commercial, industrial — raked, blown, vacuumed, gone.</p>
       <div class="flex gap-2 mt-4">
-        <a href="#" class="w-10 h-10 border-2 border-cream flex items-center justify-center hover:bg-lime hover:text-ink hover:border-lime transition"><i class="fa-brands fa-instagram"></i></a>
-        <a href="#" class="w-10 h-10 border-2 border-cream flex items-center justify-center hover:bg-lime hover:text-ink hover:border-lime transition"><i class="fa-brands fa-facebook-f"></i></a>
-        <a href="#" class="w-10 h-10 border-2 border-cream flex items-center justify-center hover:bg-lime hover:text-ink hover:border-lime transition"><i class="fa-brands fa-tiktok"></i></a>
-        <a href="#" class="w-10 h-10 border-2 border-cream flex items-center justify-center hover:bg-lime hover:text-ink hover:border-lime transition"><i class="fa-brands fa-youtube"></i></a>
+        <a href="tel:+13347773031" aria-label="Call LeafBlitz on 334-777-3031" title="Call 334-777-3031" class="w-10 h-10 border-2 border-cream flex items-center justify-center hover:bg-lime hover:text-ink hover:border-lime transition"><i class="fa-solid fa-phone" aria-hidden="true"></i></a>
+        <a href="sms:+13347773031" aria-label="Text LeafBlitz on 334-777-3031" title="Text 334-777-3031" class="w-10 h-10 border-2 border-cream flex items-center justify-center hover:bg-lime hover:text-ink hover:border-lime transition"><i class="fa-solid fa-comment-sms" aria-hidden="true"></i></a>
+        <a href="mailto:Corinthianbrown@checkchasinempire.onmicrosoft.com" aria-label="Email LeafBlitz" title="Email us" class="w-10 h-10 border-2 border-cream flex items-center justify-center hover:bg-lime hover:text-ink hover:border-lime transition"><i class="fa-solid fa-envelope" aria-hidden="true"></i></a>
+        <button type="button" onclick="openBooking()" aria-label="Open the booking form" title="Book online" class="w-10 h-10 border-2 border-cream flex items-center justify-center hover:bg-lime hover:text-ink hover:border-lime transition"><i class="fa-solid fa-calendar-check" aria-hidden="true"></i></button>
       </div>
+      <p class="text-xs text-cream/50 font-bold mt-4">Corinthian Brown • <a href="tel:+13347773031" class="hover:text-lime">334-777-3031</a> • <a href="tel:+13345782252" class="hover:text-lime">334-578-2252</a></p>
     </div>
     <div><div class="font-display text-xl text-lime mb-3">SERVICES</div><ul class="space-y-2 font-medium text-sm text-cream/70"><li><a href="#services" class="hover:text-lime">Residential Pickup</a></li><li><a href="#services" class="hover:text-lime">Commercial Routes</a></li><li><a href="#services" class="hover:text-lime">Industrial Acres</a></li><li><a href="#estimator" class="hover:text-lime">Curb Pile Pickup $29+</a></li><li><a href="#estimator" class="hover:text-lime">Gutter Cleanout</a></li></ul></div>
-    <div><div class="font-display text-xl text-lime mb-3">COMPANY</div><ul class="space-y-2 font-medium text-sm text-cream/70"><li><a href="#proof" class="hover:text-lime">Before / After</a></li><li><a href="#reviews" class="hover:text-lime">Reviews</a></li><li><a href="#faq" class="hover:text-lime">FAQ</a></li><li><a href="#" class="hover:text-lime">Careers — Join the Blitz</a></li><li><a href="#" class="hover:text-lime">Compost Impact Report</a></li></ul></div>
-    <div class="bg-cream text-ink border-[3px] border-cream p-5 rotate-1"><div class="font-display text-2xl">GET $20 OFF</div><p class="text-sm font-medium">Drop your number. We text you a $20 coupon. No spam, just leaves.</p><div class="flex gap-2 mt-3"><input id="couponPhone" placeholder="(555) ___" class="flex-1 border-[3px] border-ink px-3 py-2 font-bold text-sm outline-none w-full"/><button onclick="claimCoupon()" class="bg-blaze text-white border-[3px] border-ink font-display px-4">→</button></div></div>
+    <div><div class="font-display text-xl text-lime mb-3">COMPANY</div><ul class="space-y-2 font-medium text-sm text-cream/70"><li><a href="#proof" class="hover:text-lime">Before / After</a></li><li><a href="#reviews" class="hover:text-lime">Reviews</a></li><li><a href="#faq" class="hover:text-lime">FAQ — where the leaves go</a></li><li><a href="#contact" class="hover:text-lime">Contact</a></li><li><a href="mailto:Corinthianbrown@checkchasinempire.onmicrosoft.com?subject=Join%20the%20Blitz%20%E2%80%94%20crew%20application" class="hover:text-lime">Careers — Join the Blitz</a></li></ul></div>
+    <div class="bg-cream text-ink border-[3px] border-cream p-5 rotate-1"><div class="font-display text-2xl">GET $20 OFF</div><p class="text-sm font-medium">Enter your mobile number — we open a text to our dispatch with the coupon request, and reply with your $20 code.</p><div class="flex gap-2 mt-3"><label for="couponPhone" class="sr-only">Mobile number for the $20 off coupon</label><input id="couponPhone" type="tel" autocomplete="tel" inputmode="tel" placeholder="(334) 000-0000" class="flex-1 border-[3px] border-ink px-3 py-2 font-bold text-sm outline-none w-full"/><button type="button" onclick="claimCoupon()" aria-label="Request the $20 off coupon by text" class="bg-blaze text-white border-[3px] border-ink font-display px-4">→</button></div></div>
   </div>
   <div class="max-w-[1400px] mx-auto px-4 md:px-8 mt-10 pt-6 border-t border-cream/15 flex flex-col md:flex-row justify-between gap-2 text-xs font-bold tracking-widest text-cream/50"><span>© 2026 LEAFBLITZ CO. ALL LEAVES RESERVED.</span><span>LICENSED • INSURED • COMPOST-CERTIFIED • MADE WITH RAKE & RAGE</span></div>
 </footer>
 
 <!-- FLOATING -->
-<button onclick="openBooking()" class="fixed bottom-5 right-5 z-[90] btn-brutal bg-lime border-thick hard font-display text-lg px-5 py-3 flex items-center gap-2 wiggle"><span class="w-3 h-3 bg-blaze rounded-full animate-ping"></span> QUOTE: <span id="floatPrice">$189</span></button>
+<button type="button" onclick="openBooking()" class="fixed bottom-5 right-5 z-[90] btn-brutal bg-lime border-thick hard font-display text-lg px-5 py-3 flex items-center gap-2 wiggle"><span class="w-3 h-3 bg-blaze rounded-full animate-ping"></span> QUOTE: <span id="floatPrice">$189</span></button>
 
 <!-- BOOKING MODAL -->
-<div id="bookingModal" class="fixed inset-0 z-[200] hidden items-center justify-center p-3 md:p-6">
-  <div class="absolute inset-0 bg-ink/80 backdrop-blur-sm" onclick="closeBooking()"></div>
+<div id="bookingModal" role="dialog" aria-modal="true" aria-labelledby="bookingTitle" aria-describedby="bookingIntro" class="fixed inset-0 z-[200] hidden items-center justify-center p-3 md:p-6">
+  <div class="absolute inset-0 bg-ink/80 backdrop-blur-sm" onclick="closeBooking()" aria-hidden="true"></div>
   <div class="relative w-full max-w-3xl bg-cream border-[5px] border-ink hard max-h-[92vh] overflow-y-auto">
     <div class="sticky top-0 bg-ink text-cream px-5 py-4 flex justify-between items-center border-b-[4px] border-ink z-10">
-      <div class="font-display text-2xl">BOOK YOUR BLITZ <span id="modalPriceTag" class="bg-lime text-ink text-lg px-2 ml-2">$189</span></div>
-      <button onclick="closeBooking()" class="w-10 h-10 bg-blaze border-2 border-cream font-black">✕</button>
+      <div id="bookingTitle" class="font-display text-2xl">BOOK YOUR BLITZ <span id="modalPriceTag" class="bg-lime text-ink text-lg px-2 ml-2">$189</span></div>
+      <button type="button" onclick="closeBooking()" aria-label="Close booking form" class="w-10 h-10 bg-blaze border-2 border-cream font-black">✕</button>
     </div>
     <div class="px-5 pt-5">
       <div class="grid grid-cols-3 gap-2 mb-6">
@@ -689,24 +802,25 @@ tailwind.config = {
     </div>
     <!-- STEP 1 -->
     <div id="bStep1" class="px-5 pb-6">
+      <div id="bookingIntro" class="sr-only">Three step booking request: your details, a day and time window, then review. Nothing is charged here.</div>
       <div id="modalSummary" class="bg-lime border-[3px] border-ink p-4 font-bold text-sm mb-4"></div>
       <div class="grid md:grid-cols-2 gap-3">
-        <div><label class="font-bold text-xs tracking-widest">FULL NAME *</label><input id="fName" placeholder="Jane Doe" class="w-full border-[3px] border-ink px-3 py-2.5 font-bold outline-none focus:bg-lime/30 mt-1"/></div>
-        <div><label class="font-bold text-xs tracking-widest">PHONE *</label><input id="fPhone" placeholder="(555) 123-4567" class="w-full border-[3px] border-ink px-3 py-2.5 font-bold outline-none focus:bg-lime/30 mt-1"/></div>
-        <div class="md:col-span-2"><label class="font-bold text-xs tracking-widest">SERVICE ADDRESS *</label><input id="fAddr" placeholder="123 Maple St, Springfield" class="w-full border-[3px] border-ink px-3 py-2.5 font-bold outline-none focus:bg-lime/30 mt-1"/></div>
-        <div class="md:col-span-2"><label class="font-bold text-xs tracking-widest">ANYTHING WE SHOULD KNOW? (gates, dogs, slopes)</label><textarea id="fNotes" rows="2" placeholder="Back gate code 4410, two big oaks, pile by curb..." class="w-full border-[3px] border-ink px-3 py-2.5 font-medium outline-none focus:bg-lime/30 mt-1"></textarea></div>
+        <div><label for="fName" class="font-bold text-xs tracking-widest">FULL NAME *</label><input id="fName" name="name" type="text" autocomplete="name" placeholder="Jane Doe" class="w-full border-[3px] border-ink px-3 py-2.5 font-bold outline-none focus:bg-lime/30 mt-1"/></div>
+        <div><label for="fPhone" class="font-bold text-xs tracking-widest">PHONE *</label><input id="fPhone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="(334) 000-0000" class="w-full border-[3px] border-ink px-3 py-2.5 font-bold outline-none focus:bg-lime/30 mt-1"/></div>
+        <div class="md:col-span-2"><label for="fAddr" class="font-bold text-xs tracking-widest">SERVICE ADDRESS *</label><input id="fAddr" name="address" type="text" autocomplete="street-address" placeholder="Street, city, ZIP" class="w-full border-[3px] border-ink px-3 py-2.5 font-bold outline-none focus:bg-lime/30 mt-1"/></div>
+        <div class="md:col-span-2"><label for="fNotes" class="font-bold text-xs tracking-widest">ANYTHING WE SHOULD KNOW? (gates, dogs, slopes)</label><textarea id="fNotes" name="notes" rows="2" placeholder="Back gate code 4410, two big oaks, pile by curb..." class="w-full border-[3px] border-ink px-3 py-2.5 font-medium outline-none focus:bg-lime/30 mt-1"></textarea></div>
       </div>
-      <button onclick="goStep(2)" class="btn-brutal w-full mt-4 bg-ink text-lime font-display text-2xl py-3 border-thick">NEXT: PICK A TIME →</button>
+      <button type="button" onclick="goStep(2)" class="btn-brutal w-full mt-4 bg-ink text-lime font-display text-2xl py-3 border-thick">NEXT: PICK A TIME →</button>
     </div>
     <!-- STEP 2 -->
     <div id="bStep2" class="px-5 pb-6 hidden">
-      <label class="font-bold text-xs tracking-widest">PICK A DAY — NEXT 14 DAYS (SUNDAYS WE REST 😴)</label>
-      <div id="dayGrid" class="grid grid-cols-4 md:grid-cols-7 gap-2 mt-2"></div>
-      <label class="font-bold text-xs tracking-widest mt-5 block">PICK A TIME WINDOW</label>
-      <div id="slotGrid" class="grid grid-cols-2 md:grid-cols-4 gap-2 mt-2"></div>
+      <p id="dayLabel" class="font-bold text-xs tracking-widest">PICK A DAY — NEXT 14 DAYS (SUNDAYS WE REST 😴)</p>
+      <div id="dayGrid" role="group" aria-labelledby="dayLabel" class="grid grid-cols-4 md:grid-cols-7 gap-2 mt-2"></div>
+      <p id="slotLabel" class="font-bold text-xs tracking-widest mt-5 block">PICK A TIME WINDOW</p>
+      <div id="slotGrid" role="group" aria-labelledby="slotLabel" class="grid grid-cols-2 md:grid-cols-4 gap-2 mt-2"></div>
       <div class="grid grid-cols-2 gap-3 mt-5">
-        <button onclick="goStep(1)" class="border-thick bg-white font-display text-xl py-3">← BACK</button>
-        <button onclick="goStep(3)" class="btn-brutal bg-ink text-lime font-display text-xl py-3 border-thick">REVIEW →</button>
+        <button type="button" onclick="goStep(1)" class="border-thick bg-white font-display text-xl py-3">← BACK</button>
+        <button type="button" onclick="goStep(3)" class="btn-brutal bg-ink text-lime font-display text-xl py-3 border-thick">REVIEW →</button>
       </div>
     </div>
     <!-- STEP 3 -->
@@ -714,18 +828,27 @@ tailwind.config = {
       <div id="confirmSummary" class="border-[3px] border-ink bg-white p-4 text-sm font-medium"></div>
       <label class="flex items-start gap-3 mt-4 font-bold text-sm cursor-pointer"><input id="agreeBox" type="checkbox" class="w-6 h-6 accent-[#FF4D00] mt-0.5 shrink-0"/> I agree to pay after I love it. Free re-visit if a leaf survives. Crew can access yard at scheduled time.</label>
       <div class="grid grid-cols-2 gap-3 mt-4">
-        <button onclick="goStep(2)" class="border-thick bg-white font-display text-xl py-3">← BACK</button>
-        <button onclick="confirmBooking()" class="btn-brutal bg-blaze text-white font-display text-xl py-3 border-thick">BLITZ ME! 🔥</button>
+        <button type="button" onclick="goStep(2)" class="border-thick bg-white font-display text-xl py-3">← BACK</button>
+        <button type="button" onclick="confirmBooking()" class="btn-brutal bg-blaze text-white font-display text-xl py-3 border-thick">BLITZ ME! 🔥</button>
       </div>
     </div>
-    <!-- SUCCESS -->
+    <!-- SUCCESS / HANDOFF -->
     <div id="bSuccess" class="px-5 pb-8 hidden text-center">
-      <div class="text-7xl mt-4">🎉</div>
-      <div class="font-display text-5xl mt-2">YOU'RE ON<br>THE ROUTE!</div>
-      <div class="inline-block bg-ink text-lime font-display text-2xl px-4 py-2 mt-4 border-thick">BOOKING <span id="bookingId">LEAF-0000</span></div>
+      <div class="text-7xl mt-4" aria-hidden="true">🎉</div>
+      <div class="font-display text-5xl mt-2">ONE TAP<br>FROM BOOKED!</div>
+      <div class="inline-block bg-ink text-lime font-display text-2xl px-4 py-2 mt-4 border-thick">REF <span id="bookingId">LEAF-0000</span></div>
       <p id="successLine" class="font-bold mt-4"></p>
-      <div class="bg-lime border-[3px] border-ink p-4 mt-4 text-sm font-bold">📲 Confirmation text sent! Crew texts you 30 min before arrival with live ETA + crew photo.</div>
-      <button onclick="closeBooking()" class="btn-brutal mt-4 bg-ink text-lime font-display text-2xl px-8 py-3 border-thick">DONE ✓</button>
+      <div class="bg-paper border-[3px] border-ink p-4 mt-4 text-sm font-bold text-left">
+        This page runs without a server, so nothing has been sent yet — your details are pre-loaded into the buttons below. Tap one and dispatch has your request in seconds. Nothing is charged here; you pay after you love it.
+      </div>
+      <div class="grid sm:grid-cols-3 gap-3 mt-4">
+        <a id="sendEmail" href="mailto:Corinthianbrown@checkchasinempire.onmicrosoft.com" class="btn-brutal bg-lime text-ink font-display text-xl px-4 py-3 border-thick">✉ EMAIL IT</a>
+        <a id="sendText" href="sms:+13347773031" class="btn-brutal bg-blaze text-white font-display text-xl px-4 py-3 border-thick">💬 TEXT IT</a>
+        <a id="sendCall" href="tel:+13347773031" class="btn-brutal bg-ink text-lime font-display text-xl px-4 py-3 border-thick">📞 CALL NOW</a>
+      </div>
+      <button type="button" onclick="copyBooking()" id="copyBtn" class="mt-4 bg-white border-thick font-bold text-sm px-4 py-2">📋 COPY THE DETAILS</button>
+      <p class="mt-4 text-xs font-bold tracking-widest opacity-70">CREW CONFIRMS BY TEXT OR CALL — WE DON'T SELL YOUR NUMBER TO ANYBODY.</p>
+      <button type="button" onclick="closeBooking()" class="btn-brutal mt-4 bg-ink text-lime font-display text-2xl px-8 py-3 border-thick">DONE ✓</button>
     </div>
   </div>
 </div>
@@ -734,6 +857,22 @@ tailwind.config = {
 <div id="toastBox" class="fixed top-24 right-4 z-[300] space-y-3 w-[320px] max-w-[calc(100vw-2rem)]"></div>
 
 <script>
+/* ============ CONTACT — single source of truth ============
+   Change the number/email here and every call, text, email and booking
+   handoff on the page follows. */
+const CONTACT = {
+  name: 'Corinthian Brown',
+  business: 'LeafBlitz',
+  phoneE164: '+13347773031',      // primary — call & text
+  phonePretty: '334-777-3031',
+  altPhoneE164: '+13345782252',   // secondary line
+  altPhonePretty: '334-578-2252',
+  email: 'Corinthianbrown@checkchasinempire.onmicrosoft.com'
+};
+const REDUCED_MOTION = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+/* GSAP comes from a CDN — if it is blocked the page must still price and book. */
+const HAS_GSAP = typeof window.gsap !== 'undefined';
+
 /* ============ STATE ============ */
 const state = {
   service: 'residential',
@@ -756,7 +895,11 @@ const URG = {standard:{f:0,label:'Standard 3–5 days'}, priority:{f:49,label:'P
 
 /* ============ PRELOADER ============ */
 let lp=0; const loadInt=setInterval(()=>{ lp+=Math.random()*22; if(lp>=100){lp=100;clearInterval(loadInt); setTimeout(()=>{document.getElementById('preloader').style.opacity='0';document.getElementById('preloader').style.visibility='hidden'; revealHero();},350);} document.getElementById('loadPct').textContent='RAKING… '+Math.floor(lp)+'%'; document.getElementById('loadBar').style.width=lp+'%'; },140);
-function revealHero(){ gsap.fromTo('.reveal-hero',{y:80,opacity:0},{y:0,opacity:1,duration:.9,stagger:.12,ease:'power4.out'}); }
+function revealHero(){
+  document.querySelectorAll('.reveal-hero').forEach(el=>{ el.style.opacity='1'; el.style.transform='none'; });
+  if(!HAS_GSAP||REDUCED_MOTION) return;
+  gsap.fromTo('.reveal-hero',{y:80,opacity:0},{y:0,opacity:1,duration:.9,stagger:.12,ease:'power4.out'});
+}
 
 /* ============ LEAF CANVAS ============ */
 const cv=document.getElementById('leafCanvas'), ctx=cv.getContext('2d');
@@ -774,12 +917,22 @@ function drawLeaf(l){
   ctx.beginPath(); ctx.moveTo(l.s,0); ctx.lineTo(l.s+5,3); ctx.stroke();
   ctx.restore();
 }
-(function loop(){ ctx.clearRect(0,0,cv.width,cv.height);
+let leafRaf=null;
+function leafFrame(){
+  ctx.clearRect(0,0,cv.width,cv.height);
   leaves.forEach((l,i)=>{ l.sway+=l.swaySp; l.r+=l.vr; l.y+=l.vy; l.x+=l.vx + Math.sin(l.sway)*1.2 + wind*3;
     if(l.y>cv.height+40||l.x<-50||l.x>cv.width+50) leaves[i]=makeLeaf(true);
     drawLeaf(l); });
-  requestAnimationFrame(loop);
-})();
+  leafRaf=requestAnimationFrame(leafFrame);
+}
+if(REDUCED_MOTION){ ctx.clearRect(0,0,cv.width,cv.height); }
+else leafFrame();
+/* Don't burn a background tab's battery on falling leaves. */
+document.addEventListener('visibilitychange',()=>{
+  if(REDUCED_MOTION) return;
+  if(document.hidden){ if(leafRaf){ cancelAnimationFrame(leafRaf); leafRaf=null; } }
+  else if(!leafRaf) leafFrame();
+});
 
 /* ============ ESTIMATOR ============ */
 const yardSizeEl=document.getElementById('yardSize');
@@ -849,15 +1002,23 @@ function calc(){
   document.getElementById('quoteBags').textContent=bags+' BAGS';
   document.getElementById('ecoLine').textContent='Your job = ~'+bags+' bags diverted from landfill.';
   const days=['Sun','Mon','Tue','Wed','Thu','Fri','Sat']; const t=new Date(); t.setDate(t.getDate()+ (state.urg==='sameday'?0:state.urg==='priority'?2:3));
-  document.getElementById('dispatchLine').textContent=(state.urg==='sameday'?'TODAY ':days[t.getDay()].toUpperCase()+' '+(t.getMonth()+1)+'/'+t.getDate()+' at 9AM.');
+  document.getElementById('dispatchLine').textContent=(state.urg==='sameday'?'TODAY — call to lock it.':days[t.getDay()].toUpperCase()+' '+(t.getMonth()+1)+'/'+t.getDate()+' at 9AM.');
 }
-let curShown=189;
+let curShown=189, numToken=0;
 function animateNumber(id, target, prefix){
-  const el=document.getElementById(id); const start=curShown; const t0=performance.now();
-  function step(t){ const p=Math.min(1,(t-t0)/400); const e=1-Math.pow(1-p,3); const v=Math.round(start+(target-start)*e); el.textContent=prefix+v; if(p<1) requestAnimationFrame(step); else curShown=target; }
+  const el=document.getElementById(id); if(!el) return;
+  if(REDUCED_MOTION){ curShown=target; el.textContent=prefix+target; return; }
+  const mine=++numToken, start=curShown, t0=performance.now();
+  function step(t){
+    if(mine!==numToken) return;                 /* a newer price took over */
+    const p=Math.min(1,(t-t0)/400); const e=1-Math.pow(1-p,3);
+    const v=Math.round(start+(target-start)*e);
+    el.textContent=prefix+v; curShown=v;
+    if(p<1) requestAnimationFrame(step);
+  }
   requestAnimationFrame(step);
 }
-function pulseQuote(){ gsap.fromTo('#quoteTotal',{scale:1.15,rotate:-2},{scale:1,rotate:0,duration:.4,ease:'back.out(3)'}); }
+function pulseQuote(){ if(!HAS_GSAP||REDUCED_MOTION) return; gsap.fromTo('#quoteTotal',{scale:1.15,rotate:-2},{scale:1,rotate:0,duration:.4,ease:'back.out(3)'}); }
 
 /* ============ BEFORE / AFTER ============ */
 const baSets=[
@@ -894,28 +1055,57 @@ document.getElementById('compareRows').innerHTML=rows.map((r,i)=>`
 
 /* ============ TESTIMONIALS ============ */
 const testis=[
-  {n:'Sarah M.', z:'Oakdale — RESI $189', t:'“My yard was a horror movie. Two dudes, one vacuum shark, 80 minutes — GONE. My neighbor literally knocked to ask who did it.”', img:'https://i.pravatar.cc/100?img=47', stars:5},
-  {n:'Dave K.', z:'Property Mgr — COMM $640', t:'“They do our 4 storefronts bi-weekly before 7AM. Zero complaints, photo proof every visit. Our slip incidents dropped to zero.”', img:'https://i.pravatar.cc/100?img=13', stars:5},
-  {n:'Priya S.', z:'Riverside — RESI $240', t:'“Buried category. Like, couldn’t-see-grass buried. Price Puncher said $240, final was $235. Paid after. Insane.”', img:'https://i.pravatar.cc/100?img=32', stars:5},
-  {n:'Tom W.', z:'Logistics Park — INDUS', t:'“6 acres of oak hell + clogged drains. Fleet showed up two days, left it spotless with compost certs for our audit. Pros.”', img:'https://i.pravatar.cc/100?img=59', stars:5},
-  {n:'Greg & Lou', z:'Northgate — CURB $29', t:'“We raked to the curb, they vacuumed it in 6 minutes for $29. SIX MINUTES. Best $29 ever spent, I rake with pride now.”', img:'https://i.pravatar.cc/100?img=15', stars:5}
+  /* SAMPLE REVIEWS — replace these with real, permissioned customer quotes.
+     Drop a photo URL into `img` and it will be used instead of the initials badge. */
+  {n:'Sarah M.', z:'Montgomery — RESI $189', t:'“My yard was a horror movie. Two dudes, one vacuum shark, 80 minutes — GONE. My neighbor literally knocked to ask who did it.”', stars:5},
+  {n:'Dave K.', z:'Property Mgr — COMM $640', t:'“They do our 4 storefronts bi-weekly before 7AM. Zero complaints, photo proof every visit. Our slip incidents dropped to zero.”', stars:5},
+  {n:'Priya S.', z:'Pike Road — RESI $240', t:'“Buried category. Like, couldn’t-see-grass buried. Price Puncher said $240, final was $235. Paid after. Insane.”', stars:5},
+  {n:'Tom W.', z:'Logistics Park — INDUS', t:'“6 acres of oak hell + clogged drains. Fleet showed up two days, left it spotless with compost certs for our audit. Pros.”', stars:5},
+  {n:'Greg & Lou', z:'Wetumpka — CURB $29', t:'“We raked to the curb, they vacuumed it in 6 minutes for $29. SIX MINUTES. Best $29 ever spent, I rake with pride now.”', stars:5}
 ];
 let tIdx=0;
-function renderTesti(){
-  document.getElementById('testiTrack').innerHTML=testis.map(x=>`
-    <div class="w-full shrink-0 p-6 md:p-12 flex flex-col md:flex-row gap-6 items-start">
-      <img src="${x.img}" class="w-20 h-20 rounded-full border-[4px] border-lime object-cover shrink-0"/>
-      <div><div class="text-lime font-black tracking-widest">★★★★★ VERIFIED BLITZ</div>
+function initialsOf(name){
+  return String(name).split(/[\s&]+/).filter(Boolean).slice(0,2).map(w=>w[0].toUpperCase()).join('');
+}
+/* The track is built once; moving only updates dots + transform. */
+function renderTestiTrack(){
+  document.getElementById('testiTrack').innerHTML=testis.map((x,i)=>{
+    const badge = x.img
+      ? `<img src="${x.img}" alt="Photo of ${x.n}" loading="lazy" decoding="async" class="w-20 h-20 rounded-full border-[4px] border-lime object-cover shrink-0"/>`
+      : `<div class="avatar w-20 h-20 rounded-full border-[4px] border-lime text-3xl shrink-0" role="img" aria-label="${x.n}">${initialsOf(x.n)}</div>`;
+    return `
+    <div class="w-full shrink-0 p-6 md:p-12 flex flex-col md:flex-row gap-6 items-start" role="group" aria-roledescription="slide" aria-label="Review ${i+1} of ${testis.length} — ${x.n}, ${x.z}">
+      ${badge}
+      <div><div class="text-lime font-black tracking-widest">★★★★★ BLITZ REVIEW</div>
       <p class="font-display text-2xl md:text-4xl leading-[1.05] mt-2">${x.t}</p>
       <div class="mt-4 flex items-center gap-3"><span class="bg-lime text-ink font-bold px-3 py-1 border-2 border-lime text-sm">${x.n}</span><span class="text-cream/60 font-bold text-sm">${x.z}</span></div></div>
-    </div>`).join('');
-  document.getElementById('testiDots').innerHTML=testis.map((_,i)=>`<button onclick="goTesti(${i})" class="h-3 border-2 border-ink transition-all ${i===tIdx?'w-8 bg-ink':'w-3 bg-white'}"></button>`).join('');
+    </div>`;
+  }).join('');
+}
+function renderTesti(){
+  document.getElementById('testiDots').innerHTML=testis.map((_,i)=>`<button type="button" onclick="goTesti(${i})" aria-label="Show review ${i+1}" aria-current="${i===tIdx?'true':'false'}" class="h-3 border-2 border-ink transition-all ${i===tIdx?'w-8 bg-ink':'w-3 bg-white'}"></button>`).join('');
   document.getElementById('testiIdx').textContent=String(tIdx+1).padStart(2,'0');
   document.getElementById('testiTrack').style.transform=`translateX(-${tIdx*100}%)`;
 }
 function moveTesti(d){ tIdx=(tIdx+d+testis.length)%testis.length; renderTesti(); }
 function goTesti(i){ tIdx=i; renderTesti(); }
-renderTesti(); setInterval(()=>{moveTesti(1)},6000);
+renderTestiTrack(); renderTesti();
+/* Auto-advance, but never fight the reader: pause on hover/focus/touch and
+   stay still entirely when the visitor asked for reduced motion. */
+let testiTimer=null, testiPaused=false;
+function startTestiTimer(){
+  if(testiTimer||REDUCED_MOTION) return;
+  testiTimer=setInterval(()=>{ if(!testiPaused) moveTesti(1); },6000);
+}
+startTestiTimer();
+(function(){
+  const wrap=document.getElementById('reviews');
+  if(!wrap) return;
+  wrap.addEventListener('pointerenter',()=>{testiPaused=true;});
+  wrap.addEventListener('pointerleave',()=>{testiPaused=false;});
+  wrap.addEventListener('focusin',()=>{testiPaused=true;});
+  wrap.addEventListener('focusout',()=>{testiPaused=false;});
+})();
 
 /* ============ FAQ ============ */
 const faqs=[
@@ -929,45 +1119,102 @@ const faqs=[
 ];
 document.getElementById('faqList').innerHTML=faqs.map((f,i)=>`
   <div class="faq-item border-thick bg-paper hard-sm overflow-hidden ${i===0?'open':''}">
-    <button onclick="toggleFaq(this)" class="w-full flex items-center justify-between gap-4 p-4 md:p-5 text-left">
+    <button type="button" onclick="toggleFaq(this)" aria-expanded="${i===0?'true':'false'}" aria-controls="faqA${i}" id="faqQ${i}" class="w-full flex items-center justify-between gap-4 p-4 md:p-5 text-left">
       <span class="font-display text-lg md:text-2xl">${f[0]}</span>
-      <span class="faq-icon w-10 h-10 shrink-0 bg-ink text-lime border-[3px] border-ink flex items-center justify-center text-2xl font-black">+</span>
+      <span class="faq-icon w-10 h-10 shrink-0 bg-ink text-lime border-[3px] border-ink flex items-center justify-center text-2xl font-black" aria-hidden="true">+</span>
     </button>
-    <div class="faq-a"><p class="px-4 md:px-5 pb-5 font-medium text-[15px] border-t-[3px] border-ink pt-4 bg-cream">${f[1]}</p></div>
+    <div class="faq-a" id="faqA${i}" role="region" aria-labelledby="faqQ${i}"><p class="px-4 md:px-5 pb-5 font-medium text-[15px] border-t-[3px] border-ink pt-4 bg-cream">${f[1]}</p></div>
   </div>`).join('');
-function toggleFaq(btn){ const item=btn.parentElement; const was=item.classList.contains('open'); document.querySelectorAll('.faq-item').forEach(x=>x.classList.remove('open')); if(!was) item.classList.add('open'); }
+/* Open answers size to their own content so nothing is ever clipped on narrow screens. */
+function sizeOpenFaq(){
+  document.querySelectorAll('.faq-item.open .faq-a').forEach(a=>{ a.style.maxHeight=a.scrollHeight+'px'; });
+}
+function toggleFaq(btn){
+  const item=btn.parentElement; const was=item.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(x=>{
+    x.classList.remove('open');
+    const b=x.querySelector('button'); if(b) b.setAttribute('aria-expanded','false');
+    const a=x.querySelector('.faq-a'); if(a) a.style.maxHeight='';
+  });
+  if(!was){ item.classList.add('open'); btn.setAttribute('aria-expanded','true'); requestAnimationFrame(sizeOpenFaq); }
+}
+window.addEventListener('resize',sizeOpenFaq);
+sizeOpenFaq();
 
-/* ============ ZIP + ZONES ============ */
+/* ============ ZIP + ZONES ============
+   SERVICE AREA — edit this block when coverage changes.
+   Prefixes are the first 3 digits of the ZIP (so '361' covers 36101-36199).
+   zoneA = local crews, same-day / 48h.  zoneB = regional routes, scheduled.
+   Anything unmatched is quoted as a custom fleet job — we never hard-say "no". */
+const SERVICE_AREA = {
+  zoneA: ['360', '361', '364', '367', '368'],
+  zoneB: ['300', '301', '302', '303', '306', '317', '323', '324', '325',
+          '350', '351', '352', '354', '355', '356', '357', '358', '359',
+          '386', '387', '388', '389', '390', '391', '392', '393', '394', '395', '396', '397'],
+  phone: CONTACT.phoneE164,
+  phonePretty: CONTACT.phonePretty
+};
 function checkZip(){
   const v=document.getElementById('zipInput').value.trim(); const box=document.getElementById('zipResult'); box.classList.remove('hidden');
   if(!/^\d{5}$/.test(v)){ box.className='mt-4 border-[3px] border-ink p-4 font-bold text-sm bg-blaze text-white'; box.innerHTML='⚠️ That’s not a 5-digit ZIP. Try again, champ.'; return; }
-  if(v==='99999'){ box.className='mt-4 border-[3px] border-ink p-4 font-bold text-sm bg-ink text-cream'; box.innerHTML='🗺️ ZIP '+v+' is OUT OF ZONE… <span class="text-lime">but call us.</span> Industrial fleet travels. (555) 546-5323'; return; }
-  const first=parseInt(v[0]); let zone, msg, cls;
-  if([9,6].includes(first)){ zone='ZONE A — SAME-DAY ELIGIBLE ⚡'; cls='bg-lime text-ink'; msg='Trucks are in your area TODAY. Same-day + 48h slots open.'; }
-  else if([1,7,3].includes(first)){ zone='ZONE B — 48-HOUR ROUTE 🗓'; cls='bg-gold text-ink'; msg='You’re on our 48-hour loop. Priority fee waived this week!'; }
-  else { zone='ZONE C — CUSTOM / FLEET 🚚'; cls='bg-ink text-lime'; msg='Rural / industrial corridor — we’ll build a custom fleet quote. Free site walk.'; }
+  const p3=v.slice(0,3); let zone, msg, cls;
+  if(SERVICE_AREA.zoneA.includes(p3)){ zone='ZONE A — LOCAL CREW ⚡'; cls='bg-lime text-ink'; msg='You’re on our home turf. Same-day and 48-hour slots open.'; }
+  else if(SERVICE_AREA.zoneB.includes(p3)){ zone='ZONE B — REGIONAL ROUTE 🗓'; cls='bg-gold text-ink'; msg='You’re on our regional loop — usually scheduled within 48 hours.'; }
+  else { zone='ZONE C — CUSTOM / FLEET 🚚'; cls='bg-ink text-lime'; msg='Outside our regular routes, but the fleet travels for bigger jobs. Free site walk — call and we’ll build a custom quote.'; }
   box.className='mt-4 border-[3px] border-ink p-4 font-bold text-sm '+cls;
-  box.innerHTML=`✅ ${v} → <span class="font-display text-lg">${zone}</span><br>${msg} <button onclick="openBooking()" class="underline">Book now →</button>`;
+  box.innerHTML=`✅ ${v} → <span class="font-display text-lg">${zone}</span><br>${msg} <button type="button" onclick="openBooking()" class="underline font-bold">Book now →</button> or call <a class="underline font-bold" href="tel:${SERVICE_AREA.phone}">${SERVICE_AREA.phonePretty}</a>`;
   toast('ZIP '+v+' checked — '+zone.split('—')[0].trim()+'!','lime');
 }
 document.getElementById('zipInput').addEventListener('keydown',e=>{if(e.key==='Enter')checkZip();});
-const hoods=['OAKDALE⚡','RIVERSIDE⚡','NORTHGATE⚡','MAPLE HTS','ELM PARK','HILLCREST','BROOKSIDE','FAIRVIEW','CEDAR BLVD','LAKESHORE','OLD MILL','DEPOT⚙','AIRPORT⚙','SOUTHPARK','WESTEND','EASTVALE'];
-document.getElementById('zoneGrid').innerHTML=hoods.map((h,i)=>`<div class="border-2 ${h.includes('⚡')?'border-lime bg-lime/10 text-lime':h.includes('⚙')?'border-blaze bg-blaze/20 text-white':'border-cream/25 bg-white/5 text-cream/70'} py-3 px-1">${h}</div>`).join('');
+/* SERVICE TOWNS — edit this list to match where you actually run crews.
+   ⚡ marks same-day-eligible towns, ⚙ marks industrial / fleet corridors. */
+const SERVICE_TOWNS=['MONTGOMERY⚡','PIKE ROAD⚡','WETUMPKA⚡','MILLBROOK','PRATTVILLE','HOPE HULL','AUBURN⚙','OPELIKA⚙','PHENIX CITY','TROY','CLANTON','TALLADEGA','EUFAULA','ANDALUSIA','TUSCALOOSA','BIRMINGHAM'];
+document.getElementById('zoneGrid').innerHTML=SERVICE_TOWNS.map((h)=>`<div class="border-2 ${h.includes('⚡')?'border-lime bg-lime/10 text-lime':h.includes('⚙')?'border-blaze bg-blaze/20 text-white':'border-cream/25 bg-white/5 text-cream/70'} py-3 px-1">${h}</div>`).join('');
 
 /* ============ BOOKING ============ */
 const slots=['8–10 AM','10–12 PM','12–2 PM','2–4 PM','4–6 PM'];
+let lastFocused=null;
 function openBooking(){
+  lastFocused=document.activeElement;
   const m=document.getElementById('bookingModal'); m.classList.remove('hidden'); m.classList.add('flex'); document.body.style.overflow='hidden';
   goStep(1); buildDays(); updateModalSummary();
+  setTimeout(()=>{ const f=document.getElementById('fName'); if(f&&!f.value) f.focus(); },120);
 }
-function closeBooking(){ const m=document.getElementById('bookingModal'); m.classList.add('hidden'); m.classList.remove('flex'); document.body.style.overflow=''; }
+function closeBooking(){
+  const m=document.getElementById('bookingModal');
+  if(!m||m.classList.contains('hidden')) return;
+  m.classList.add('hidden'); m.classList.remove('flex'); document.body.style.overflow='';
+  if(lastFocused&&lastFocused.focus) lastFocused.focus();
+}
+/* keep Tab inside the dialog while it is open */
+document.addEventListener('keydown',e=>{
+  const m=document.getElementById('bookingModal');
+  if(e.key!=='Tab'||!m||m.classList.contains('hidden')) return;
+  const f=m.querySelectorAll('a[href],button:not([disabled]),input:not([disabled]),textarea:not([disabled]),[tabindex]:not([tabindex="-1"])');
+  const visible=[...f].filter(el=>el.offsetParent!==null);
+  if(!visible.length) return;
+  const first=visible[0], last=visible[visible.length-1];
+  if(e.shiftKey&&document.activeElement===first){ e.preventDefault(); last.focus(); }
+  else if(!e.shiftKey&&document.activeElement===last){ e.preventDefault(); first.focus(); }
+});
 function updateModalSummary(){
   const c=CFG[state.service]; const addons=[...state.addons].map(a=>ADDON_NAMES[a]).join(', ')||'None';
   document.getElementById('modalSummary').innerHTML=`LOCKED ESTIMATE: <span class="font-display text-2xl">$${state.total}</span> — ${c.badge} • ${state.size.toLocaleString()} sqft • ${DENS[state.density].label} • ${FREQ[state.freq].label} • ${URG[state.urg].label}<br><span class="text-xs">ADD-ONS: ${addons}</span>`;
 }
 function goStep(n){
   if(n===2){
-    if(!document.getElementById('fName').value.trim()||!document.getElementById('fPhone').value.trim()||!document.getElementById('fAddr').value.trim()){ toast('Fill name, phone + address first ✍️','blaze'); return; }
+    const name=fieldValue('fName'), phone=fieldValue('fPhone'), addr=fieldValue('fAddr');
+    if(!name||!phone||!addr){
+      toast('Fill name, phone + address first ✍️','blaze');
+      const target=!name?'fName':!phone?'fPhone':'fAddr';
+      document.getElementById(target).focus();
+      return;
+    }
+    if(phone.replace(/\D/g,'').length<10){
+      toast('That phone looks short — the crew needs 10 digits to reach you 📞','blaze');
+      document.getElementById('fPhone').focus();
+      return;
+    }
     updateModalSummary();
   }
   if(n===3){
@@ -1003,34 +1250,89 @@ function buildDays(){
     const full=names[d.getDay()]+', '+months[d.getMonth()]+' '+d.getDate();
     const hot=(added<3);
     const b=document.createElement('button');
-    b.className='day-card border-[3px] border-ink bg-white p-2 text-center hover:bg-lime'+(state.booking.day&&state.booking.day.label===full?' selected':'');
-    b.innerHTML=`<div class="text-[10px] font-black tracking-widest">${names[d.getDay()]}</div><div class="font-display text-2xl leading-none">${d.getDate()}</div><div class="text-[10px] font-bold">${hot?'🔥 '+ (2+added) +' LEFT':'OPEN'}</div>`;
-    b.onclick=()=>{ state.booking.day={label:full}; document.querySelectorAll('.day-card').forEach(x=>x.classList.remove('selected')); b.classList.add('selected'); buildSlots(); };
+    b.type='button';
+    const selected=!!(state.booking.day&&state.booking.day.label===full);
+    b.className='day-card border-[3px] border-ink bg-white p-2 text-center hover:bg-lime'+(selected?' selected':'');
+    b.setAttribute('aria-pressed',selected?'true':'false');
+    b.innerHTML=`<div class="text-[10px] font-black tracking-widest">${names[d.getDay()]}</div><div class="font-display text-2xl leading-none">${d.getDate()}</div><div class="text-[10px] font-bold">${hot?'🔥 SOON':'OPEN'}</div>`;
+    b.onclick=()=>{ state.booking.day={label:full}; document.querySelectorAll('.day-card').forEach(x=>{x.classList.remove('selected');x.setAttribute('aria-pressed','false');}); b.classList.add('selected'); b.setAttribute('aria-pressed','true'); buildSlots(); };
     g.appendChild(b); added++;
   }
   buildSlots();
 }
 function buildSlots(){
   const g=document.getElementById('slotGrid'); g.innerHTML='';
-  slots.forEach((s,i)=>{
-    const taken=(state.booking.day && (state.booking.day.label.length+i)%4===0);
+  slots.forEach((s)=>{
     const b=document.createElement('button');
-    b.className='slot border-[3px] border-ink bg-white font-bold text-sm py-3 px-2'+(state.booking.slot===s?' selected':'');
-    b.textContent=(taken?'❌ ':'✅ ')+s; b.disabled=taken;
-    b.onclick=()=>{ state.booking.slot=s; document.querySelectorAll('.slot').forEach(x=>x.classList.remove('selected')); b.classList.add('selected'); };
+    b.type='button';
+    const selected=state.booking.slot===s;
+    b.className='slot border-[3px] border-ink bg-white font-bold text-sm py-3 px-2'+(selected?' selected':'');
+    b.setAttribute('aria-pressed',selected?'true':'false');
+    b.textContent='✅ '+s;
+    b.onclick=()=>{ state.booking.slot=s; document.querySelectorAll('.slot').forEach(x=>{x.classList.remove('selected');x.setAttribute('aria-pressed','false');}); b.classList.add('selected'); b.setAttribute('aria-pressed','true'); };
     g.appendChild(b);
   });
 }
+/* ---- booking handoff ----
+   No server behind this page, so a confirmed request is packaged and handed
+   to the visitor's own mail/text app pre-addressed to dispatch. */
+let lastBooking=null;
+function fieldValue(id){ const el=document.getElementById(id); return el?el.value.trim():''; }
+function bookingDetails(id){
+  const c=CFG[state.service];
+  const addons=[...state.addons].map(a=>ADDON_NAMES[a]).join(', ')||'None';
+  const notes=fieldValue('fNotes');
+  return [
+    'LeafBlitz booking request '+id,
+    'Name: '+fieldValue('fName'),
+    'Phone: '+fieldValue('fPhone'),
+    'Service address: '+fieldValue('fAddr'),
+    'Service: '+c.label+' — '+state.size.toLocaleString()+' sqft, '+DENS[state.density].label,
+    'Add-ons: '+addons,
+    'Frequency: '+FREQ[state.freq].label+' | Urgency: '+URG[state.urg].label,
+    'Requested window: '+(state.booking.day?state.booking.day.label:'—')+' • '+state.booking.slot,
+    'Estimate: $'+state.total+' (pay after the job)',
+    notes?'Notes: '+notes:''
+  ].filter(Boolean).join('\n');
+}
 function confirmBooking(){
   if(!document.getElementById('agreeBox').checked){ toast('Tick the agreement box first ☑️','blaze'); return; }
-  const id='LEAF-'+Math.floor(1000+Math.random()*9000);
+  const d=new Date();
+  const id='LEAF-'+String(d.getMonth()+1).padStart(2,'0')+String(d.getDate()).padStart(2,'0')+'-'+Math.floor(1000+Math.random()*9000);
+  const details=bookingDetails(id);
+  lastBooking={id:id,details:details};
   document.getElementById('bookingId').textContent=id;
-  document.getElementById('successLine').innerHTML=`${esc(document.getElementById('fName').value.split(' ')[0]||'Friend')}, crew rolls <strong>${state.booking.day.label} • ${state.booking.slot}</strong> for <strong>$${state.total}</strong>.`;
+  const first=(fieldValue('fName').split(' ')[0])||'Friend';
+  document.getElementById('successLine').innerHTML=`${esc(first)}, you asked for <strong>${esc(state.booking.day.label)} • ${esc(state.booking.slot)}</strong> at <strong>$${state.total}</strong>. Reference <strong>${id}</strong>.`;
+  document.getElementById('sendEmail').href='mailto:'+CONTACT.email
+    +'?subject='+encodeURIComponent('Booking request '+id+' — '+fieldValue('fAddr'))
+    +'&body='+encodeURIComponent(details);
+  document.getElementById('sendText').href='sms:'+CONTACT.phoneE164+'?&body='+encodeURIComponent(details);
+  document.getElementById('sendCall').href='tel:'+CONTACT.phoneE164;
+  const btn=document.getElementById('copyBtn'); if(btn) btn.textContent='📋 COPY THE DETAILS';
   [1,2,3].forEach(i=>document.getElementById('bStep'+i).classList.add('hidden'));
   document.getElementById('bSuccess').classList.remove('hidden');
-  leafBurst(); toast('Booked! '+id+' — see you soon 🚚','lime');
+  leafBurst(); toast('Request '+id+' is ready — tap EMAIL or TEXT to send it to dispatch 🚚','lime');
+  setTimeout(()=>{ const s=document.getElementById('sendEmail'); if(s) s.focus(); },150);
+}
+function copyBooking(){
+  if(!lastBooking) return;
+  const btn=document.getElementById('copyBtn');
+  const done=()=>{ if(btn) btn.textContent='✅ COPIED — PASTE IT INTO A TEXT OR EMAIL'; toast('Details copied to your clipboard 📋','lime'); };
+  const fallback=()=>{
+    const ta=document.createElement('textarea');
+    ta.value=lastBooking.details; ta.setAttribute('readonly','');
+    ta.style.position='fixed'; ta.style.top='-1000px';
+    document.body.appendChild(ta); ta.select();
+    try{ document.execCommand('copy'); done(); }
+    catch(err){ toast('Copy is blocked here — use EMAIL or TEXT instead','blaze'); }
+    ta.remove();
+  };
+  if(navigator.clipboard&&navigator.clipboard.writeText){ navigator.clipboard.writeText(lastBooking.details).then(done).catch(fallback); }
+  else fallback();
 }
 function leafBurst(){
+  if(!HAS_GSAP||REDUCED_MOTION) return;
   const em=['🍂','🍁','🌿','✨','💥'];
   for(let i=0;i<40;i++){ const s=document.createElement('div'); s.className='confetti-leaf'; s.textContent=em[Math.floor(Math.random()*em.length)];
     s.style.left='50%'; s.style.top='40%'; document.body.appendChild(s);
@@ -1049,21 +1351,34 @@ function toast(msg, color){
   setTimeout(()=>{ t.style.transition='all .4s'; t.style.transform='translateX(120%)'; t.style.opacity='0'; setTimeout(()=>t.remove(),400); },3400);
 }
 function claimCoupon(){
-  const v=document.getElementById('couponPhone').value.trim();
-  if(v.length<7){ toast('Drop a real number for the $20 off 📲','blaze'); return; }
-  const code='BLITZ20-'+Math.floor(100+Math.random()*900);
-  toast('Coupon locked: '+code+' — $20 off! 🎉','lime'); document.getElementById('couponPhone').value='';
+  const el=document.getElementById('couponPhone'); const digits=el.value.trim().replace(/\D/g,'');
+  if(digits.length<10){ toast('Drop a real 10-digit number for the $20 off 📲','blaze'); el.focus(); return; }
+  const body=encodeURIComponent('Hi LeafBlitz — text me the $20 off coupon. My number is '+digits+'.');
+  window.location.href='sms:'+CONTACT.phoneE164+'?&body='+body;
+  toast('Opening your texts — hit send and we reply with your $20 code 🎉','lime');
+  el.value='';
 }
-document.getElementById('menuBtn').onclick=()=>document.getElementById('mobileMenu').classList.toggle('hidden');
-document.querySelectorAll('#mobileMenu a').forEach(a=>a.onclick=()=>document.getElementById('mobileMenu').classList.add('hidden'));
+const menuBtn=document.getElementById('menuBtn'), mobileMenu=document.getElementById('mobileMenu');
+function setMenu(open){
+  mobileMenu.classList.toggle('hidden',!open);
+  menuBtn.setAttribute('aria-expanded',open?'true':'false');
+  menuBtn.setAttribute('aria-label',open?'Close menu':'Open menu');
+}
+menuBtn.onclick=()=>setMenu(mobileMenu.classList.contains('hidden'));
+document.querySelectorAll('#mobileMenu a').forEach(a=>a.onclick=()=>setMenu(false));
+document.addEventListener('keydown',e=>{ if(e.key==='Escape'&&!mobileMenu.classList.contains('hidden')){ setMenu(false); menuBtn.focus(); } });
 
 /* counters */
 const cObs=new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting){ const el=e.target, target=+el.dataset.target; let cur=0; const step=Math.max(1,Math.round(target/60)); const iv=setInterval(()=>{cur+=step; if(cur>=target){cur=target;clearInterval(iv);} el.textContent=cur.toLocaleString();},25); cObs.unobserve(el);} }),{threshold:.5});
 document.querySelectorAll('.counter').forEach(el=>cObs.observe(el));
 
 /* scroll reveals */
-gsap.registerPlugin(ScrollTrigger);
-gsap.utils.toArray('.reveal').forEach(el=>{ gsap.fromTo(el,{y:50,opacity:0},{y:0,opacity:1,duration:.8,ease:'power3.out', scrollTrigger:{trigger:el,start:'top 88%'}}); });
+if(HAS_GSAP&&!REDUCED_MOTION){
+  gsap.registerPlugin(window.ScrollTrigger);
+  gsap.utils.toArray('.reveal').forEach(el=>{ gsap.fromTo(el,{y:50,opacity:0},{y:0,opacity:1,duration:.8,ease:'power3.out', scrollTrigger:{trigger:el,start:'top 88%'}}); });
+}else{
+  document.querySelectorAll('.reveal').forEach(el=>{ el.style.opacity='1'; el.style.transform='none'; });
+}
 
 /* esc closes modal */
 document.addEventListener('keydown',e=>{ if(e.key==='Escape') closeBooking(); });

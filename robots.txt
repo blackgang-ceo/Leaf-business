@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://blackgang-ceo.github.io/Leaf-business/sitemap.xml

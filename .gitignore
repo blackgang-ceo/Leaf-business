@@ -1,0 +1,8 @@
+# Staged site artifact built by .github/workflows/publish.yml (CI-only, never committed)
+_site/
+
+# Local noise
+__pycache__/
+*.py[cod]
+node_modules/
+.DS_Store
