@@ -50,6 +50,13 @@ jobs:
           sys.exit(1 if failed else 0)
           PY
 
+      - name: Runtime smoke test (jsdom, no CDNs — advisory)
+        continue-on-error: true
+        run: |
+          cd tools
+          npm install --no-audit --no-fund
+          node smoke_test.js ../index.html
+
       - name: Verify JSON-LD and site icons parse
         run: |
           python3 tools/make_icons.py >/dev/null && echo "icon generator OK"
